@@ -8,8 +8,15 @@ namespace S5_OOP_FinalProject
 {
     class Program
     {
+        //Test de push
+        public static int Test()
+        {
+            int a = 2 ;
+            return a;
+        }
         static void Main(string[] args)
         {
+
         }
     }
 }
