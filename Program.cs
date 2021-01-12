@@ -20,7 +20,10 @@ namespace S5_OOP_FinalProject
             Console.WriteLine("Amour et compassion");
             Console.WriteLine("Calin");
         }
-        
+        public void Lopez()
+        {
+            Console.WriteLine("Manges tes morts");
+        }
 
         static void Main(string[] args)
         {
