@@ -14,6 +14,12 @@ namespace S5_OOP_FinalProject
             int a = 2 ;
             return a;
         }
+
+        public void MMMMMMM()
+        {
+            Console.WriteLine("Amour et compassion");
+        }
+
         static void Main(string[] args)
         {
 
