@@ -51,6 +51,11 @@
     <Compile Include="Persons\Employee.cs" />
     <Compile Include="Persons\Officer.cs" />
     <Compile Include="Persons\Person.cs" />
+    <Compile Include="DeliveryDriver.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="Officer.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Pizzeria.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
