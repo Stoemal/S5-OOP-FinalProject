@@ -1,49 +1,57 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-abstract public class Person
+namespace S5_OOP_FinalProject
 {
-    protected string firstName;
-    protected string lastName;
-    protected string address;
-    protected string phoneNumber;
-
-	public Person(string firstName, string lastName, string address, string phoneNumber)
-	{
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-	}
-
-    #region Accesseurs
-    public string FirstName
+    class Person
     {
-        get { return this.firstName; }
-        set { this.firstName = value; }
-    }
 
-    public string LastName
-    {
-        get { return this.lastName; }
-        set { this.lastName = value; }
-    }
+        protected string firstName;
+        protected string lastName;
+        protected string address;
+        protected string phoneNumber;
 
-    public string Address
-    {
-        get { return this.address; }
-        set { this.address = value; }
-    }
+        public Person(string firstName, string lastName, string address, string phoneNumber)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.address = address;
+            this.phoneNumber = phoneNumber;
+        }
 
-    public string PhoneNumber
-    {
-        get { return this.phoneNumber; }
-        set { this.phoneNumber = value; }
-    }
+        #region Accesseurs
+        public string FirstName
+        {
+            get { return this.firstName; }
+            set { this.firstName = value; }
+        }
 
-    #endregion Accesseurs
+        public string LastName
+        {
+            get { return this.lastName; }
+            set { this.lastName = value; }
+        }
 
-    public override string ToString()
-    {
-        return "Nom : " + lastName + "\nPrénom : " + firstName + "\nAdresse : " + address + "\nTéléphone : " + phoneNumber;
+        public string Address
+        {
+            get { return this.address; }
+            set { this.address = value; }
+        }
+
+        public string PhoneNumber
+        {
+            get { return this.phoneNumber; }
+            set { this.phoneNumber = value; }
+        }
+
+        #endregion Accesseurs
+
+        public override string ToString()
+        {
+            return "Nom : " + lastName + "\nPrénom : " + firstName + "\nAdresse : " + address + "\nTéléphone : " + phoneNumber;
+        }
     }
 }
