@@ -18,6 +18,7 @@ namespace S5_OOP_FinalProject
         public void MMMMMMM()
         {
             Console.WriteLine("Amour et compassion");
+            Console.WriteLine("Calin");
         }
         public void Lopez()
         {
