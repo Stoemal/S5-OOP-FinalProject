@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    public class Person
+    abstract public class Person
     {
         protected string firstName;
         protected string lastName;
@@ -25,27 +25,19 @@ namespace S5_OOP_FinalProject
         public string FirstName
         {
             get { return this.firstName; }
-            set { this.firstName = value; }
         }
-
         public string LastName
         {
             get { return this.lastName; }
-            set { this.lastName = value; }
         }
-
         public string Address
         {
             get { return this.address; }
-            set { this.address = value; }
         }
-
         public string PhoneNumber
         {
             get { return this.phoneNumber; }
-            set { this.phoneNumber = value; }
         }
-
         #endregion Accesseurs
 
         public override string ToString()

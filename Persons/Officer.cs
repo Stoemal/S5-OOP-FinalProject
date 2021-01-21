@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    sealed class Officer : Employee
+    sealed public class Officer : Employee
     {
         private DateTime hireDate;
         private int orderCount;
@@ -16,8 +16,14 @@ namespace S5_OOP_FinalProject
             this.orderCount = orderCount;
         }
 
-
-
+        public DateTime HireDate
+        {
+            get { return this.hireDate; }
+        }
+        public int OrderCount
+        {
+            get { return this.orderCount; }
+        }
 
     }
 }

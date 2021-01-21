@@ -44,12 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beverage.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="Pizza.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="DeliveryDriver.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="Officer.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Persons\DeliveryDriver.cs" />
+    <Compile Include="Persons\Employee.cs" />
+    <Compile Include="Persons\Officer.cs" />
+    <Compile Include="Persons\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

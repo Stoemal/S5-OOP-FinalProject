@@ -22,17 +22,14 @@ namespace S5_OOP_FinalProject
         public string Size
         {
             get { return this.size; }
-            set { this.size = value; }
         }
         public string Type
         {
             get { return this.type; }
-            set { this.type = value; }
         }
         public float Price
         {
             get { return this.price; }
-            set { this.price = value; }
         }
 
         public override string ToString()

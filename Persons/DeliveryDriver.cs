@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    sealed class DeliveryDriver : Employee
+    sealed public class DeliveryDriver : Employee
     {
         private string meanOfTransport;
         private int orderCount;
@@ -16,6 +16,14 @@ namespace S5_OOP_FinalProject
             this.orderCount = orderCount;
         }
 
+        public string MeanOfTransport
+        {
+            get { return this.meanOfTransport; }
+        }
+        public int OrderCount
+        {
+            get { return this.orderCount; }
+        }
 
     }
 }

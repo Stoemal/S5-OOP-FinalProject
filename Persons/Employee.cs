@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    class Employee : Person
+    abstract public class Employee : Person
     {
         protected string position;
         public Employee(string firstName, string lastName, string address, string phoneNumber, string position) : base (firstName, lastName, address, phoneNumber)
@@ -14,7 +14,10 @@ namespace S5_OOP_FinalProject
             this.position = position;
         }
 
-
+        public string Position
+        {
+            get { return this.position; }
+        }
 
     }
 }

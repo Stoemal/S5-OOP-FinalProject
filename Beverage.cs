@@ -23,17 +23,14 @@ namespace S5_OOP_FinalProject
         public string Type
         {
             get { return this.type; }
-            set { this.type = value; }
         }
         public float Volume
         {
             get { return this.volume; }
-            set { this.volume = value; }
         }
         public float Price
         {
             get { return this.price; }
-            set { this.price = value; }
         }
         #endregion Accesseurs
 
