@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    class Person
+    public class Person
     {
-
         protected string firstName;
         protected string lastName;
         protected string address;
