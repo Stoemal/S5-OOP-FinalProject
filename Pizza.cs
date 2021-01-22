@@ -19,6 +19,7 @@ namespace S5_OOP_FinalProject
             this.price = price;
         }
 
+        #region Accesseurs
         public string Size
         {
             get { return this.size; }
@@ -36,5 +37,6 @@ namespace S5_OOP_FinalProject
         {
             return "Taille : " + size + "\nType : " + type + "\nPrix : " + price;
         }
+        #endregion Accesseurs
     }
 }

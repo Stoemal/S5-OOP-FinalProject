@@ -16,6 +16,7 @@ namespace S5_OOP_FinalProject
             this.orderCount = orderCount;
         }
 
+        #region Accesseurs
         public DateTime HireDate
         {
             get { return this.hireDate; }
@@ -24,6 +25,6 @@ namespace S5_OOP_FinalProject
         {
             get { return this.orderCount; }
         }
-
+        #endregion Accesseurs
     }
 }

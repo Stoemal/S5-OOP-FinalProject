@@ -17,5 +17,20 @@ namespace S5_OOP_FinalProject
             this.listOrder = listOrder;
             this.cumulativeOrder = cumulativeOrder;
         }
+
+        #region Accesseurs
+        public DateTime FirstOrder
+        {
+            get { return this.firstOrder; }            
+        }
+        public List<Order> ListOrder
+        {
+            get { return this.listOrder; }
+        }
+        public float CumulativeOrder
+        {
+            get { return this.cumulativeOrder; }
+        }
+        #endregion Accesseurs
     }
 }
