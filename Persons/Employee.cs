@@ -9,6 +9,7 @@ namespace S5_OOP_FinalProject
     abstract public class Employee : Person
     {
         protected string position;
+  
         public Employee(string firstName, string lastName, string address, string phoneNumber, string position) : base (firstName, lastName, address, phoneNumber)
         {
             this.position = position;

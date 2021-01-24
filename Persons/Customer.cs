@@ -11,6 +11,14 @@ namespace S5_OOP_FinalProject
         private DateTime firstOrder;
         private List<Order> listOrder;
         private float cumulativeOrder;
+
+        public Customer(string firstName, string lastName, string address, string phoneNumber) : base(firstName, lastName, address, phoneNumber)
+        {
+            firstOrder = new DateTime();
+            listOrder = new List<Order>();
+            cumulativeOrder = 0;
+        }
+
         public Customer(string firstName, string lastName, string address, string phoneNumber, DateTime firstOrder, List<Order> listOrder, float cumulativeOrder) : base(firstName, lastName, address, phoneNumber)
         {
             this.firstOrder = firstOrder;
@@ -32,5 +40,10 @@ namespace S5_OOP_FinalProject
             get { return this.cumulativeOrder; }
         }
         #endregion Accesseurs
+
+        public override string ToString()
+        {
+            return "Nom : " + lastName + "\nPrénom : " + firstName + "\nAdresse : " + address + "\nTéléphone : " + phoneNumber;
+        }
     }
 }
