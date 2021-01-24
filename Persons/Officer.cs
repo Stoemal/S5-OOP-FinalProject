@@ -10,6 +10,9 @@ namespace S5_OOP_FinalProject
     {
         private DateTime hireDate;
         private int orderCount;
+
+        
+
         public Officer(string firstName, string lastName, string address, string phoneNumber, string position, DateTime hireDate, int orderCount) : base(firstName, lastName, address, phoneNumber, position)
         {
             this.hireDate = hireDate;
