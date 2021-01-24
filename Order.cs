@@ -87,5 +87,10 @@ namespace S5_OOP_FinalProject
             get { return this.bill; }
         }
         #endregion Accesseurs
+
+        public override string ToString()
+        {
+            return "Numero de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + ", état : " + achievement + ", addition : " + bill + " €" + "\n Client : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName ;
+        }
     }
 }

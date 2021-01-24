@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    sealed public class Officer : Employee
+    sealed public class Officer : Employee, IDisplay
     {
         private DateTime hireDate;
         private int orderCount;
@@ -26,5 +26,11 @@ namespace S5_OOP_FinalProject
             get { return this.orderCount; }
         }
         #endregion Accesseurs
+        
+        public void Display()
+        {
+            Console.WriteLine(this.orderCount);
+        }
+
     }
 }

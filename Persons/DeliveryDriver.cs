@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    sealed public class DeliveryDriver : Employee
+    sealed public class DeliveryDriver : Employee, IDisplay
     {
         private string meanOfTransport;
         private int orderCount;
@@ -26,6 +26,11 @@ namespace S5_OOP_FinalProject
             get { return this.orderCount; }
         }
         #endregion Accesseurs
+
+        public void Display()
+        {
+            Console.WriteLine(this.orderCount);
+        }
 
     }
 }
