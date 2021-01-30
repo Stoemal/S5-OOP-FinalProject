@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Interface d'affichage
+    /// </summary>
     public interface IDisplay
     {
         void Display();

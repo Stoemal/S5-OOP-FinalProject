@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class abstract des employés héritant de la Class Person
+    /// Un emloyé se définit directement comme étant un Commis (Officer) ou un Livreur (DeliveryDriver)
+    /// </summary>
     abstract public class Employee : Person
     {
         protected string position;

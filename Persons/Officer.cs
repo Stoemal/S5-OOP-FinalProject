@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class du Commis héritant de la Class Employee et implémentant IDisplay
+    /// C'est une feuille terminale de l'arbre d'héritage
+    /// </summary>
     sealed public class Officer : Employee, IDisplay
     {
         private DateTime hireDate;

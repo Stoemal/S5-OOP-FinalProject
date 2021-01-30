@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class abstract mère de Employee et de Customer
+    /// Elle permet de définir une personne et est aussi la
+    /// racine de l'arbre d'héritage des Class des employées et de celle des clients
+    /// </summary>
     abstract public class Person
     {
         protected string firstName;

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class du Client héritant de la Class Person 
+    /// C'est une feuille terminale de l'arbre d'héritage
+    /// </summary>
     public sealed class Customer : Person
     {
         private DateTime firstOrder;
@@ -29,7 +33,8 @@ namespace S5_OOP_FinalProject
         #region Accesseurs
         public DateTime FirstOrder
         {
-            get { return this.firstOrder; }            
+            get { return this.firstOrder; }    
+            set { this.firstOrder = value; }
         }
         public List<Order> ListOrder
         {
@@ -38,6 +43,7 @@ namespace S5_OOP_FinalProject
         public float CumulativeOrder
         {
             get { return this.cumulativeOrder; }
+            set { this.cumulativeOrder = value; }
         }
         #endregion Accesseurs
 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class des Commandes
+    /// </summary>
     public class Order
     {
         private string orderNumber;
@@ -15,12 +18,12 @@ namespace S5_OOP_FinalProject
         private Officer officerInCharge;
         private DeliveryDriver deliveryDriverInCharge;
 
-        private List<Pizza> listPizza;
-        private List<Beverage> listBeverage;
+        private List<Pizza> listPizza;      
+        private List<Beverage> listBeverage;        
 
         private string state;
         private string achievement;
-        private float bill;
+        private float bill;     
 
 
         public Order(string orderNumber, DateTime date,
@@ -99,10 +102,12 @@ namespace S5_OOP_FinalProject
         public string State
         {
             get { return this.state; }
+            set { this.state = value; }
         }
         public string Achievement
         {
             get { return this.achievement; }
+            set { this.achievement = value; }
         }
         public float Bill
         {
