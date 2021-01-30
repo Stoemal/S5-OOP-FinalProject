@@ -43,7 +43,20 @@ namespace S5_OOP_FinalProject
 
         public override string ToString()
         {
-            return "Nom : " + lastName + "\nPrénom : " + firstName + "\nAdresse : " + address + "\nTéléphone : " + phoneNumber;
+
+            string chain = "";
+            if(firstOrder != null) chain = chain + "\n1ère commande : " + firstOrder.ToString();
+            if(listOrder != null)
+            {
+                if(listOrder.Count() > 0)
+                {
+                    listOrder.ForEach(delegate (Order n)
+                    {
+                        chain = chain + "\n" + n;
+                    });
+                }              
+            }
+            return base.ToString() + chain;
         }
     }
 }

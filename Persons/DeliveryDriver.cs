@@ -27,6 +27,15 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
+        public override string ToString()
+        {
+            string chain = "\nMoyen de transport : ";
+            if (meanOfTransport != null) chain = chain + meanOfTransport;
+            else chain = chain + "inconnue";
+            chain = chain + "\nNombre de commande(s) : " + orderCount;
+            return base.ToString() + chain;
+        }
+
         public void Display()
         {
             Console.WriteLine(this.orderCount);

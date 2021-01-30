@@ -22,6 +22,26 @@ namespace S5_OOP_FinalProject
         private string achievement;
         private float bill;
 
+
+        public Order(string orderNumber, DateTime date,
+            Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,            
+            string state, string achievement)
+        {
+            this.orderNumber = orderNumber;
+            this.date = date;
+
+            this.customerToServe = customerToServe;
+            this.officerInCharge = officerInCharge;
+            this.deliveryDriverInCharge = deliveryDriverInCharge;
+
+            this.state = state;
+            this.achievement = achievement;
+
+            this.listPizza = new List<Pizza>();
+            this.listBeverage = new List<Beverage>();
+            this.bill = 0;
+        }
+
         public Order(string orderNumber, DateTime date,
             Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
             List<Pizza> listPizza, List<Beverage> listBeverage, 
@@ -68,10 +88,12 @@ namespace S5_OOP_FinalProject
         public List<Pizza> ListPizza
         {
             get { return this.listPizza; }
+            set { this.listPizza = value; }
         }
         public List<Beverage> ListBeverage
         {
             get { return this.listBeverage; }
+            set { this.listBeverage = value; }
         }
 
         public string State
@@ -85,12 +107,17 @@ namespace S5_OOP_FinalProject
         public float Bill
         {
             get { return this.bill; }
+            set { this.bill = value; }
         }
         #endregion Accesseurs
 
         public override string ToString()
         {
-            return "Numero de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + ", état : " + achievement + ", addition : " + bill + " €" + "\n Client : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName ;
+            return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + 
+                ", état : " + achievement + ", addition : " + bill + " €" + 
+                "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + 
+                "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + 
+                "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName ;
         }
     }
 }

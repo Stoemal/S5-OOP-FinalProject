@@ -20,5 +20,13 @@ namespace S5_OOP_FinalProject
             get { return this.position; }
         }
 
+        public override string ToString()
+        {
+            string chain = "\nPosition : ";
+            if (position != null) chain = chain + position;
+            else chain = chain + " inconnue";
+            return base.ToString() + chain;
+        }
+
     }
 }
