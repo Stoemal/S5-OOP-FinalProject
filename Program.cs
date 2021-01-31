@@ -12,7 +12,8 @@ namespace S5_OOP_FinalProject
         List<Order> globalOrderList = new List<Order> { };// liste regroupant la totalité des commandes     
         
         static void Main(string[] args)
-        {           
+        {
+            #region tests Mehdi
             Pizzeria pizzAlpha = new Pizzeria();
 
             //string file = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Clients.csv";
@@ -50,9 +51,7 @@ namespace S5_OOP_FinalProject
             {
                 Console.WriteLine(elt + "\n");
             }
-            */
-           
-
+            
             foreach (Order elt in pizzAlpha.GlobalOrderList)
             {
                 Console.WriteLine(elt + "\n");
@@ -66,15 +65,16 @@ namespace S5_OOP_FinalProject
                 }
                 Console.WriteLine();
             }
+            */
 
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            Console.WriteLine();
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCity);
+            Console.WriteLine();
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
 
-            foreach (Order elt in pizzAlpha.GlobalOrderList)
-            {
-                
-
-            }
-
-
+            
+            #endregion tests Mehdi
 
             Console.ReadKey();
         }

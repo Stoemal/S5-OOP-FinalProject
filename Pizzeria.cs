@@ -51,6 +51,19 @@ namespace S5_OOP_FinalProject
         #endregion Accesseurs
 
 
+
+
+
+        #region Module Client
+
+        /*
+        Fonctions de lecture de fichiers du module client
+        Elles sont toutes construites avec la même structure
+        On l'explique une fois dans ReadCustomers
+        Notons aussi qu'on ne lit que des fichiers csv pour chaque individu
+        */
+        #region Lire Fichiers
+
         /// <summary>
         /// Permet de lire les fichiers Clients, Commis, Livreur et Commande
         /// </summary>
@@ -62,13 +75,6 @@ namespace S5_OOP_FinalProject
             n(file);
         }
 
-        /*
-        Fonctions de lecture de fichiers du module client
-        Elles sont toutes construites avec la même structure
-        On l'explique une fois dans ReadCustomers
-        Notons aussi qu'on ne lit que des fichiers csv pour chaque individu
-        */
-        #region Module Client
         /// <summary>
         /// Lit un fichier Client et ajoute les clients du fichier dans listCustomer
         /// </summary>
@@ -177,6 +183,98 @@ namespace S5_OOP_FinalProject
             finally
             { if (lecteur != null) lecteur.Close(); }
         }
+        #endregion Lire Fichiers
+
+        #region Affichage Clients
+        /// <summary>
+        /// On définit une délégation pour Afficher les clients de trois manières
+        /// comme demandé pour le module Client
+        /// </summary>
+        /// <param name="lcustomer">liste de clients à afficher</param>
+        public delegate void DisplayCustomer(List<Customer> lcustomer);
+
+        /// <summary>
+        /// Méthode appelée pour afficher les clients
+        /// </summary>
+        /// <param name="n">délégation DisplayCustomer prenant listCustomer en paramètre</param>
+        public void DisplayCustomerShape(DisplayCustomer n)
+        {
+            n(listCustomer);
+        }
+
+        /// <summary>
+        /// Affiche les clients par ordre alphabétique des noms en 
+        /// triant la liste des clients
+        /// </summary>
+        /// <param name="temp">paramètre correspondant à listCustomer</param>
+        public void DisplayCustomerAlphabet(List<Customer> temp)
+        {          
+            //On trie la liste avec un sort et une délégation
+            temp.Sort(delegate (Customer a, Customer b)
+            {
+                return a.LastName.CompareTo(b.LastName);              
+            });
+
+            //On affiche la liste avec un ForEach et une délégation
+            temp.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });            
+            temp = null;
+        }
+
+        /// <summary>
+        /// Affiche les clients par ordre alphabétique des villes
+        /// sans trier la liste des clients
+        /// </summary>
+        /// <param name="temp">paramètre correspondant à listCustomer</param>
+        public void DisplayCustomerCity(List<Customer> temp)
+        {
+            string[] datas = new string[temp.Count()];  //Le tableau où on mettra le nom des villes en plusieurs exemplaires si elles le sont
+            string[] pass = null;                       //Un tableau séparant chaque mots composant l'adresse
+            List<string> cities = new List<string>();   //Un tableau des villes
+
+            //On récupère d'abord tous les noms de ville dans datas
+            for(int i = 0; i < datas.Length; i++)
+            {
+                pass = temp[i].Address.Split(' ');
+                datas[i] = pass[pass.Length - 1];             
+            }
+
+            cities.Add(datas[0]); //On ajoute la première ville
+
+            //Puis on regarde s'il y a d'autres villes portant le même nom
+            //Dans le cas échéant on retire tous les noms de villes similaires pour créer la liste
+            for(int i = 1; i < datas.Length; i++)
+            {
+                if (!cities.Exists((string d) => { return d == datas[i]; })) //Si le nom de la ville n'existe pas dans cities on 
+                                                                             //ajoute le nom dans la liste
+                {
+                    cities.Add(datas[i]);
+                }
+            }
+           
+            //On affiche tous les clients vivant dans une ville répertoriée dans 
+            //la liste de ville : cities
+            cities.ForEach((string elt) =>
+            {
+                Console.WriteLine(elt + " :\n");
+                for (int i = 0; i < temp.Count(); i++)
+                {
+                    if (datas[i] == elt) Console.WriteLine(temp[i] + "\n");
+                }
+                Console.WriteLine();
+            });
+        }
+
+        public void DisplayCustomerCumulativeOrder(List<Customer> temp)
+        {
+            for(int i = 0; i < temp.Count(); i++)
+            {
+                temp[i].Calculation();
+                Console.WriteLine(temp[i].PartialToStringCumulativeOrder() + "\n");
+            }
+        }
+
+        #endregion Affichage Clients
+
         #endregion Module Client
 
 
@@ -226,41 +324,37 @@ namespace S5_OOP_FinalProject
 
                             #region Attribution du nom du client et des employés à une commande
                             c = null;
-                            if (listCustomer == null || listCustomer.Count() == 0) ;
-                            else
+                            for (int i = 0; i < listCustomer.Count() && c == null; i++)
                             {
-                                for (int i = 0; i < listCustomer.Count() && c == null; i++)
-                                {
-                                    if (datas[3] == listCustomer[i].PhoneNumber) c = listCustomer[i];
-                                }
-                            }
+                                if (datas[3] == listCustomer[i].PhoneNumber) c = listCustomer[i];
+                            }                        
 
                             o = null;
-                            if (listOfficer == null || listOfficer.Count() == 0) ;
-                            else
+                            for (int i = 0; i < listOfficer.Count() && o == null; i++)
                             {
-                                for (int i = 0; i < listOfficer.Count() && o == null; i++)
-                                {
-                                    if (datas[4].ToUpper() == listOfficer[i].LastName.ToUpper()) o = listOfficer[i];
-                                }
-                            }
+                                if (datas[4].ToUpper() == listOfficer[i].LastName.ToUpper()) o = listOfficer[i];
+                            }                        
 
                             d = null;
-                            if (listDeliveryDriver == null || listDeliveryDriver.Count() == 0) ;
-                            else
+                            for (int i = 0; i < listDeliveryDriver.Count() && d == null; i++)
                             {
-                                for (int i = 0; i < listDeliveryDriver.Count() && d == null; i++)
-                                {
-                                    if (datas[5].ToUpper() == listDeliveryDriver[i].LastName.ToUpper()) d = listDeliveryDriver[i];
-
-                                }
+                                if (datas[5].ToUpper() == listDeliveryDriver[i].LastName.ToUpper()) d = listDeliveryDriver[i];
                             }
                             #endregion
 
                             //On ajoute la commande dans la liste de commandes
-                            globalOrderList.Add(new Order(datas[0],
+                            Order add = new Order(datas[0],
                                 new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]),
-                                Convert.ToInt32(datas[1]), 0, 0), c, o, d, datas[6], datas[7]));
+                                Convert.ToInt32(datas[1]), 0, 0), c, o, d, datas[6], datas[7]);
+
+                            globalOrderList.Add(add);
+                            if(c.FirstOrder == new DateTime())
+                            {
+                                c.FirstOrder = new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]));
+                            }
+                            c.ListOrder.Add(add);
+                            o.OrderCount++;
+                            d.OrderCount++;
                             //listDeliveryDriver.Add(new DeliveryDriver(datas[0], d4atas[1], datas[2], datas[3], datas[4], datas[5], 0));
                         }
 
@@ -326,11 +420,11 @@ namespace S5_OOP_FinalProject
                                         globalOrderList[i].ListBeverage.Add(new Beverage(datas[1], float.Parse(datas[5]), Convert.ToInt32(datas[2])));
                                         globalOrderList[i].Bill = globalOrderList[i].Bill + float.Parse(datas[2]);
                                     }
-                                }
-                                
+                                }                               
                             }
                         }                      
                     }
+                    
                     lu = null;
                     datas = null;
                 }
@@ -372,5 +466,8 @@ namespace S5_OOP_FinalProject
             Console.WriteLine(sum / globalOrderList.Count());
         }
         #endregion Module Statistiques
+
+
+        
     }
 }

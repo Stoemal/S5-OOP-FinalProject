@@ -10,7 +10,7 @@ namespace S5_OOP_FinalProject
     /// Class du Client héritant de la Class Person 
     /// C'est une feuille terminale de l'arbre d'héritage
     /// </summary>
-    public sealed class Customer : Person
+    public sealed class Customer : Person, ICalculus
     {
         private DateTime firstOrder;
         private List<Order> listOrder;
@@ -47,21 +47,50 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
-        public override string ToString()
+        /// <summary>
+        /// Implémentation de ICalculus permettant d'obtenir le prix 
+        /// cumulé de toutes les commandes d'un client
+        public void Calculation()
         {
+            cumulativeOrder = 0;
+            listOrder.ForEach((Order n) => { cumulativeOrder = cumulativeOrder + n.Bill; });
+        }
 
-            string chain = "";
-            if(firstOrder != null) chain = chain + "\n1ère commande : " + firstOrder.ToString();
-            if(listOrder != null)
+        /// <summary>
+        /// Retourne la chaîne de caractère de base de la 
+        /// classe Person en y ajoutant le montant cumulé
+        /// </summary>
+        /// <returns>chaîne de caractère de base de la classe Person et montant cumulé</returns>
+        public string PartialToStringCumulativeOrder()
+        {
+            return base.ToString() + "\nMontant cumulé : " + cumulativeOrder;
+        }
+
+        public string PartialToStringListOrder()
+        {
+            string chain = "Liste de commande du client : ";
+            if (listOrder != null)
             {
-                if(listOrder.Count() > 0)
+                if (listOrder.Count() > 0)
                 {
                     listOrder.ForEach(delegate (Order n)
                     {
-                        chain = chain + "\n" + n;
+                        chain = chain + "\n" + n.PartialToString();
                     });
-                }              
+                }
             }
+            return base.ToString() + chain;
+        }
+
+        /// <summary>
+        /// Retourne une chaîne de caractère avec toutes les informations 
+        /// du client
+        /// </summary>
+        /// <returns>chaîne de caractère avec toutes les informations du client</returns>
+        public override string ToString()
+        {
+            string chain = "";
+            if(firstOrder != new DateTime()) chain = chain + "\n1ère commande : " + firstOrder.ToString();              
             return base.ToString() + chain;
         }
     }

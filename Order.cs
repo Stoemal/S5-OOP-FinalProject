@@ -9,7 +9,7 @@ namespace S5_OOP_FinalProject
     /// <summary>
     /// Class des Commandes
     /// </summary>
-    public class Order
+    public class Order : ICalculus
     {
         private string orderNumber;
         private DateTime date;
@@ -116,6 +116,35 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
+        /// <summary>
+        /// Implémentation de ICalculus permettant d'obtenir le montant
+        /// de l'addition de la commande      
+        public void Calculation()
+        {
+            bill = 0;
+            //L'addition est la somme des prix des pizzas et des boissons
+            listPizza.ForEach((Pizza n) => { bill = bill + n.Price; });
+            listBeverage.ForEach((Beverage n) => { bill = bill + n.Price; });           
+        }
+
+        /// <summary>
+        /// Retourne une chaîne de caractères avec toutes les informations d'une commande
+        /// en retirant le nom du client
+        /// </summary>
+        /// <returns>chaîne de caractères avec toutes les informations d'une commande
+        /// sans le nom du client</returns>
+        public string PartialToString()
+        {
+            return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state +
+                ", état : " + achievement + ", addition : " + bill + " €" + 
+                "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName +
+                "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName;
+        }
+
+        /// <summary>
+        /// Retourne une chaîne de caractères avec toutes les informations d'une commande
+        /// </summary>
+        /// <returns>chaîne de caractères avec toutes les informations d'une commande</returns>
         public override string ToString()
         {
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + 

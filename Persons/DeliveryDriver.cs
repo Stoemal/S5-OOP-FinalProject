@@ -28,6 +28,7 @@ namespace S5_OOP_FinalProject
         public int OrderCount
         {
             get { return this.orderCount; }
+            set { this.orderCount = value; }
         }
         #endregion Accesseurs
 
