@@ -39,7 +39,7 @@ namespace S5_OOP_FinalProject
 
         public override string ToString()
         {
-            return "Type : " + type + "\nVolume :" + volume + "\nPrix : " + price;
+            return "Type : " + type + "\nVolume : " + volume + "\nPrix : " + price;
         }
 
     }

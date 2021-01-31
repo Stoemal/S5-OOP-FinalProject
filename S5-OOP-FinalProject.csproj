@@ -46,6 +46,7 @@
     <Compile Include="Beverage.cs" />
     <Compile Include="IEntries.cs" />
     <Compile Include="IDisplay.cs" />
+    <Compile Include="ICalculus.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Pizza.cs" />
     <Compile Include="Persons\Customer.cs" />

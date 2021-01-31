@@ -13,7 +13,8 @@ namespace S5_OOP_FinalProject
         
         /*
         static void Main(string[] args)
-        {           
+        {
+            #region tests Mehdi
             Pizzeria pizzAlpha = new Pizzeria();
 
             //string file = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Clients.csv";
@@ -52,8 +53,6 @@ namespace S5_OOP_FinalProject
                 Console.WriteLine(elt + "\n");
             }
             
-           
-
             foreach (Order elt in pizzAlpha.GlobalOrderList)
             {
                 Console.WriteLine(elt + "\n");
@@ -67,7 +66,13 @@ namespace S5_OOP_FinalProject
                 }
                 Console.WriteLine();
             }
+            */
 
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            Console.WriteLine();
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCity);
+            Console.WriteLine();
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
 
             foreach (Order elt in pizzAlpha.GlobalOrderList)
             {
@@ -93,6 +98,8 @@ namespace S5_OOP_FinalProject
 
             }
 
+            
+            #endregion tests Mehdi
 
             foreach(Officer elt in pizzAlpha.ListOfficer)
             {
