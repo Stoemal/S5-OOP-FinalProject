@@ -74,19 +74,12 @@ namespace S5_OOP_FinalProject
             Console.WriteLine();
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
 
-            foreach (Order elt in pizzAlpha.GlobalOrderList)
-            {
-                
-                if((purchase.Date > date1 ) && (purchase.Date < date2))
-                {
-                    Console.WriteLine(purchase.ToString());
-                }
-            }
+
             Console.ReadKey();
         }
-        
 
 
+        #endregion tests Mehdi
 
 
 
@@ -100,7 +93,7 @@ namespace S5_OOP_FinalProject
             }
 
             
-            #endregion tests Mehdi
+
 
             foreach(Officer elt in pizzAlpha.ListOfficer)
             {

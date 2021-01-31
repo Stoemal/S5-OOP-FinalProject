@@ -215,7 +215,5 @@ namespace S5_OOP_FinalProject
             }
             return text;
         }
-
-
     }
 }
