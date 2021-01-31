@@ -11,7 +11,9 @@ namespace S5_OOP_FinalProject
     /// </summary>
     public class Order : ICalculus
     {
+        #region Attributs
         private string orderNumber;
+        private static int increment = 0;
         private DateTime date;
 
         private Customer customerToServe;
@@ -23,8 +25,8 @@ namespace S5_OOP_FinalProject
 
         private string state;
         private string achievement;
-        private float bill;     
-
+        private float bill = 0;
+        #endregion
 
         public Order(string orderNumber, DateTime date,
             Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,            
@@ -65,10 +67,47 @@ namespace S5_OOP_FinalProject
             this.bill = bill;
         }
 
+        public Order(
+    Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
+    string state, string achievement)
+        {
+            this.orderNumber = Convert.ToString(increment);
+            this.date = DateTime.Now;
+
+            this.customerToServe = customerToServe;
+            this.officerInCharge = officerInCharge;
+            this.deliveryDriverInCharge = deliveryDriverInCharge;
+            this.OfficerInCharge.OrderCount++;
+            this.DeliveryDriverInCharge.OrderCount++;
+
+            this.state = state;
+            this.achievement = achievement;
+
+            this.listPizza = new List<Pizza>();
+            this.listBeverage = new List<Beverage>();
+
+
+            foreach (Pizza pizz in listPizza)
+            {
+                this.bill = bill + pizz.Price;
+            }
+            foreach (Beverage drink in listBeverage)
+            {
+                this.bill = bill + drink.Price;
+            }
+            increment++;
+        }
+
+
+
         #region Accesseurs
         public string OrderNumber
         {
             get { return this.orderNumber; }
+            set
+            {
+                orderNumber = value;
+            }
         }
         public DateTime Date
         {
@@ -145,13 +184,38 @@ namespace S5_OOP_FinalProject
         /// Retourne une chaîne de caractères avec toutes les informations d'une commande
         /// </summary>
         /// <returns>chaîne de caractères avec toutes les informations d'une commande</returns>
+        public static float Note()
+        {
+            float prix = 0;
+
+            return prix;
+        }
+
+
         public override string ToString()
         {
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + 
-                ", état : " + achievement + ", addition : " + bill + " €" + 
+                ", état : " + achievement + ", addition : " + bill + " e" + 
                 "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + 
                 "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + 
-                "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName ;
+                "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName + "\n";
         }
+        public string FoodToString()
+        {
+            string text = "Liste pizza : \n";
+            foreach(Pizza pizz in listPizza)
+            {
+                text = text + pizz.Type + pizz.Size + pizz.Price + "\n";
+                
+            }
+            text = text = "Liste boissons : \n";
+            foreach(Beverage boisson in listBeverage)
+            {
+                text = text + boisson.Type + boisson.Volume + boisson.Price + "\n";
+            }
+            return text;
+        }
+
+
     }
 }

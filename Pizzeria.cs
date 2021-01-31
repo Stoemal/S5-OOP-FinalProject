@@ -117,7 +117,6 @@ namespace S5_OOP_FinalProject
             finally  //On ferme le StremReader une fois que tout a été effectué
             { if (lecteur != null) lecteur.Close(); }
         }
-
         /// <summary>
         /// Lit un fichier Commis et ajoute les clients du fichier dans listOfficer
         /// </summary>
@@ -152,7 +151,6 @@ namespace S5_OOP_FinalProject
             finally
             { if (lecteur != null) lecteur.Close(); }
         }
-
         /// <summary>
         /// Lit un fichier Livreur et ajoute les clients du fichier dans listDeliveryDriver
         /// </summary>
@@ -276,8 +274,7 @@ namespace S5_OOP_FinalProject
         #endregion Affichage Clients
 
         #endregion Module Client
-
-
+        ////////////////////////////////////////////////////////
         /*
         Fonctions de lecture de fichiers du module commande
         Elles sont toutes construites avec la même structure que pour celles
@@ -443,11 +440,12 @@ namespace S5_OOP_FinalProject
             else Console.WriteLine("Liste de Commande vide => Etude des détails impossible");           
         }
         #endregion Module Commande
-
-
+        ////////////////////////////////////////////////////////
         #region Module Statistiques
+
         public void OrderTime(DateTime date1, DateTime date2)
         { // Pour afficher les commandes sur une certaine période
+            Console.WriteLine("Commandes passées entre le :  " + Convert.ToString(date1) + "  et le  " + Convert.ToString(date2) + "\n");
             foreach (Order purchase in globalOrderList)
             {
                 if ((purchase.Date > date1) && (purchase.Date < date2))
@@ -463,11 +461,58 @@ namespace S5_OOP_FinalProject
             {
                 sum = sum + purchase.Bill;
             }
-            Console.WriteLine(sum / globalOrderList.Count());
+            Console.WriteLine("Moyenne montant commandes : " + sum / globalOrderList.Count());
         }
+        public void CustomerAccount()
+        {// [STATISTIQUES] cette fonction affiche la moyenne des comptes clients
+         // on parcourt la liste de clients 
+         // puis pour chaque client on parcourt la liste de commandes et on y ajoute
+         // on somme donc les notes de chaques commandes que l'on divise par la longueur de la liste de commande
+         // on termine par afficher le nom du client et la moyenne des dépenses de son compte
+            float sum = 0;
+            foreach (Customer client in listCustomer)
+            {
+                foreach (Order commande in client.ListOrder)
+                {
+                    sum = sum + commande.Bill;
+                }
+                Console.WriteLine(client.LastName + "  " + sum / client.ListOrder.Count() + " e");
+                sum = 0;
+            }
+        }
+
         #endregion Module Statistiques
+        ////////////////////////////////////////////////////////
+        #region Module Autre
+
+        public void RandomPizza()
+        {
+            // Cette fonction fait partie du module autre, elle offre une grande 
+            //  pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
+
+            Random rnd = new Random(); //On définit un variable aléatoire
+            int index = rnd.Next(listCustomer.Count());//cela nous retourne l'index dans la liste de clients du client chanceux
+            Customer luckyCustomer = listCustomer[index];// on associe le client à son index
+            Pizza luckyPizza = new Pizza("Grande", "Chance", 0);//On crée la pizza qui sera offerte (on ne peut l'avoir que via cette fonction)
+            Beverage luckyBeverage = new Beverage("Bière au Beurre", 100, 0);//On crée la bière au beurre
+            List<Pizza> luckyPList = new List<Pizza> { luckyPizza };//On crée nos listes de pizza et boissons (le constructeur de commande à besoin de list pour fonctionner)
+            List<Beverage> luckyBList = new List<Beverage> { luckyBeverage };
+            Officer a = new Officer("Tom", "Cruise", "LosAngeles", "0101010101", "ISS", Convert.ToDateTime("2019-06-02"), 2);
+            DeliveryDriver b = new DeliveryDriver("Chuck", "Norris", "Las Vegas", "0123456789", "Il vous trouvera", "Monocycle", 0);
+            Order luckyOrder = new Order(Convert.ToString(globalOrderList.Count() + 1), DateTime.Now, luckyCustomer, a, b, luckyPList, luckyBList, "en préparation", "en préparation", 0);
+            //On construit notre commande avec les arguments précédents
+            luckyCustomer.ListOrder.Add(luckyOrder);// On ajoute la commande à la liste de commande de notre client
+            //Console.WriteLine(luckyOrder);
+            // Permet de vérifier que la commande se soit bien executée
+        }
 
 
-        
+
+
+
+        #endregion
+
+
+
     }
 }
