@@ -68,18 +68,24 @@ namespace S5_OOP_FinalProject
 
         public string PartialToStringListOrder()
         {
-            string chain = "Liste de commande du client : ";
-            if (listOrder != null)
+            string chain = "Liste de commande :";
+            if (listOrder == null || listOrder.Count() == 0)
             {
+                chain = chain + " Vide";
+            }
+            else
+            {
+                chain = chain + "\n";
                 if (listOrder.Count() > 0)
                 {
                     listOrder.ForEach(delegate (Order n)
                     {
-                        chain = chain + "\n" + n.PartialToString();
+                        if (n.Achievement.ToUpper() == "PERDUE") chain = chain + "Commande perdue";
+                        else chain = chain + "\n" + n.PartialToString() + "\n\n" + n.FoodToString();
                     });
-                }
-            }
-            return base.ToString() + chain;
+                }               
+            }           
+            return base.ToString() + "\n\n" + chain;
         }
 
         /// <summary>

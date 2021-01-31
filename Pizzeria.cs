@@ -11,7 +11,7 @@ namespace S5_OOP_FinalProject
     /// Class Pizzeria controlant les commandes des clients, le travail des employés 
     /// ainsi que le reste des caractéristiques reliées à la gestion de l'argent
     /// </summary>
-    class Pizzeria
+    class Pizzeria : IDisplay
     {
         private List<Officer> listOfficer;
         private List<DeliveryDriver> listDeliveryDriver;
@@ -50,20 +50,6 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
-
-
-
-
-        #region Module Client
-
-        /*
-        Fonctions de lecture de fichiers du module client
-        Elles sont toutes construites avec la même structure
-        On l'explique une fois dans ReadCustomers
-        Notons aussi qu'on ne lit que des fichiers csv pour chaque individu
-        */
-        #region Lire Fichiers
-
         /// <summary>
         /// Permet de lire les fichiers Clients, Commis, Livreur et Commande
         /// </summary>
@@ -74,6 +60,47 @@ namespace S5_OOP_FinalProject
         {
             n(file);
         }
+
+
+        public delegate void Entries(string file);
+            
+        public void Manipulate(Entries n, string file) { n(file); }
+
+
+
+
+        #region Module Client
+
+        public void CreateCustomer(string file)
+        {
+            Customer c;
+            string[] datas = new string[4];
+            Console.WriteLine("Nouveau Client : \n");
+            Console.WriteLine("Nom : ");
+            datas[0] = Console.ReadLine();
+            Console.WriteLine("Prénom : ");
+            datas[1] = Console.ReadLine();
+            Console.WriteLine("Adresse : ");
+            datas[2] = Console.ReadLine();
+            Console.WriteLine("Téléphone : ");
+            datas[3] = Console.ReadLine();
+
+            c = new Customer(datas[0], datas[1], datas[2], datas[3]);
+            listCustomer.Add(c);
+
+            StreamWriter writeFile = new StreamWriter(file, true);
+            writeFile.WriteLine(datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3]);
+            writeFile.Close();
+        }
+
+
+        /*
+        Fonctions de lecture de fichiers du module client
+        Elles sont toutes construites avec la même structure
+        On l'explique une fois dans ReadCustomers
+        Notons aussi qu'on ne lit que des fichiers csv pour chaque individu
+        */
+        #region Lire Fichiers
 
         /// <summary>
         /// Lit un fichier Client et ajoute les clients du fichier dans listCustomer
@@ -183,6 +210,7 @@ namespace S5_OOP_FinalProject
         }
         #endregion Lire Fichiers
 
+
         #region Affichage Clients
         /// <summary>
         /// On définit une délégation pour Afficher les clients de trois manières
@@ -248,9 +276,10 @@ namespace S5_OOP_FinalProject
                     cities.Add(datas[i]);
                 }
             }
-           
+
             //On affiche tous les clients vivant dans une ville répertoriée dans 
-            //la liste de ville : cities
+            //la liste de ville : cities par ordre alphabétique des villes
+            cities.Sort(delegate (string a, string b) { return a.CompareTo(b); });
             cities.ForEach((string elt) =>
             {
                 Console.WriteLine(elt + " :\n");
@@ -274,10 +303,12 @@ namespace S5_OOP_FinalProject
         #endregion Affichage Clients
 
         #endregion Module Client
-        ////////////////////////////////////////////////////////
+
+
+
         /*
-        Fonctions de lecture de fichiers du module commande
-        Elles sont toutes construites avec la même structure que pour celles
+        Les fonctions de lecture de fichiers du module commande
+        sont toutes construites avec la même structure que pour celles
         du module client
         On l'explique une fois dans ReadCustomers
         Notons aussi qu'on ne lit que des fichiers csv pour chaque commande
@@ -317,32 +348,31 @@ namespace S5_OOP_FinalProject
                         {
                             lu = lecteur.ReadLine();
                             datas = lu.Split(';');
-                            temp = datas[2].Split('/');
+                            temp = datas[1].Split('/');
 
                             #region Attribution du nom du client et des employés à une commande
                             c = null;
                             for (int i = 0; i < listCustomer.Count() && c == null; i++)
                             {
-                                if (datas[3] == listCustomer[i].PhoneNumber) c = listCustomer[i];
+                                if (datas[2] == listCustomer[i].PhoneNumber) c = listCustomer[i];
                             }                        
 
                             o = null;
                             for (int i = 0; i < listOfficer.Count() && o == null; i++)
                             {
-                                if (datas[4].ToUpper() == listOfficer[i].LastName.ToUpper()) o = listOfficer[i];
+                                if (datas[3].ToUpper() == listOfficer[i].LastName.ToUpper()) o = listOfficer[i];
                             }                        
 
                             d = null;
                             for (int i = 0; i < listDeliveryDriver.Count() && d == null; i++)
                             {
-                                if (datas[5].ToUpper() == listDeliveryDriver[i].LastName.ToUpper()) d = listDeliveryDriver[i];
+                                if (datas[4].ToUpper() == listDeliveryDriver[i].LastName.ToUpper()) d = listDeliveryDriver[i];
                             }
                             #endregion
 
                             //On ajoute la commande dans la liste de commandes
-                            Order add = new Order(datas[0],
-                                new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]),
-                                Convert.ToInt32(datas[1]), 0, 0), c, o, d, datas[6], datas[7]);
+                            Order add = new Order(new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]),
+                                Convert.ToInt32(datas[0]), 0, 0), c, o, d, datas[5], datas[6]);
 
                             globalOrderList.Add(add);
                             if(c.FirstOrder == new DateTime())
@@ -398,7 +428,9 @@ namespace S5_OOP_FinalProject
 
                         for(int i = 0; i < globalOrderList.Count(); i++)
                         {
-                            if(globalOrderList[i].OrderNumber == datas[0])
+                            //Console.WriteLine(globalOrderList[i].OrderNumber);
+                            //Console.WriteLine(datas[0]);
+                            if(Convert.ToString(globalOrderList[i].OrderNumber) == datas[0])
                             {
                                 if(datas[1].ToUpper() == "PIZZA")
                                 {
@@ -439,10 +471,28 @@ namespace S5_OOP_FinalProject
             }
             else Console.WriteLine("Liste de Commande vide => Etude des détails impossible");           
         }
+        
+        /// <summary>
+        /// Implémentation de IDisplay affichant les données de chacune des commandes
+        /// </summary>
+        public void Display()
+        {
+            globalOrderList.ForEach(delegate (Order n) { Console.WriteLine(n + "\n" + n.FoodToString()); });
+        }
+
+        
+
         #endregion Module Commande
-        ////////////////////////////////////////////////////////
+
+
+
         #region Module Statistiques
 
+        /// <summary>
+        /// Affiche les commandes selon une période de temps
+        /// </summary>
+        /// <param name="date1">1ère date</param>
+        /// <param name="date2">2ème date ultérieure à la 1ère</param>
         public void OrderTime(DateTime date1, DateTime date2)
         { // Pour afficher les commandes sur une certaine période
             Console.WriteLine("Commandes passées entre le :  " + Convert.ToString(date1) + "  et le  " + Convert.ToString(date2) + "\n");
@@ -454,6 +504,10 @@ namespace S5_OOP_FinalProject
                 }
             }
         }
+
+        /// <summary>
+        /// Calcul la moyenne du prix de toutes les commandes
+        /// </summary>
         public void OrderMean()
         {
             float sum = 0;
@@ -463,13 +517,36 @@ namespace S5_OOP_FinalProject
             }
             Console.WriteLine("Moyenne montant commandes : " + sum / globalOrderList.Count());
         }
+
+        /// <summary>
+        /// Cette fonction affiche la moyenne des comptes clients
+        /// on parcourt la liste de clients 
+        /// puis pour chaque client on parcourt la liste de commandes et on y ajoute
+        /// on somme donc les notes de chaques commandes que l'on divise par la longueur de la liste de commande
+        /// on termine par afficher le nom du client et la moyenne des dépenses de son compte
+        /// </summary>
         public void CustomerAccount()
-        {// [STATISTIQUES] cette fonction affiche la moyenne des comptes clients
-         // on parcourt la liste de clients 
-         // puis pour chaque client on parcourt la liste de commandes et on y ajoute
-         // on somme donc les notes de chaques commandes que l'on divise par la longueur de la liste de commande
-         // on termine par afficher le nom du client et la moyenne des dépenses de son compte
+        {
             float sum = 0;
+
+            /*
+            listCustomer.ForEach(delegate (Customer n)
+            {
+                if(n.ListOrder != null)
+                {
+                    if(n.ListOrder.Count() > 0)
+                    {
+                        n.Calculation();
+                        sum = n.CumulativeOrder / n.ListOrder.Count();
+                    }
+                }
+                Console.WriteLine(n.LastName + "  " + sum / n.ListOrder.Count() + " e");
+                sum = 0;
+            });
+            */
+            
+
+
             foreach (Customer client in listCustomer)
             {
                 foreach (Order commande in client.ListOrder)
@@ -482,28 +559,37 @@ namespace S5_OOP_FinalProject
         }
 
         #endregion Module Statistiques
+
+
+
         ////////////////////////////////////////////////////////
         #region Module Autre
 
+        /// <summary>
+        /// Cette fonction fait partie du module autre, elle offre une grande 
+        /// pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
+        /// </summary>
         public void RandomPizza()
         {
-            // Cette fonction fait partie du module autre, elle offre une grande 
-            //  pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
-
             Random rnd = new Random(); //On définit un variable aléatoire
             int index = rnd.Next(listCustomer.Count());//cela nous retourne l'index dans la liste de clients du client chanceux
             Customer luckyCustomer = listCustomer[index];// on associe le client à son index
             Pizza luckyPizza = new Pizza("Grande", "Chance", 0);//On crée la pizza qui sera offerte (on ne peut l'avoir que via cette fonction)
-            Beverage luckyBeverage = new Beverage("Bière au Beurre", 100, 0);//On crée la bière au beurre
+            Beverage luckyBeverage = new Beverage("Bière au Beurre", 300, 0);//On crée la bière au beurre
             List<Pizza> luckyPList = new List<Pizza> { luckyPizza };//On crée nos listes de pizza et boissons (le constructeur de commande à besoin de list pour fonctionner)
             List<Beverage> luckyBList = new List<Beverage> { luckyBeverage };
             Officer a = new Officer("Tom", "Cruise", "LosAngeles", "0101010101", "ISS", Convert.ToDateTime("2019-06-02"), 2);
             DeliveryDriver b = new DeliveryDriver("Chuck", "Norris", "Las Vegas", "0123456789", "Il vous trouvera", "Monocycle", 0);
-            Order luckyOrder = new Order(Convert.ToString(globalOrderList.Count() + 1), DateTime.Now, luckyCustomer, a, b, luckyPList, luckyBList, "en préparation", "en préparation", 0);
+            Order luckyOrder = new Order(DateTime.Now, luckyCustomer, a, b, luckyPList, luckyBList, "en préparation", "en préparation", 0);
+
+           
+
             //On construit notre commande avec les arguments précédents
             luckyCustomer.ListOrder.Add(luckyOrder);// On ajoute la commande à la liste de commande de notre client
-            //Console.WriteLine(luckyOrder);
-            // Permet de vérifier que la commande se soit bien executée
+
+            Console.WriteLine(luckyOrder + "\n" + luckyOrder.FoodToString());
+            //Console.WriteLine(luckyCustomer);
+            //Permet de vérifier que la commande se soit bien executée
         }
 
 

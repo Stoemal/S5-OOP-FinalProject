@@ -12,7 +12,7 @@ namespace S5_OOP_FinalProject
     public class Order : ICalculus
     {
         #region Attributs
-        private string orderNumber;
+        private int orderNumber;
         private static int increment = 0;
         private DateTime date;
 
@@ -28,6 +28,8 @@ namespace S5_OOP_FinalProject
         private float bill = 0;
         #endregion
 
+        //Anciens constructeurs avec increment et orderNumber en string
+        /*
         public Order(string orderNumber, DateTime date,
             Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,            
             string state, string achievement)
@@ -45,6 +47,7 @@ namespace S5_OOP_FinalProject
             this.listPizza = new List<Pizza>();
             this.listBeverage = new List<Beverage>();
             this.bill = 0;
+            increment++;
         }
 
         public Order(string orderNumber, DateTime date,
@@ -65,11 +68,11 @@ namespace S5_OOP_FinalProject
             this.state = state;
             this.achievement = achievement;
             this.bill = bill;
+            increment++;
         }
 
-        public Order(
-    Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
-    string state, string achievement)
+        public Order(Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
+            string state, string achievement)
         {
             this.orderNumber = Convert.ToString(increment);
             this.date = DateTime.Now;
@@ -97,13 +100,87 @@ namespace S5_OOP_FinalProject
             }
             increment++;
         }
+        */
 
 
+        public Order(DateTime date,
+        Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
+        string state, string achievement)
+        {
+            orderNumber = increment;
+            increment++;
+
+            this.date = date;
+
+            this.customerToServe = customerToServe;
+            this.officerInCharge = officerInCharge;
+            this.deliveryDriverInCharge = deliveryDriverInCharge;
+
+            this.state = state;
+            this.achievement = achievement;
+
+            this.listPizza = new List<Pizza>();
+            this.listBeverage = new List<Beverage>();
+            this.bill = 0;
+        }
+
+        public Order(DateTime date,
+            Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
+            List<Pizza> listPizza, List<Beverage> listBeverage,
+            string state, string achievement, float bill)
+        {
+            orderNumber = increment;
+            increment++;
+
+            this.date = date;
+
+            this.customerToServe = customerToServe;
+            this.officerInCharge = officerInCharge;
+            this.deliveryDriverInCharge = deliveryDriverInCharge;
+
+            this.listPizza = listPizza;
+            this.listBeverage = listBeverage;
+
+            this.state = state;
+            this.achievement = achievement;
+            this.bill = bill;
+        }
+
+        public Order(Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
+            string state, string achievement)
+        {
+            orderNumber = increment;
+            increment++;
+
+            this.date = DateTime.Now;
+
+            this.customerToServe = customerToServe;
+            this.officerInCharge = officerInCharge;
+            this.deliveryDriverInCharge = deliveryDriverInCharge;
+            this.OfficerInCharge.OrderCount++;
+            this.DeliveryDriverInCharge.OrderCount++;
+
+            this.state = state;
+            this.achievement = achievement;
+
+            this.listPizza = new List<Pizza>();
+            this.listBeverage = new List<Beverage>();
+
+
+            foreach (Pizza pizz in listPizza)
+            {
+                this.bill = bill + pizz.Price;
+            }
+            foreach (Beverage drink in listBeverage)
+            {
+                this.bill = bill + drink.Price;
+            }
+        }
 
         #region Accesseurs
-        public string OrderNumber
+        public int OrderNumber
         {
-            get { return this.orderNumber; }
+            get { return orderNumber; }
             set
             {
                 orderNumber = value;
@@ -180,10 +257,7 @@ namespace S5_OOP_FinalProject
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName;
         }
 
-        /// <summary>
-        /// Retourne une chaîne de caractères avec toutes les informations d'une commande
-        /// </summary>
-        /// <returns>chaîne de caractères avec toutes les informations d'une commande</returns>
+        
         public static float Note()
         {
             float prix = 0;
@@ -191,29 +265,53 @@ namespace S5_OOP_FinalProject
             return prix;
         }
 
-
+        /// <summary>
+        /// Retourne une chaîne de caractères avec toutes les informations d'une commande
+        /// </summary>
+        /// <returns>chaîne de caractères avec toutes les informations d'une commande</returns>
         public override string ToString()
         {
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + 
-                ", état : " + achievement + ", addition : " + bill + " e" + 
+                ", état : " + achievement + ", addition : " + bill + " €" + 
                 "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + 
                 "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + 
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName + "\n";
         }
+
+        /// <summary>
+        /// Retourne une chaîne de caracère contenant tout les 
+        /// produits d'une commande
+        /// </summary>
+        /// <returns>haîne de caracère contenant tout les produits d'une commande</returns>
         public string FoodToString()
         {
-            string text = "Liste pizza : \n";
-            foreach(Pizza pizz in listPizza)
+            string text = null;
+
+            if(listPizza != null)
             {
-                text = text + pizz.Type + pizz.Size + pizz.Price + "\n";
-                
-            }
-            text = text = "Liste boissons : \n";
-            foreach(Beverage boisson in listBeverage)
+                if(listPizza.Count() > 0)
+                {
+                    text = "Liste pizza : \n";
+                    foreach (Pizza pizz in listPizza)
+                    {
+                        text = text + pizz.Type + " " + pizz.Size + " " + pizz.Price + " euros\n";
+                    }
+                    text = text + "\n";
+                }
+            }            
+            if(listBeverage != null)
             {
-                text = text + boisson.Type + boisson.Volume + boisson.Price + "\n";
+                if(listBeverage.Count() > 0)
+                {
+                    text = text + "Liste boissons : \n";
+                    foreach (Beverage boisson in listBeverage)
+                    {
+                        text = text + boisson.Type + " " + boisson.Volume + "cL " + boisson.Price + " euros\n";
+                    }
+                }               
             }
-            return text;
+            if (text == null) return "Vide";
+            else return text;
         }
 
 
