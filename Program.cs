@@ -9,14 +9,68 @@ namespace S5_OOP_FinalProject
 {
     class Program
     {
-        List<Order> globalOrderList = new List<Order> { };// liste regroupant la totalité des commandes
+        List<Order> globalOrderList = new List<Order> { };// liste regroupant la totalité des commandes     
         
-        
-        
-        public void OrderTime(DateTime date1, DateTime date2)
-        { // Pour afficher les commandes sur une certaine période
-            foreach(Order purchase in globalOrderList)
+        static void Main(string[] args)
+        {           
+            Pizzeria pizzAlpha = new Pizzeria();
+
+            //string file = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Clients.csv";
+            //string file1 = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Commis.csv";
+            //string file2 = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Livreur.csv";
+            //string file3 = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Commandes.csv";
+            //string file4 = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\DetailsCommandes.csv";
+
+            string file = "Clients.csv";
+            string file1 = "Commis.csv";
+            string file2 = "Livreur.csv";
+            string file3 = "Commandes.csv";
+            string file4 = "DetailsCommandes.csv";
+
+            pizzAlpha.AddFilesData(pizzAlpha.ReadCustomers, file);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadOfficer, file1);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadDeliveryDriver, file2);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadOrder, file3);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadDetailsOrder, file4);
+
+            /*
+            foreach (Customer elt in pizzAlpha.ListCustomer)
             {
+                Console.WriteLine(elt + "\n");
+            }
+            
+
+            foreach (Officer elt in pizzAlpha.ListOfficer)
+            {
+                Console.WriteLine(elt + "\n");
+            }
+            
+          
+            foreach (DeliveryDriver elt in pizzAlpha.ListDeliveryDriver)
+            {
+                Console.WriteLine(elt + "\n");
+            }
+            */
+           
+
+            foreach (Order elt in pizzAlpha.GlobalOrderList)
+            {
+                Console.WriteLine(elt + "\n");
+                for (int i = 0; i < elt.ListPizza.Count(); i++)
+                {
+                    Console.WriteLine(elt.ListPizza[i]);
+                }               
+                for (int i = 0; i < elt.ListBeverage.Count(); i++)
+                {
+                    Console.WriteLine(elt.ListBeverage[i]);
+                }
+                Console.WriteLine();
+            }
+
+
+            foreach (Order elt in pizzAlpha.GlobalOrderList)
+            {
+                
                 if((purchase.Date > date1 ) && (purchase.Date < date2))
                 {
                     Console.WriteLine(purchase.ToString());
@@ -42,11 +96,8 @@ namespace S5_OOP_FinalProject
             /*
             Pizzeria pizzAlpha = new Pizzeria();
 
-            string file = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Clients.csv";
-            string file1 = "C:\\Users\\Mehdi\\Documents\\Z - Activités Mehdi\\1. Ecole\\ESILV\\Année 3\\S5\\POO avancées\\Problème POO\\Commis.csv";
+            }
 
-            pizzAlpha.AddFilesData(pizzAlpha.ReadCustomers, file);
-            pizzAlpha.AddFilesData(pizzAlpha.ReadOfficer, file1);
 
             foreach(Officer elt in pizzAlpha.ListOfficer)
             {

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class du Livreur héritant de la Class Employee et implémentant IDisplay
+    /// C'est une feuille terminale de l'arbre d'héritage
+    /// </summary>
     sealed public class DeliveryDriver : Employee, IDisplay
     {
         private string meanOfTransport;
@@ -26,6 +30,15 @@ namespace S5_OOP_FinalProject
             get { return this.orderCount; }
         }
         #endregion Accesseurs
+
+        public override string ToString()
+        {
+            string chain = "\nMoyen de transport : ";
+            if (meanOfTransport != null) chain = chain + meanOfTransport;
+            else chain = chain + "inconnue";
+            chain = chain + "\nNombre de commande(s) : " + orderCount;
+            return base.ToString() + chain;
+        }
 
         public void Display()
         {

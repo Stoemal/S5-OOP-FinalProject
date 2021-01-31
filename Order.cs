@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class des Commandes
+    /// </summary>
     public class Order
     {
         private string orderNumber;
@@ -15,12 +18,32 @@ namespace S5_OOP_FinalProject
         private Officer officerInCharge;
         private DeliveryDriver deliveryDriverInCharge;
 
-        private List<Pizza> listPizza;
-        private List<Beverage> listBeverage;
+        private List<Pizza> listPizza;      
+        private List<Beverage> listBeverage;        
 
         private string state;
         private string achievement;
-        private float bill;
+        private float bill;     
+
+
+        public Order(string orderNumber, DateTime date,
+            Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,            
+            string state, string achievement)
+        {
+            this.orderNumber = orderNumber;
+            this.date = date;
+
+            this.customerToServe = customerToServe;
+            this.officerInCharge = officerInCharge;
+            this.deliveryDriverInCharge = deliveryDriverInCharge;
+
+            this.state = state;
+            this.achievement = achievement;
+
+            this.listPizza = new List<Pizza>();
+            this.listBeverage = new List<Beverage>();
+            this.bill = 0;
+        }
 
         public Order(string orderNumber, DateTime date,
             Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
@@ -68,29 +91,38 @@ namespace S5_OOP_FinalProject
         public List<Pizza> ListPizza
         {
             get { return this.listPizza; }
+            set { this.listPizza = value; }
         }
         public List<Beverage> ListBeverage
         {
             get { return this.listBeverage; }
+            set { this.listBeverage = value; }
         }
 
         public string State
         {
             get { return this.state; }
+            set { this.state = value; }
         }
         public string Achievement
         {
             get { return this.achievement; }
+            set { this.achievement = value; }
         }
         public float Bill
         {
             get { return this.bill; }
+            set { this.bill = value; }
         }
         #endregion Accesseurs
 
         public override string ToString()
         {
-            return "Numero de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + ", état : " + achievement + ", addition : " + bill + " €" + "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName +"\n";
+            return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + 
+                ", état : " + achievement + ", addition : " + bill + " €" + 
+                "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + 
+                "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + 
+                "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName ;
         }
     }
 }

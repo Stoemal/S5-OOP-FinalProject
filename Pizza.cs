@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class des Pizzas
+    /// </summary>
     public class Pizza
     {
         private string size;

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
+    /// <summary>
+    /// Class des Boissons
+    /// </summary>
     public class Beverage
     {
         private string type;
