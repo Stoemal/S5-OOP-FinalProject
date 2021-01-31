@@ -11,7 +11,7 @@ namespace S5_OOP_FinalProject
     {
         List<Order> globalOrderList = new List<Order> { };// liste regroupant la totalité des commandes     
         
-        /*
+        
         static void Main(string[] args)
         {
             #region tests Mehdi
@@ -82,18 +82,19 @@ namespace S5_OOP_FinalProject
                     Console.WriteLine(purchase.ToString());
                 }
             }
+            Console.ReadKey();
         }
-        */
+        
 
 
 
 
 
-
+        /*
         static void Main(string[] args)
         {      
             #region TEST MEHDI
-            /*
+            
             Pizzeria pizzAlpha = new Pizzeria();
 
             }
@@ -105,7 +106,7 @@ namespace S5_OOP_FinalProject
             {
                 Console.WriteLine(elt);
             }
-            */
+            
             #endregion
 
             Pizzeria pizzBeta = new Pizzeria();
@@ -194,5 +195,7 @@ namespace S5_OOP_FinalProject
 
             Console.ReadKey();
         }
+        */
+
     }
 }

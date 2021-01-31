@@ -93,5 +93,16 @@ namespace S5_OOP_FinalProject
             if(firstOrder != new DateTime()) chain = chain + "\n1ère commande : " + firstOrder.ToString();              
             return base.ToString() + chain;
         }
+        public bool PassedAnOrder()
+        {
+            foreach(Order commande in listOrder)
+            {  
+                if (commande.Date == DateTime.Today)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
