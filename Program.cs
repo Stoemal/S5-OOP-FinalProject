@@ -11,6 +11,7 @@ namespace S5_OOP_FinalProject
     {
         List<Order> globalOrderList = new List<Order> { };// liste regroupant la totalité des commandes     
         
+        /*
         static void Main(string[] args)
         {           
             Pizzeria pizzAlpha = new Pizzeria();
@@ -50,7 +51,7 @@ namespace S5_OOP_FinalProject
             {
                 Console.WriteLine(elt + "\n");
             }
-            */
+            
            
 
             foreach (Order elt in pizzAlpha.GlobalOrderList)
@@ -77,15 +78,9 @@ namespace S5_OOP_FinalProject
                 }
             }
         }
-        public void OrderMean()
-        {
-            float sum = 0;
-            foreach(Order purchase in globalOrderList)
-            {
-                sum = sum + purchase.Bill;
-            }
-            Console.WriteLine(sum/globalOrderList.Count());
-        }
+        */
+
+
 
 
 
@@ -135,13 +130,53 @@ namespace S5_OOP_FinalProject
             DeliveryDriver dab = new DeliveryDriver("Paul","Zuckerberg","Paris","0630569127","pas encore la","vélo",0);
 
             Order ooa  = new Order("000001",Convert.ToDateTime("2020-06-02"),cab,oaa,daa,pla,bla,"en preparation","en cours",12);
-            Order oob  = new Order("000002",Convert.ToDateTime("2020-06-02"),cab,oaa,daa,plb,blb,"en preparation","en cours",12);
-            Order ooc  = new Order("000003",Convert.ToDateTime("2020-06-02"),caa,oab,dab,pla,bla,"en preparation","en cours",12);
+            Order oob  = new Order("000002",Convert.ToDateTime("2020-06-02"),cab,oaa,daa,plb,blb,"en preparation","en cours",20);
+            Order ooc  = new Order("000003",Convert.ToDateTime("2020-06-02"),caa,oab,dab,pla,bla,"en preparation","en cours",20);
+            Order ood = new Order(caa, oaa, daa, "encours", "encours");
+            Order ooe = new Order(caa, oaa, daa, "encours", "encours");
+            Order oof = new Order(caa, oaa, daa, "encours", "encours");
+
+            pizzBeta.GlobalOrderList.Add(ooa);
+            pizzBeta.GlobalOrderList.Add(oob);
+            pizzBeta.GlobalOrderList.Add(ooc);
+
+            pizzBeta.GlobalOrderList.Add(ood);
+            pizzBeta.GlobalOrderList.Add(ooe);
+            pizzBeta.GlobalOrderList.Add(oof);
+
+
+            ood.ListPizza.Add(paa);
+            ood.ListBeverage.Add(baa);
+            
+
+            caa.ListOrder.Add(ooa);
+            caa.ListOrder.Add(oob);
+
+
+            //oaa.OrderCount = 2;
+
+            pizzBeta.ListCustomer.Add(caa);
+            pizzBeta.ListCustomer.Add(cab);
+            pizzBeta.ListCustomer.Add(cac);
+
+            pizzBeta.ListCustomer.Add(cad);
+
+
+
 
             Console.WriteLine(ooa.ToString());
             Console.WriteLine(oob.ToString());
             Console.WriteLine(ooc.ToString());
+            Console.WriteLine(ood.ToString());
+            Console.WriteLine(ooe.ToString());
+            Console.WriteLine(oof.ToString());
+            Console.WriteLine(oof);
 
+            pizzBeta.OrderMean();
+            pizzBeta.CustomerAccount();
+            oaa.Display();
+            pizzBeta.OrderTime(Convert.ToDateTime("2020-03-03"), Convert.ToDateTime("2021-03-03"));
+            pizzBeta.RandomPizza();
 
 
 
