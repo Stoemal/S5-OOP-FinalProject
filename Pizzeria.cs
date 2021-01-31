@@ -591,9 +591,70 @@ namespace S5_OOP_FinalProject
             //Console.WriteLine(luckyCustomer);
             //Permet de vérifier que la commande se soit bien executée
         }
+        public void BestCustomer()
+        {
+            /// Cette fonction permet de trouver le meilleur client (celui qui à dépensé le plus d'argent)
+            /// et lui offre la prochaine commande
+            /// On crée un client qui sera le meilleur client
+            Customer bestCustomer = new Customer("", "", "", "");
+            foreach(Customer client in listCustomer)
+            {
+                if(client.CumulativeOrder > bestCustomer.CumulativeOrder)
+                {
+                    bestCustomer = client;
+                }
+            }
+            /// on parcourt toute la liste pour trouver le meilleur client
+            /// on rend nulle la note de sa prochaine commande.
+            int length = bestCustomer.ListOrder.Count;
+            bestCustomer.ListOrder[length + 1].Bill = 0;
+        }
+        public void FirstNameDay()
+        {
+            /// Cette fonction fait payer 1€ sa commande au client, 
+            /// si son nom fait partie de la liste de noms suivante
+            /// et qu'il commande le jour de cette promotion
+            /// On crée notre liste de noms
+            List<string> firstNameList = new List<string>
+            {
+                "Monique","Germaine","Reine","Brigitte",
+                "Jacqueline","Adrienne","Xaviere",
 
-
-
+                "Teodule","Norbert","Gervais","Casimir",
+                "Raymond","Wilfried","Guy"
+            };
+            /// On parcourt notre list de commandes
+            foreach(Order commande in globalOrderList)
+            {
+                /// Si la liste de prénom contient le prénom d'un des client qui a commandé aujourd'hui 
+                /// Son addition est de 1€
+                if (firstNameList.Contains(commande.CustomerToServer.FirstName) && commande.Date == DateTime.Today)
+                {
+                    commande.Bill = 1;
+                }
+            }
+        }
+        public void BackToTheFuture()
+        {
+            Customer marty = new Customer("Marty", "McFly", "", "");
+            Officer doc = new Officer("Emett", "Brown", "HillValley", "0101010101", "InTheDeLorean", Convert.ToDateTime("1955-11-05"), 221);
+            DeliveryDriver biff = new DeliveryDriver("Biff", "Tannen", "HillValley", "0123456789", "DansLeFumier", "HoverBoard", 0);
+            Pizza pizz = new Pizza("Grande", "Voyageur Du Temps", 0);
+            Beverage boisson = new Beverage("Lait", 33,0);
+            Order commande = new Order(marty, doc, biff, "en preparation", "en cours");
+            commande.ListPizza.Add(pizz);
+            commande.ListBeverage.Add(boisson);
+            if(DateTime.Today == Convert.ToDateTime("2015-10-21"))
+            {
+                foreach(Customer client in listCustomer)
+                {
+                    if (client == marty && marty.PassedAnOrder() == true)
+                    {
+                        client.ListOrder.Add(commande);
+                    }
+                }
+            }
+        }
 
 
         #endregion

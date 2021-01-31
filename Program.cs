@@ -94,6 +94,12 @@ namespace S5_OOP_FinalProject
             Console.ReadKey();
             #endregion tests Mehdi
 
+            foreach(Officer elt in pizzAlpha.ListOfficer)
+            {
+                Console.WriteLine(elt);
+            }
+            
+            #endregion
 
             #region tests Quentin
             /*
@@ -149,6 +155,9 @@ namespace S5_OOP_FinalProject
             caa.ListOrder.Add(oob);
 
 
+
+
+
             //oaa.OrderCount = 2;
 
             pizzBeta.ListCustomer.Add(caa);
@@ -170,9 +179,10 @@ namespace S5_OOP_FinalProject
 
             pizzBeta.OrderMean();
             pizzBeta.CustomerAccount();
-            oaa.Display();
-            pizzBeta.OrderTime(Convert.ToDateTime("2020-03-03"), Convert.ToDateTime("2021-03-03"));
-            pizzBeta.RandomPizza();
+            
+            //oaa.Display();
+            //pizzBeta.OrderTime(Convert.ToDateTime("2020-03-03"), Convert.ToDateTime("2021-03-03"));
+            //pizzBeta.RandomPizza();
 
             /*
             foreach (Order elt in pizzAlpha.GlobalOrderList)
@@ -184,6 +194,10 @@ namespace S5_OOP_FinalProject
                 }
             }
             */
+
+            Console.ReadKey();
+        }
+        */
 
             #endregion tests Quentin
         }     
