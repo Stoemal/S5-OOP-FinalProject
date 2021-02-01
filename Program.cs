@@ -14,6 +14,10 @@ namespace S5_OOP_FinalProject
         
         static void Main(string[] args)
         {
+            /// Deux delegate qui permettent de donner un tarif de prix différent selon 
+            /// si on est senior, etudiant, veteran ou pas 
+            CorrectedPrice normal = (float bill) => { return bill; };
+            CorrectedPrice student = (float bill) => { return (3 * bill) / 4; };
             #region tests Mehdi
             Pizzeria pizzAlpha = new Pizzeria();
 
@@ -67,26 +71,32 @@ namespace S5_OOP_FinalProject
                 Console.WriteLine();
             }
             
-                       foreach (Customer elt in pizzAlpha.ListCustomer)
+
+
+
+                        pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            Console.WriteLine();
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCity);
+            Console.WriteLine();
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
+
+            foreach (Customer elt in pizzAlpha.ListCustomer)
             {
                 Console.WriteLine(elt.PartialToStringListOrder());
                 Console.WriteLine();
             }
 
-            
-
 
             */
 
-            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
-            Console.WriteLine();
-            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCity);
-            Console.WriteLine();
-            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
- 
 
 
             //pizzAlpha.Display();
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.CreateCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.DeleteCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.ModifyCustomer, file);
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
 
             //TEST MODULE CLIENT
 
@@ -102,21 +112,21 @@ namespace S5_OOP_FinalProject
 
 
             //TESTS MODULE AUTRE
-            //pizzAlpha.RandomPizza();
-
-            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
-
-            //pizzAlpha.ManipulateEntries(pizzAlpha.CreateCustomer, file);
-            //pizzAlpha.ManipulateEntries(pizzAlpha.DeleteCustomer, file);
-            //pizzAlpha.ManipulateEntries(pizzAlpha.ModifyCustomer, file);
-
-            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            //pizzAlpha.RandomPizza(); marche
+            //pizzAlpha.BestCustomer(); marche
+            //pizzAlpha.FirstNameDay(); marche
+            //pizzAlpha.BackToTheFuture(); marche
+            //pizzAlpha.GlobalOrderList[1].Ponderation(student);
+            //Console.WriteLine(pizzAlpha.GlobalOrderList[1].Bill);
 
 
-            //pizzAlpha.BestCustomer();
-            //pizzAlpha.FirstNameDay();
-            //pizzAlpha.BackToTheFuture();
-            Console.WriteLine("zzzzzzzzzzzzzz"); 
+
+
+            Console.WriteLine(pizzAlpha.GlobalOrderList[1].Bill);
+            
+
+
+
 
             Console.ReadKey();
 

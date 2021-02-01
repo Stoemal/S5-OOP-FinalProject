@@ -32,8 +32,10 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
+        #region FONCTIONS
         public override string ToString()
         {
+            ///Renvoie les informations concernant ce livreur
             string chain = "\nMoyen de transport : ";
             if (meanOfTransport != null) chain = chain + meanOfTransport;
             else chain = chain + "inconnue";
@@ -43,8 +45,9 @@ namespace S5_OOP_FinalProject
 
         public void Display()
         {
+            /// Permet d'afficher le nombre de commandes livrées par ce livreur
             Console.WriteLine("Nombre de commandes prises en charge : " + this.orderCount);
         }
-
+        #endregion
     }
 }

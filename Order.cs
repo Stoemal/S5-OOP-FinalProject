@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    /// <summary>
     /// Class des Commandes
-    /// </summary>
+    
+
+    public delegate float CorrectedPrice(float bill);
+    /// Delegation permettant de faire une pondération de l'addition
+
     public class Order : ICalculus
     {
         #region Attributs
@@ -28,6 +31,7 @@ namespace S5_OOP_FinalProject
         private float bill = 0;
         #endregion
 
+        #region ANCIEN CONSTRUCTEURS
         //Anciens constructeurs avec increment et orderNumber en string
         /*
         public Order(string orderNumber, DateTime date,
@@ -101,8 +105,9 @@ namespace S5_OOP_FinalProject
             increment++;
         }
         */
+        #endregion
 
-
+        #region CONSTRUCTEURS
         public Order(DateTime date,
         Customer customerToServe, Officer officerInCharge, DeliveryDriver deliveryDriverInCharge,
         string state, string achievement)
@@ -167,12 +172,7 @@ namespace S5_OOP_FinalProject
             listBeverage = new List<Beverage>();
 
         }
-
-
-        public Order()
-        {
-
-        }
+        #endregion
 
         #region Accesseurs
         public int OrderNumber
@@ -187,7 +187,6 @@ namespace S5_OOP_FinalProject
         {
             get { return this.date; }
         }
-
         public Customer CustomerToServer
         {
             get { return this.customerToServe; }
@@ -211,7 +210,6 @@ namespace S5_OOP_FinalProject
             get { return this.listBeverage; }
             set { this.listBeverage = value; }
         }
-
         public string State
         {
             get { return this.state; }
@@ -229,32 +227,40 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
-        /// <summary>
-        /// Implémentation de ICalculus permettant d'obtenir le montant
-        /// de l'addition de la commande      
+        #region FONCTIONS
         public void Calculation()
         {
+            /// Implémentation de ICalculus permettant d'obtenir le montant
+            /// de l'addition de la commande 
             bill = 0;
             //L'addition est la somme des prix des pizzas et des boissons
             listPizza.ForEach((Pizza n) => { bill = bill + n.Price; });
-            listBeverage.ForEach((Beverage n) => { bill = bill + n.Price; });           
+            listBeverage.ForEach((Beverage n) => { bill = bill + n.Price; });
+
         }
 
-        /// <summary>
-        /// Retourne une chaîne de caractères avec toutes les informations d'une commande
-        /// en retirant le nom du client
-        /// </summary>
-        /// <returns>chaîne de caractères avec toutes les informations d'une commande
-        /// sans le nom du client</returns>
+        public void Ponderation(CorrectedPrice a)
+        {
+            ///Fonction qui calcule le prix de la commande selon plusieurs tarifs
+            bill = 0;
+            ///L'addition est la somme des prix des pizzas et des boissons
+            listPizza.ForEach((Pizza n) => { bill = bill + n.Price; });
+            listBeverage.ForEach((Beverage n) => { bill = bill + n.Price; });
+            /// Ici on applique la pondération voulue pour corriger la note
+            /// Les pondérations sont définies tout en haut du programm principal
+            bill = a(this.bill);
+        }
+
         public string PartialToString()
         {
+            /// Retourne une chaîne de caractères avec toutes les informations d'une commande
+            /// en retirant le nom du client
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state +
-                ", état : " + achievement + ", addition : " + bill + " €" + 
+                ", état : " + achievement + ", addition : " + bill + " e" + 
                 "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName +
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName;
         }
-
-        
+     
         public static float Note()
         {
             float prix = 0;
@@ -262,26 +268,19 @@ namespace S5_OOP_FinalProject
             return prix;
         }
 
-        /// <summary>
-        /// Retourne une chaîne de caractères avec toutes les informations d'une commande
-        /// </summary>
-        /// <returns>chaîne de caractères avec toutes les informations d'une commande</returns>
         public override string ToString()
         {
+            /// Retourne une chaîne de caractères avec toutes les informations d'une commande
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + 
-                ", état : " + achievement + ", addition : " + bill + " €" + 
+                ", état : " + achievement + ", addition : " + bill + " e" + 
                 "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + 
                 "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + 
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName + "\n";
         }
 
-        /// <summary>
-        /// Retourne une chaîne de caracère contenant tout les 
-        /// produits d'une commande
-        /// </summary>
-        /// <returns>haîne de caracère contenant tout les produits d'une commande</returns>
         public string FoodToString()
         {
+            /// Retourne une chaîne de caracère contenant tous les produits d'une commande
             string text = null;
 
             if(listPizza != null)
@@ -291,7 +290,7 @@ namespace S5_OOP_FinalProject
                     text = "Liste pizza : \n";
                     foreach (Pizza pizz in listPizza)
                     {
-                        text = text + pizz.Type + " " + pizz.Size + " " + pizz.Price + " euros\n";
+                        text = text + pizz.Type + " " + pizz.Size + " " + pizz.Price + " e\n";
                     }
                     text = text + "\n";
                 }
@@ -303,12 +302,13 @@ namespace S5_OOP_FinalProject
                     text = text + "Liste boissons : \n";
                     foreach (Beverage boisson in listBeverage)
                     {
-                        text = text + boisson.Type + " " + boisson.Volume + "cL " + boisson.Price + " euros\n";
+                        text = text + boisson.Type + " " + boisson.Volume + "cL " + boisson.Price + " e\n";
                     }
                 }               
             }
             if (text == null) return "Vide";
             else return text;
         }
+        #endregion
     }
 }

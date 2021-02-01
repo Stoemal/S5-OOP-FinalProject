@@ -6,29 +6,28 @@ using System.Threading.Tasks;
 
 namespace S5_OOP_FinalProject
 {
-    /// <summary>
     /// Class du Client héritant de la Class Person 
     /// C'est une feuille terminale de l'arbre d'héritage
-    /// </summary>
     public sealed class Customer : Person, ICalculus
     {
         private DateTime firstOrder;
         private List<Order> listOrder;
         private float cumulativeOrder;
 
+        #region CONSTRUCTEURS
         public Customer(string firstName, string lastName, string address, string phoneNumber) : base(firstName, lastName, address, phoneNumber)
         {
             firstOrder = new DateTime();
             listOrder = new List<Order>();
             cumulativeOrder = 0;
         }
-
         public Customer(string firstName, string lastName, string address, string phoneNumber, DateTime firstOrder, List<Order> listOrder, float cumulativeOrder) : base(firstName, lastName, address, phoneNumber)
         {
             this.firstOrder = firstOrder;
             this.listOrder = listOrder;
             this.cumulativeOrder = cumulativeOrder;
         }
+        #endregion
 
         #region Accesseurs
         public DateTime FirstOrder
@@ -47,22 +46,19 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
-        /// <summary>
-        /// Implémentation de ICalculus permettant d'obtenir le prix 
-        /// cumulé de toutes les commandes d'un client
+        #region FONCTIONS
         public void Calculation()
         {
+            /// Implémentation de ICalculus permettant d'obtenir le prix 
+            /// cumulé de toutes les commandes d'un client
             cumulativeOrder = 0;
             listOrder.ForEach((Order n) => { cumulativeOrder = cumulativeOrder + n.Bill; });
         }
 
-        /// <summary>
-        /// Retourne la chaîne de caractère de base de la 
-        /// classe Person en y ajoutant le montant cumulé
-        /// </summary>
-        /// <returns>chaîne de caractère de base de la classe Person et montant cumulé</returns>
         public string PartialToStringCumulativeOrder()
         {
+            /// Retourne la chaîne de caractère de base de la 
+            /// classe Person en y ajoutant le montant cumulé
             return base.ToString() + "\nMontant cumulé : " + cumulativeOrder;
         }
 
@@ -88,27 +84,31 @@ namespace S5_OOP_FinalProject
             return base.ToString() + "\n\n" + chain;
         }
 
-        /// <summary>
-        /// Retourne une chaîne de caractère avec toutes les informations 
-        /// du client
-        /// </summary>
-        /// <returns>chaîne de caractère avec toutes les informations du client</returns>
         public override string ToString()
         {
+            /// Retourne une chaîne de caractère avec toutes les informations du client
             string chain = "";
             if(firstOrder != new DateTime()) chain = chain + "\n1ère commande : " + firstOrder.ToString();              
             return base.ToString() + chain;
         }
+
         public bool PassedAnOrder()
         {
+            ///Fonction qui vérifie si un client à passé commande aujourd'hui
+            ///On parcourt toutes les commandes
+            ///Si la date de l'une d'entre elle correspond à la date d'ujourd'hui on revoie true sinon false
             foreach(Order commande in listOrder)
             {  
-                if (commande.Date == DateTime.Today)
+                /// Bien faire attention au ToShortDateString qui transforme la date en string
+                /// Mais sans compter les heure, minutes et secondes.
+                /// Sinon la comparaison se fait entre 2 instants et non 2 dates
+                if (commande.Date.ToShortDateString() == DateTime.Today.ToShortDateString())
                 {
                     return true;
                 }
             }
             return false;
         }
+        #endregion
     }
 }

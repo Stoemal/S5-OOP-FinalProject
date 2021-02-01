@@ -15,10 +15,6 @@ namespace S5_OOP_FinalProject
         private string type;
         private float price;
 
-        public Pizza()
-        {
-
-        }
 
         public Pizza(string size, string type, float price)
         {

@@ -7,17 +7,18 @@ using System.IO;
 
 namespace S5_OOP_FinalProject
 {
-    /// <summary>
     /// Class Pizzeria controlant les commandes des clients, le travail des employés 
     /// ainsi que le reste des caractéristiques reliées à la gestion de l'argent
-    /// </summary>
     class Pizzeria : IDisplay
     {
+        #region ATTRIBUTS
         private List<Officer> listOfficer;
         private List<DeliveryDriver> listDeliveryDriver;
         private List<Customer> listCustomer;
         private List<Order> globalOrderList;
+        #endregion
 
+        #region CONSTRUCTEURS
         public Pizzeria()
         {
             listOfficer = new List<Officer>();
@@ -25,7 +26,7 @@ namespace S5_OOP_FinalProject
             listCustomer = new List<Customer>();
             globalOrderList = new List<Order>();
         }
-
+        #endregion
 
         #region Accesseurs
         public List<Officer> ListOfficer
@@ -50,17 +51,14 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
-        /// <summary>
-        /// Permet de lire les fichiers Clients, Commis, Livreur et Commande
-        /// </summary>
-        /// <param name="file">Emplacement du fichier</param>
+        #region FONCTIONS GENERALES
         public delegate void ReadFiles(string file);
-
+        /// Permet de lire les fichiers Clients, Commis, Livreur et Commande
+        /// file correspond à l'emplacement des fichiers
         public void AddFilesData(ReadFiles n, string file)
         {
             n(file);
         }
-
 
         public delegate void Entries(string file);
             
@@ -68,30 +66,35 @@ namespace S5_OOP_FinalProject
 
         public Officer AvailableOfficer()
         {
-            Officer nul = new Officer("Nobody", "Nobody", "Nowhere", "Nothing","Conge",Convert.ToDateTime("0000-00-00"),0);
+            /// Cette fonction retourne un commis disponible, s'il n'y en a pas, elle retourne le commis nul
+            /// On crée le commis nul
+            Officer nul = new Officer("Nobody", "Nobody", "Nowhere", "Nothing","Conge",Convert.ToDateTime("2000-02-20"),0);
             foreach(Officer officer in listOfficer)
             {
-                if(officer.Position == "sur place")
+                ///On parcourt la liste des commis
+                if(officer.Position == "surplace")
                 {
+                    /// Si un  d'entre eux est sur place, on retourne celui-la
                     return officer;
                 }
-
+                /// Sinon on retourne le commis nul
             }
             return nul;
         }
         public DeliveryDriver AvailableDriver()
         {
+            /// Cette fonction retourne un livreur disponible, elle fonctionne exactement comme AvailableOfficer
             DeliveryDriver nul = new DeliveryDriver("Nobody", "Nobody", "Nowhere", "Nothing", "Conge", "Nothing", 0);
             foreach(DeliveryDriver driver in listDeliveryDriver)
             {
-                if(driver.Position == "sur place")
+                if(driver.Position == "surplace")
                 {
                     return driver;
                 }
             }
             return nul;
         }
-
+        #endregion
 
         #region Module Client
 
@@ -457,17 +460,14 @@ namespace S5_OOP_FinalProject
 
         #endregion Module Client
 
-
-
+        #region Module Commande
         /*
         Les fonctions de lecture de fichiers du module commande
-        sont toutes construites avec la même structure que pour celles
+        sont toutes construites avec la même structure que celles
         du module client
         On l'explique une fois dans ReadCustomers
         Notons aussi qu'on ne lit que des fichiers csv pour chaque commande
         */
-        #region Module Commande
-        
         public void CreateOrder(string file)
         {
             Customer c;
@@ -664,8 +664,6 @@ namespace S5_OOP_FinalProject
 
         #endregion Module Commande
 
-
-
         #region Module Statistiques
 
         /// <summary>
@@ -740,46 +738,44 @@ namespace S5_OOP_FinalProject
 
         #endregion Module Statistiques
 
-
-
-        ////////////////////////////////////////////////////////
         #region Module Autre
-
-        /// <summary>
-        /// Cette fonction fait partie du module autre, elle offre une grande 
-        /// pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
-        /// </summary>
         public void RandomPizza()
         {
-            Random rnd = new Random(); //On définit un variable aléatoire
-            int index = rnd.Next(listCustomer.Count());//cela nous retourne l'index dans la liste de clients du client chanceux
-            Customer luckyCustomer = listCustomer[index];// on associe le client à son index
-            Pizza luckyPizza = new Pizza("Grande", "Chance", 0);//On crée la pizza qui sera offerte (on ne peut l'avoir que via cette fonction)
-            Beverage luckyBeverage = new Beverage("Bière au Beurre", 300, 0);//On crée la bière au beurre
-            List<Pizza> luckyPList = new List<Pizza> { luckyPizza };//On crée nos listes de pizza et boissons (le constructeur de commande à besoin de list pour fonctionner)
+            /// Cette fonction fait partie du module autre, elle offre une grande 
+            /// pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
+            Random rnd = new Random(); 
+            //On définit un variable aléatoire
+            int index = rnd.Next(listCustomer.Count());
+            //Cela nous retourne l'index dans la liste de clients du client chanceux
+            Customer luckyCustomer = listCustomer[index];
+            //On associe le client à son index
+            Pizza luckyPizza = new Pizza("Grande", "Chance", 0);
+            //On crée la pizza qui sera offerte (on ne peut l'avoir que via cette fonction)
+            Beverage luckyBeverage = new Beverage("Bière au Beurre", 300, 0);
+            //On crée la bière au beurre
+            List<Pizza> luckyPList = new List<Pizza> { luckyPizza };
+            //On crée nos listes de pizza et boissons (le constructeur de commande à besoin de list pour fonctionner)
             List<Beverage> luckyBList = new List<Beverage> { luckyBeverage };
-            Officer a = new Officer("Tom", "Cruise", "LosAngeles", "0101010101", "ISS", Convert.ToDateTime("2019-06-02"), 2);
-            DeliveryDriver b = new DeliveryDriver("Chuck", "Norris", "Las Vegas", "0123456789", "Il vous trouvera", "Monocycle", 0);
-            Order luckyOrder = new Order(DateTime.Now, luckyCustomer, a, b, luckyPList, luckyBList, "en préparation", "en préparation", 0);
-
-           
-
+            //Officer a = new Officer("Tom", "Cruise", "LosAngeles", "0101010101", "ISS", Convert.ToDateTime("2019-06-02"), 2);
+            //DeliveryDriver b = new DeliveryDriver("Chuck", "Norris", "Las Vegas", "0123456789", "Il vous trouvera", "Monocycle", 0);
+            Order luckyOrder = new Order(DateTime.Now, luckyCustomer, AvailableOfficer(), AvailableDriver(), luckyPList, luckyBList, "en préparation", "en préparation", 0);
             //On construit notre commande avec les arguments précédents
             luckyCustomer.ListOrder.Add(luckyOrder);// On ajoute la commande à la liste de commande de notre client
-
             Console.WriteLine(luckyOrder + "\n" + luckyOrder.FoodToString());
+            //Console.WriteLine();
             //Console.WriteLine(luckyCustomer);
             //Permet de vérifier que la commande se soit bien executée
         }
         public void BestCustomer()
         {
             /// Cette fonction permet de trouver le meilleur client (celui qui à dépensé le plus d'argent)
-            /// et lui offre la prochaine commande
-            /// On crée un client qui sera le meilleur client
+            /// et lui offre une pizza royale et une bouteille de chardonnay
             Customer bestCustomer = new Customer("", "", "", "");
             Pizza pizz = new Pizza("Grande", "Royale", 0);
             Beverage boisson = new Beverage("Chardonnay", 100, 0);
             Order commande = new Order(bestCustomer, AvailableOfficer(), AvailableDriver(), "en preparation", "en cours");
+            commande.ListPizza.Add(pizz);
+            commande.ListBeverage.Add(boisson);
             foreach(Customer client in listCustomer)
             {
                 if(client.CumulativeOrder > bestCustomer.CumulativeOrder)
@@ -787,12 +783,12 @@ namespace S5_OOP_FinalProject
                     bestCustomer = client;
                 }
             }
-
             /// on parcourt toute la liste pour trouver le meilleur client
-            /// on rend nulle la note de sa prochaine commande.
-            bestCustomer.ListOrder.Add(commande);
-            //Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            Console.WriteLine(bestCustomer);
+            /// on lui met en attente sa prochaine commande
+            //bestCustomer.ListOrder.Add(commande);
+            //Console.WriteLine(bestCustomer);
+            Console.WriteLine(commande.ToString());
+            //Console.WriteLine(commande.FoodToString());
         }
         public void FirstNameDay()
         {
@@ -814,17 +810,21 @@ namespace S5_OOP_FinalProject
                 /// Si la liste de prénom contient le prénom d'un des client qui a commandé aujourd'hui 
                 /// Son addition est de 1€
 
-                if (firstNameList.Contains(commande.CustomerToServer.FirstName) && /*commande.Date == DateTime.Today*/ commande.CustomerToServer.PassedAnOrder())
+                if (firstNameList.Contains(commande.CustomerToServer.FirstName) && commande.CustomerToServer.PassedAnOrder())
                 {
                     commande.Bill = 1;
-                    Console.WriteLine(commande.CustomerToServer.ToString());
-                    Console.WriteLine("gggggggggggggggggggggg");
+                    //Console.WriteLine(commande.CustomerToServer.ToString());
+                    //Console.WriteLine(commande.ToString());
+                    //Console.WriteLine(commande.FoodToString());
                 }
             }
 
         }
         public void BackToTheFuture()
         {
+            //Cette fonction vérifie si on est le 21/10/2015 que l'on a passé commande aujourd'hui
+            //et si on s'appelle Marty McFly, si c'est la cas, on gagne une grande pizza voyageur du temps 
+            //ainsi qu'un verre de lait, on se fait livrer par biff ! Le pied non ?
             Customer marty = new Customer("Marty", "McFly","HillValley","111111111");
             Officer doc = new Officer("Emett", "Brown", "HillValley", "0101010101", "InTheDeLorean", Convert.ToDateTime("1955-11-05"), 221);
             DeliveryDriver biff = new DeliveryDriver("Biff", "Tannen", "HillValley", "0123456789", "DansLeFumier", "HoverBoard", 0);
@@ -833,26 +833,23 @@ namespace S5_OOP_FinalProject
             Order commande = new Order(marty, doc, biff, "en preparation", "en cours");
             commande.ListPizza.Add(pizz);
             commande.ListBeverage.Add(boisson);
-            if(DateTime.Today == Convert.ToDateTime("2015-10-21"))
+            //On crée tous nos objets 
+            if(DateTime.Today.ToShortDateString() == "21/10/2015")
             {
-                //Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaa");
+                //On vérifie la date
                 foreach (Customer client in listCustomer)
                 {
-                    //Console.WriteLine("bbbbbbbbbbbbbbbbbbbbbbbbb");
-                    if (client == marty /* && marty.PassedAnOrder() == true*/)
+                    if (client.FirstName == "Marty" && client.LastName == "McFly" && client.PassedAnOrder())
                     {
+                        //On vérifie le client ET s'il a passé commande aujourd'hui
                         client.ListOrder.Add(commande);
-                        
-                        client.ToString();
-                        client.PartialToStringListOrder();
-                        //Console.WriteLine("cccccccccccccccccccccccccccccc");
-
+                        //Console.WriteLine(client.ToString());
+                        //Console.WriteLine(client.PartialToStringListOrder());
                     }
                 }
             }
         }
-
-
+        //La delegation pour changer la pondération d'une note fait aussi partie du module autre
         #endregion
 
 

@@ -33,6 +33,7 @@ namespace S5_OOP_FinalProject
         }
         #endregion Accesseurs
 
+        #region FONCTIONS
         public override string ToString()
         {
             string chain = null;
@@ -45,6 +46,6 @@ namespace S5_OOP_FinalProject
         {
             Console.WriteLine("Nombre de commandes prises en charge : " + this.orderCount);
         }
-
+        #endregion
     }
 }
