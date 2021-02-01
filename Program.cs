@@ -103,6 +103,16 @@ namespace S5_OOP_FinalProject
 
             //TESTS MODULE AUTRE
             //pizzAlpha.RandomPizza();
+
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
+            //pizzAlpha.ManipulateEntries(pizzAlpha.CreateCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.DeleteCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.ModifyCustomer, file);
+
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
+
             //pizzAlpha.BestCustomer();
             //pizzAlpha.FirstNameDay();
             //pizzAlpha.BackToTheFuture();
