@@ -43,7 +43,7 @@ namespace S5_OOP_FinalProject
 
         public void Display()
         {
-            Console.WriteLine(this.orderCount);
+            Console.WriteLine("Nombre de commandes prises en charge : " + this.orderCount);
         }
 
     }
