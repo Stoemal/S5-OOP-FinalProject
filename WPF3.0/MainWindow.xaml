@@ -5,9 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF3._0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Pizzeria PizzAlpha" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="197,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="96" Width="186"><Run Text="Test"/><LineBreak/><Run/></TextBlock>
-
+        <TextBlock Margin="209,174,209,82.6" TextWrapping="Wrap" FontSize="36" TextAlignment="Center" Text="Bienvenue à la pizzeria PizzAlpha !"/>
+        <Grid MaxHeight="460" MaxWidth="800" MinHeight="460" MinWidth="800" Margin="0,-30,0,0">
+            <Grid HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="794" Margin="0,30,0,0" 
+              MinHeight="40" MaxHeight="40" MinWidth="794" MaxWidth="794">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Click="Menu_Principal">Menu principal</Button>
+                <Button Grid.Column="1" Click="Module_Client">Module Client</Button>
+                <Button Grid.Column="2">Module Commande</Button>
+                <Button Grid.Column="3">Module Statistiques</Button>
+                <Button Grid.Column="4">Module Autre</Button>
+            </Grid>
+            <Frame x:Name="MainFrame" Margin="0,75,0,0"/>
+            <Button Content="Quitter" HorizontalAlignment="Left" Margin="10,421,0,0" VerticalAlignment="Top" Width="75" Click="Quitter"/>
+        </Grid>
     </Grid>
 </Window>
