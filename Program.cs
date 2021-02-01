@@ -89,17 +89,19 @@ namespace S5_OOP_FinalProject
             //pizzAlpha.CustomerAccount();
             //pizzAlpha.RandomPizza();
 
-            pizzAlpha.CreateCustomer(file);
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
+            //pizzAlpha.ManipulateEntries(pizzAlpha.CreateCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.DeleteCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.ModifyCustomer, file);
+
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
+
 
             Console.ReadKey();
             #endregion tests Mehdi
 
-            foreach(Officer elt in pizzAlpha.ListOfficer)
-            {
-                Console.WriteLine(elt);
-            }
-            
-            #endregion
 
             #region tests Quentin
             /*
@@ -194,12 +196,9 @@ namespace S5_OOP_FinalProject
                 }
             }
             */
-
+            #endregion tests Quentin
             Console.ReadKey();
         }
-        */
-
-            #endregion tests Quentin
-        }     
+       
     }
 }

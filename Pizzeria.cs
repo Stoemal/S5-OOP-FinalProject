@@ -64,12 +64,13 @@ namespace S5_OOP_FinalProject
 
         public delegate void Entries(string file);
             
-        public void Manipulate(Entries n, string file) { n(file); }
+        public void ManipulateEntries(Entries n, string file) { n(file); }
 
 
 
 
         #region Module Client
+
 
         public void CreateCustomer(string file)
         {
@@ -91,6 +92,134 @@ namespace S5_OOP_FinalProject
             StreamWriter writeFile = new StreamWriter(file, true);
             writeFile.WriteLine(datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3]);
             writeFile.Close();
+        }
+
+        public void DeleteCustomer(string file)
+        {            
+            string tel;
+            bool check = false;
+            Console.WriteLine("Modifier un client : \nEntrer son numéro de téléphone :");
+            tel = Console.ReadLine();
+
+            for(int i = 0; i < listCustomer.Count() && check == false; i++)
+            {
+                if (listCustomer[i].PhoneNumber == tel)
+                {
+                    listCustomer.Remove(listCustomer[i]);
+                    check = true;
+                }
+            }
+            if(check == true)
+            {
+                List<String> fichier = File.ReadAllLines(file).ToList();
+                for (int i = 0; i < fichier.Count(); i++)
+                {
+                    if ((fichier[i].Split(';'))[3] == tel)
+                    {
+                        fichier.RemoveAt(i);
+                        break;
+                    }
+                }
+                File.WriteAllLines(file, fichier.ToArray());
+            }
+            else Console.WriteLine("Téléphone non trouvé\n");
+        }
+
+        public void ModifyCustomer(string file)
+        {
+            string tel;
+            bool check = false;
+            int inc = -1;
+            Console.WriteLine("Modifier un client : \nEntrer son numéro de téléphone :");
+            tel = Console.ReadLine();
+
+            for (int i = 0; i < listCustomer.Count() && check == false; i++)
+            {
+                if (listCustomer[i].PhoneNumber == tel)
+                {
+                    inc = i;
+                    check = true;
+                }
+            }
+            if (check == true && inc > -1)
+            {
+                string[] datas = new string[4];
+                bool t;
+                Console.WriteLine(listCustomer[inc]);
+                Console.WriteLine("\nEntrer 1 pour modifier le client et 0 sinon :\n");
+
+                #region Modifications du client en brut
+                Console.WriteLine("Nom ?");
+                t = Int32.TryParse(Console.ReadLine(), out int res);
+                while(t == false || res > 1 || res < 0)
+                {
+                    Console.WriteLine("Entrer 0 ou 1");
+                    t = Int32.TryParse(Console.ReadLine(), out res);
+                }
+                if (res == 1)
+                {
+                    Console.WriteLine("Nouveau nom : ");
+                    datas[0] = Console.ReadLine();
+                }
+                else datas[0] = listCustomer[inc].LastName;
+
+                Console.WriteLine("\nPrénom ?");
+                t = Int32.TryParse(Console.ReadLine(), out res);
+                while (t == false || res > 1 || res < 0)
+                {
+                    Console.WriteLine("Entrer 0 ou 1");
+                    t = Int32.TryParse(Console.ReadLine(), out res);
+                }
+                if (res == 1)
+                {
+                    Console.WriteLine("Nouveau prénom : ");
+                    datas[1] = Console.ReadLine();
+                }
+                else datas[1] = listCustomer[inc].FirstName;
+
+                Console.WriteLine("\nAdresse ?");
+                t = Int32.TryParse(Console.ReadLine(), out res);
+                while (t == false || res > 1 || res < 0)
+                {
+                    Console.WriteLine("Entrer 0 ou 1");
+                    t = Int32.TryParse(Console.ReadLine(), out res);
+                }
+                if (res == 1)
+                {
+                    Console.WriteLine("Nouvelle adresse : ");
+                    datas[2] = Console.ReadLine();
+                }
+                else datas[2] = listCustomer[inc].Address;
+
+                Console.WriteLine("\nNuméro de téléphone ?");
+                t = Int32.TryParse(Console.ReadLine(), out res);
+                while (t == false || res > 1 || res < 0)
+                {
+                    Console.WriteLine("Entrer 0 ou 1");
+                    t = Int32.TryParse(Console.ReadLine(), out res);
+                }
+                if (res == 1)
+                {
+                    Console.WriteLine("Nouveau téléphone : ");
+                    datas[1] = Console.ReadLine();
+                }
+                else datas[3] = listCustomer[inc].PhoneNumber;
+                #endregion Modifications du client en brut
+
+                listCustomer[inc] = new Customer(datas[0], datas[1], datas[2], datas[3]);
+
+                List<String> fichier = File.ReadAllLines(file).ToList();
+                for (int i = 0; i < fichier.Count(); i++)
+                {
+                    if ((fichier[i].Split(';'))[3] == tel)
+                    {
+                        fichier[i] = datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3];
+                        break;
+                    }
+                }
+                File.WriteAllLines(file, fichier.ToArray());
+            }
+            else Console.WriteLine("Téléphone non trouvé\n");
         }
 
 
@@ -314,6 +443,33 @@ namespace S5_OOP_FinalProject
         Notons aussi qu'on ne lit que des fichiers csv pour chaque commande
         */
         #region Module Commande
+        
+        public void CreateOrder(string file)
+        {
+            Customer c;
+            string[] datas = new string[4];
+            Console.WriteLine("Nouveau Client : \n");
+            Console.WriteLine("Nom : ");
+            datas[0] = Console.ReadLine();
+            Console.WriteLine("Prénom : ");
+            datas[1] = Console.ReadLine();
+            Console.WriteLine("Adresse : ");
+            datas[2] = Console.ReadLine();
+            Console.WriteLine("Téléphone : ");
+            datas[3] = Console.ReadLine();
+
+            c = new Customer(datas[0], datas[1], datas[2], datas[3]);
+            listCustomer.Add(c);
+
+            StreamWriter writeFile = new StreamWriter(file, true);
+            writeFile.WriteLine(datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3]);
+            writeFile.Close();
+
+
+            Order o;
+
+        }
+            
         /// <summary>
         /// Lit les caractéristiques d'une commande dans un fichier Commande et 
         /// ajoute les commandes du fichiers dans listOrder

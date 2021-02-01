@@ -157,14 +157,14 @@ namespace S5_OOP_FinalProject
             this.customerToServe = customerToServe;
             this.officerInCharge = officerInCharge;
             this.deliveryDriverInCharge = deliveryDriverInCharge;
-            this.OfficerInCharge.OrderCount++;
-            this.DeliveryDriverInCharge.OrderCount++;
+            this.officerInCharge.OrderCount++;
+            this.deliveryDriverInCharge.OrderCount++;
 
             this.state = state;
             this.achievement = achievement;
 
-            this.listPizza = new List<Pizza>();
-            this.listBeverage = new List<Beverage>();
+            listPizza = new List<Pizza>();
+            listBeverage = new List<Beverage>();
 
 
             foreach (Pizza pizz in listPizza)
@@ -175,6 +175,12 @@ namespace S5_OOP_FinalProject
             {
                 this.bill = bill + drink.Price;
             }
+        }
+
+
+        public Order()
+        {
+
         }
 
         #region Accesseurs
