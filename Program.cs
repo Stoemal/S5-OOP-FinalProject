@@ -122,8 +122,11 @@ namespace S5_OOP_FinalProject
 
 
 
-            Console.WriteLine(pizzAlpha.GlobalOrderList[1].Bill);
-            
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
+            //pizzAlpha.ManipulateEntries(pizzAlpha.CreateCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.DeleteCustomer, file);
+            //pizzAlpha.ManipulateEntries(pizzAlpha.ModifyCustomer, file);
 
 
 
@@ -228,12 +231,6 @@ namespace S5_OOP_FinalProject
 
             #endregion tests Quentin
             Console.ReadKey();
-        }
-        
-
-
-
-
-             
+        }            
     }
 }
