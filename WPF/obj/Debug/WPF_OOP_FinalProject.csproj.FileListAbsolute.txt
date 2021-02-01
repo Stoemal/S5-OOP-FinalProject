@@ -1,0 +1,6 @@
+C:\Users\Mehdi\Source\Repos\WPF_OOP_FinalProject\obj\Debug\WPF_OOP_FinalProject.csprojAssemblyReference.cache
+C:\Users\Mehdi\Source\Repos\WPF_OOP_FinalProject\obj\Debug\MainWindow.g.cs
+C:\Users\Mehdi\Source\Repos\WPF_OOP_FinalProject\obj\Debug\Page1.g.cs
+C:\Users\Mehdi\Source\Repos\WPF_OOP_FinalProject\obj\Debug\App.g.cs
+C:\Users\Mehdi\Source\Repos\WPF_OOP_FinalProject\obj\Debug\WPF_OOP_FinalProject_MarkupCompile.cache
+C:\Users\Mehdi\Source\Repos\WPF_OOP_FinalProject\obj\Debug\WPF_OOP_FinalProject_MarkupCompile.lref
