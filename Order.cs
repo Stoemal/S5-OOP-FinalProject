@@ -166,15 +166,6 @@ namespace S5_OOP_FinalProject
             this.listPizza = new List<Pizza>();
             this.listBeverage = new List<Beverage>();
 
-
-            foreach (Pizza pizz in listPizza)
-            {
-                this.bill = bill + pizz.Price;
-            }
-            foreach (Beverage drink in listBeverage)
-            {
-                this.bill = bill + drink.Price;
-            }
         }
 
         #region Accesseurs

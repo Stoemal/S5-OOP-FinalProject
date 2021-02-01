@@ -67,40 +67,51 @@ namespace S5_OOP_FinalProject
                 Console.WriteLine();
             }
             
+                       foreach (Customer elt in pizzAlpha.ListCustomer)
+            {
+                Console.WriteLine(elt.PartialToStringListOrder());
+                Console.WriteLine();
+            }
+
+            
+
+
+            */
 
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
             Console.WriteLine();
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCity);
             Console.WriteLine();
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
-            
+ 
 
-            foreach (Customer elt in pizzAlpha.ListCustomer)
-            {
-                Console.WriteLine(elt.PartialToStringListOrder());
-                Console.WriteLine();
-            }
-            */
 
             //pizzAlpha.Display();
+
+            //TEST MODULE CLIENT
+
+            //pizzAlpha.CreateCustomer(file);
+
+
+
+            //TESTS MODULE STATISTIQUES
 
             //pizzAlpha.OrderTime(new DateTime(2021, 1, 2), new DateTime(2021, 1, 4));
             //pizzAlpha.OrderMean();
             //pizzAlpha.CustomerAccount();
-            //pizzAlpha.RandomPizza();
 
-            pizzAlpha.CreateCustomer(file);
+
+            //TESTS MODULE AUTRE
+            //pizzAlpha.RandomPizza();
+            //pizzAlpha.BestCustomer();
+            //pizzAlpha.FirstNameDay();
+            //pizzAlpha.BackToTheFuture();
+            Console.WriteLine("zzzzzzzzzzzzzz"); 
 
             Console.ReadKey();
+
+
             #endregion tests Mehdi
-
-            foreach(Officer elt in pizzAlpha.ListOfficer)
-            {
-                Console.WriteLine(elt);
-            }
-            
-            #endregion
-
             #region tests Quentin
             /*
             Pizzeria pizzBeta = new Pizzeria();
@@ -195,11 +206,14 @@ namespace S5_OOP_FinalProject
             }
             */
 
+            #endregion tests Quentin
             Console.ReadKey();
         }
-        */
+        
 
-            #endregion tests Quentin
-        }     
+
+
+
+             
     }
 }

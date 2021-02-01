@@ -66,7 +66,31 @@ namespace S5_OOP_FinalProject
             
         public void Manipulate(Entries n, string file) { n(file); }
 
+        public Officer AvailableOfficer()
+        {
+            Officer nul = new Officer("Nobody", "Nobody", "Nowhere", "Nothing","Conge",Convert.ToDateTime("0000-00-00"),0);
+            foreach(Officer officer in listOfficer)
+            {
+                if(officer.Position == "sur place")
+                {
+                    return officer;
+                }
 
+            }
+            return nul;
+        }
+        public DeliveryDriver AvailableDriver()
+        {
+            DeliveryDriver nul = new DeliveryDriver("Nobody", "Nobody", "Nowhere", "Nothing", "Conge", "Nothing", 0);
+            foreach(DeliveryDriver driver in listDeliveryDriver)
+            {
+                if(driver.Position == "sur place")
+                {
+                    return driver;
+                }
+            }
+            return nul;
+        }
 
 
         #region Module Client
@@ -597,6 +621,9 @@ namespace S5_OOP_FinalProject
             /// et lui offre la prochaine commande
             /// On crée un client qui sera le meilleur client
             Customer bestCustomer = new Customer("", "", "", "");
+            Pizza pizz = new Pizza("Grande", "Royale", 0);
+            Beverage boisson = new Beverage("Chardonnay", 100, 0);
+            Order commande = new Order(bestCustomer, AvailableOfficer(), AvailableDriver(), "en preparation", "en cours");
             foreach(Customer client in listCustomer)
             {
                 if(client.CumulativeOrder > bestCustomer.CumulativeOrder)
@@ -604,10 +631,12 @@ namespace S5_OOP_FinalProject
                     bestCustomer = client;
                 }
             }
+
             /// on parcourt toute la liste pour trouver le meilleur client
             /// on rend nulle la note de sa prochaine commande.
-            int length = bestCustomer.ListOrder.Count;
-            bestCustomer.ListOrder[length + 1].Bill = 0;
+            bestCustomer.ListOrder.Add(commande);
+            //Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            Console.WriteLine(bestCustomer);
         }
         public void FirstNameDay()
         {
@@ -628,15 +657,19 @@ namespace S5_OOP_FinalProject
             {
                 /// Si la liste de prénom contient le prénom d'un des client qui a commandé aujourd'hui 
                 /// Son addition est de 1€
-                if (firstNameList.Contains(commande.CustomerToServer.FirstName) && commande.Date == DateTime.Today)
+
+                if (firstNameList.Contains(commande.CustomerToServer.FirstName) && /*commande.Date == DateTime.Today*/ commande.CustomerToServer.PassedAnOrder())
                 {
                     commande.Bill = 1;
+                    Console.WriteLine(commande.CustomerToServer.ToString());
+                    Console.WriteLine("gggggggggggggggggggggg");
                 }
             }
+
         }
         public void BackToTheFuture()
         {
-            Customer marty = new Customer("Marty", "McFly", "", "");
+            Customer marty = new Customer("Marty", "McFly","HillValley","111111111");
             Officer doc = new Officer("Emett", "Brown", "HillValley", "0101010101", "InTheDeLorean", Convert.ToDateTime("1955-11-05"), 221);
             DeliveryDriver biff = new DeliveryDriver("Biff", "Tannen", "HillValley", "0123456789", "DansLeFumier", "HoverBoard", 0);
             Pizza pizz = new Pizza("Grande", "Voyageur Du Temps", 0);
@@ -646,11 +679,18 @@ namespace S5_OOP_FinalProject
             commande.ListBeverage.Add(boisson);
             if(DateTime.Today == Convert.ToDateTime("2015-10-21"))
             {
-                foreach(Customer client in listCustomer)
+                //Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaa");
+                foreach (Customer client in listCustomer)
                 {
-                    if (client == marty && marty.PassedAnOrder() == true)
+                    //Console.WriteLine("bbbbbbbbbbbbbbbbbbbbbbbbb");
+                    if (client == marty /* && marty.PassedAnOrder() == true*/)
                     {
                         client.ListOrder.Add(commande);
+                        
+                        client.ToString();
+                        client.PartialToStringListOrder();
+                        //Console.WriteLine("cccccccccccccccccccccccccccccc");
+
                     }
                 }
             }
