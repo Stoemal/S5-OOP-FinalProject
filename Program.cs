@@ -116,8 +116,8 @@ namespace S5_OOP_FinalProject
             //pizzAlpha.BestCustomer(); marche
             //pizzAlpha.FirstNameDay(); marche
             //pizzAlpha.BackToTheFuture(); marche
-            //pizzAlpha.GlobalOrderList[1].Ponderation(student);
-            //Console.WriteLine(pizzAlpha.GlobalOrderList[1].Bill);
+            pizzAlpha.GlobalOrderList[1].Ponderation(student);
+            Console.WriteLine(pizzAlpha.GlobalOrderList[1].Bill);
 
 
 
