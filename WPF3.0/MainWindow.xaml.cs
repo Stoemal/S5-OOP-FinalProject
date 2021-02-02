@@ -24,15 +24,30 @@ namespace WPF3._0
     public partial class MainWindow : Window
     {
         Pizzeria pizzAlpha = new Pizzeria();
+
+        
+
         public MainWindow()
         {
+            string file = "Clients.csv";
+            string file1 = "Commis.csv";
+            string file2 = "Livreur.csv";
+            string file3 = "Commandes.csv";
+            string file4 = "DetailsCommandes.csv";
+
+            pizzAlpha.AddFilesData(pizzAlpha.ReadCustomers, file);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadOfficer, file1);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadDeliveryDriver, file2);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadOrder, file3);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadDetailsOrder, file4);
+
             InitializeComponent();
         }
         
 
         private void Module_Client(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ModuleClient();
+            MainFrame.Content = new ModuleClient(pizzAlpha);
         }
 
         private void ModuleCommande(object sender, RoutedEventArgs e)
@@ -64,5 +79,7 @@ namespace WPF3._0
             //Pour fermer violemment
             this.Close();
         }
+
+     
     }
 }

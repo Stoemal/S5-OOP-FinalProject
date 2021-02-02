@@ -27,7 +27,7 @@ namespace WPF3._0
 
         private void NouveauClient(object sender, RoutedEventArgs e)
         {
-            CommandeMain.Content = new ModuleClient();
+            //CommandeMain.Content = new ModuleClient();
         }
 
         private void TrieAlphabetique(object sender, RoutedEventArgs e)

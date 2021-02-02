@@ -21,20 +21,27 @@ namespace WPF3._0
     /// </summary>
     public partial class ModuleClient : Page
     {
-        Pizzeria pizzAlpha = new Pizzeria();
-        Customer a = new Customer("dave", "dave", "dave", "dave");
-        
-        public ModuleClient()
+        Pizzeria pizzAlpha;
+       
+
+        public ModuleClient(Pizzeria pizzAlpha)
         {
+            this.pizzAlpha = pizzAlpha;
             InitializeComponent();
         }
 
         private void TrieAlphabetique(object sender, RoutedEventArgs e)
         {
-            pizzAlpha.ListCustomer.Add(a);
-            MessageBox.Show(pizzAlpha.ListCustomer[0].FirstName);
+
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
 
+            
+            listViewCustomer.ItemsSource = pizzAlpha.ListCustomer;
+            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewCustomer.ItemsSource);                    
+
+            InitializeComponent();
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            
         }
 
         private void TrieVille(object sender, RoutedEventArgs e)
@@ -44,7 +51,10 @@ namespace WPF3._0
 
         private void TrieMontant(object sender, RoutedEventArgs e)
         {
-
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
+            listViewCustomer.ItemsSource = pizzAlpha.ListCustomer;                
+            InitializeComponent();
+            
         }
 
         private void AjoutClient(object sender, RoutedEventArgs e)

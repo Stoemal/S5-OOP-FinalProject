@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace WPF3._0
 {
@@ -13,6 +14,7 @@ namespace WPF3._0
         private DateTime firstOrder;
         private List<Order> listOrder;
         private float cumulativeOrder;
+     
 
         #region CONSTRUCTEURS
         public Customer(string firstName, string lastName, string address, string phoneNumber) : base(firstName, lastName, address, phoneNumber)
@@ -33,7 +35,7 @@ namespace WPF3._0
         public DateTime FirstOrder
         {
             get { return this.firstOrder; }
-            set { this.firstOrder = value; }
+            set { this.firstOrder = value; OnPropertyChanged("FirstOrder"); }
         }
         public List<Order> ListOrder
         {
@@ -42,9 +44,12 @@ namespace WPF3._0
         public float CumulativeOrder
         {
             get { return this.cumulativeOrder; }
-            set { this.cumulativeOrder = value; }
+            set { this.cumulativeOrder = value; OnPropertyChanged("CumulativeOrder"); }
         }
         #endregion Accesseurs
+
+   
+
 
         #region FONCTIONS
         public void Calculation()
