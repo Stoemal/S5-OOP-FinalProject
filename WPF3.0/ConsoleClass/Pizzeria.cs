@@ -724,10 +724,10 @@ namespace WPF3._0
             List<string> firstNameList = new List<string>
             {
                 "Monique","Germaine","Reine","Brigitte",
-                "Jacqueline","Adrienne","Xaviere",
+                "Jacqueline","Adrienne","Xaviere","Gertrude", "Guenièvre",
 
                 "Teodule","Norbert","Gervais","Casimir",
-                "Raymond","Wilfried","Guy"
+                "Raymond","Wilfried","Guy", "Alphonse", "Eugene"
             };
             /// On parcourt notre list de commandes
             foreach (Order commande in globalOrderList)
@@ -764,7 +764,7 @@ namespace WPF3._0
             commande.ListBeverage.Add(boisson);
             //On crée tous nos objets 
             //21/10/2015
-            if (DateTime.Today.ToShortDateString() == "02/02/2021")
+            if (DateTime.Today.ToShortDateString() == "21/10/2015")
             {
                 //On vérifie la date
                 foreach (Customer client in listCustomer)
