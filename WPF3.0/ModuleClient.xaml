@@ -22,15 +22,7 @@
             <Button Content="Ville" HorizontalAlignment="Left" Width="75" Margin="0,0,0,80" Click="TrieVille" />
             <Button Content="Montant" HorizontalAlignment="Left"  Width="75" Margin="0,0,0,80" Click="TrieMontant" />
         </StackPanel>
-        <StackPanel Margin="50,50,0,0">
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Nom" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Prenom" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Adresse" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone" VerticalAlignment="Top"/>
-            <Button HorizontalAlignment="Left" Content="Ajout" Width="75" Margin="0,0,0,20" Click="AjoutClient"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone Client" VerticalAlignment="Top"/>
-            <Button HorizontalAlignment="Left" Content="Suppression" Width="75" Margin="0,0,0,20" Click="SuppressionClient"/>
-        </StackPanel>
+        
 
         <Frame Grid.Row="1" Name="ClientMain" />
         <ListView Name="listViewCustomer" HorizontalAlignment="Left" Height="313" Margin="377,50,0,0" VerticalAlignment="Top" Width="396"
