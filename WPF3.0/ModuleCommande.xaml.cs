@@ -24,5 +24,30 @@ namespace WPF3._0
         {
             InitializeComponent();
         }
+
+        private void NouveauClient(object sender, RoutedEventArgs e)
+        {
+            CommandeMain.Content = new ModuleClient();
+        }
+
+        private void TrieAlphabetique(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TrieVille(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TrieMontant(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AjoutCommande(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

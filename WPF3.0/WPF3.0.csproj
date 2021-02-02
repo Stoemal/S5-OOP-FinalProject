@@ -55,6 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConsoleClass\Beverage.cs" />
+    <Compile Include="ConsoleClass\ICalculus.cs" />
+    <Compile Include="ConsoleClass\IDisplay.cs" />
+    <Compile Include="ConsoleClass\IEntries.cs" />
+    <Compile Include="ConsoleClass\Order.cs" />
+    <Compile Include="ConsoleClass\Persons\Customer.cs" />
+    <Compile Include="ConsoleClass\Persons\DeliveryDriver.cs" />
+    <Compile Include="ConsoleClass\Persons\Employee.cs" />
     <Compile Include="MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
@@ -70,6 +78,10 @@
     <Compile Include="ModuleStatistiques.xaml.cs">
       <DependentUpon>ModuleStatistiques.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConsoleClass\Persons\Officer.cs" />
+    <Compile Include="ConsoleClass\Persons\Person.cs" />
+    <Compile Include="ConsoleClass\Pizza.cs" />
+    <Compile Include="ConsoleClass\Pizzeria.cs" />
     <Compile Include="Success.xaml.cs">
       <DependentUpon>Success.xaml</DependentUpon>
     </Compile>

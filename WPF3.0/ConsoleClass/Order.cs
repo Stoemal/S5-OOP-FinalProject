@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 
-
-namespace S5_OOP_FinalProject
+namespace WPF3._0
 {
     /// Class des Commandes
 
@@ -26,8 +24,8 @@ namespace S5_OOP_FinalProject
         private Officer officerInCharge;
         private DeliveryDriver deliveryDriverInCharge;
 
-        private List<Pizza> listPizza;      
-        private List<Beverage> listBeverage;        
+        private List<Pizza> listPizza;
+        private List<Beverage> listBeverage;
 
         private string state;
         private string achievement;
@@ -259,11 +257,11 @@ namespace S5_OOP_FinalProject
             /// Retourne une chaîne de caractères avec toutes les informations d'une commande
             /// en retirant le nom du client
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state +
-                ", état : " + achievement + ", addition : " + bill + " e" + 
+                ", état : " + achievement + ", addition : " + bill + " e" +
                 "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName +
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName;
         }
-     
+
         public static float Note()
         {
             float prix = 0;
@@ -274,10 +272,10 @@ namespace S5_OOP_FinalProject
         public override string ToString()
         {
             /// Retourne une chaîne de caractères avec toutes les informations d'une commande
-            return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state + 
-                ", état : " + achievement + ", addition : " + bill + " e" + 
-                "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName + 
-                "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName + 
+            return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state +
+                ", état : " + achievement + ", addition : " + bill + " e" +
+                "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName +
+                "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName +
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName + "\n";
         }
 
@@ -286,9 +284,9 @@ namespace S5_OOP_FinalProject
             /// Retourne une chaîne de caracère contenant tous les produits d'une commande
             string text = null;
 
-            if(listPizza != null)
+            if (listPizza != null)
             {
-                if(listPizza.Count() > 0)
+                if (listPizza.Count() > 0)
                 {
                     text = "Liste pizza : \n";
                     foreach (Pizza pizz in listPizza)
@@ -297,17 +295,17 @@ namespace S5_OOP_FinalProject
                     }
                     text = text + "\n";
                 }
-            }            
-            if(listBeverage != null)
+            }
+            if (listBeverage != null)
             {
-                if(listBeverage.Count() > 0)
+                if (listBeverage.Count() > 0)
                 {
                     text = text + "Liste boissons : \n";
                     foreach (Beverage boisson in listBeverage)
                     {
                         text = text + boisson.Type + " " + boisson.Volume + "cL " + boisson.Price + " e\n";
                     }
-                }               
+                }
             }
             if (text == null) return "Vide";
             else return text;

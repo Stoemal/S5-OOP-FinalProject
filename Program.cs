@@ -7,7 +7,9 @@ using System.IO;
 
 namespace S5_OOP_FinalProject
 {
-    class Program
+    //namespace S5_OOP_FinalProject
+    //WPF3._0
+    class Program 
     {
         List<Order> globalOrderList = new List<Order> { };// liste regroupant la totalité des commandes     
         

@@ -8,7 +8,47 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ModuleCommande">
 
-    <Grid>
-        
+    <Grid Background="White">
+
+        <Grid>
+            <Grid.ColumnDefinitions />
+            <Line X1="400" Y1="0" X2="400" Y2="470" Visibility="Visible" Stroke="Black" StrokeThickness="4" Margin="0,0,0,20"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="Entree"  Text="Entrée-Sortie" Margin="200,0,200,0" />
+                <TextBlock x:Name="Tri"  Text="Fonctions" Margin="100,0,200,0"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Margin="550,50,0,0">
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Numéro de commande" VerticalAlignment="Top"/>
+
+            <Button Content="Rechercher" HorizontalAlignment="Left" Width="75" Margin="0,0,0,20" Click="TrieAlphabetique"/>
+        </StackPanel>
+        <StackPanel Margin="50,50,0,0">
+            <Button HorizontalAlignment="Left" Content="Nouveau Client" Width="85" Margin="0,0,0,20" Click="NouveauClient"/>
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone Client" VerticalAlignment="Top"/>
+            <ComboBox Text="Pizzas" Width="120" HorizontalAlignment="Left" Margin="0,0,0,20">
+                <ComboBoxItem Content="Margherita"/>
+                <ComboBoxItem Content="Calzone"/>
+                <ComboBoxItem Content="BBQ"/>
+                <ComboBoxItem Content="Royale"/>
+                <ComboBoxItem Content="4 Fromages"/>
+                <ComboBoxItem Content="Regina"/>
+                <ComboBoxItem Content="Orientale"/>
+            </ComboBox>
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Nombre de pizzas" VerticalAlignment="Top"/>
+            <ComboBox Width="120" HorizontalAlignment="Left" Margin="0,0,0,20">
+                <ComboBoxItem Content="Coca-Cola"/>
+                <ComboBoxItem Content="Fanta"/>
+                <ComboBoxItem Content="Oasis"/>
+                <ComboBoxItem Content="Dr.Pepper"/>
+                <ComboBoxItem Content="Evian"/>
+                <ComboBoxItem Content="Thé au jasmin"/>
+            </ComboBox>
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Nombre de boissons" VerticalAlignment="Top"/>
+            <Button HorizontalAlignment="Left" Content="Ajout Commande" Width="100" Margin="0,0,0,20" Click="AjoutCommande"/>
+        </StackPanel>
+
+        <Frame Grid.Row="1" Name="CommandeMain"  />
     </Grid>
 </Page>
+

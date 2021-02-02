@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace WPF3._0
 {
     /// <summary>
@@ -20,7 +21,9 @@ namespace WPF3._0
     /// </summary>
     public partial class ModuleClient : Page
     {
-
+        Pizzeria pizzAlpha = new Pizzeria();
+        Customer a = new Customer("dave", "dave", "dave", "dave");
+        
         public ModuleClient()
         {
             InitializeComponent();
@@ -28,8 +31,10 @@ namespace WPF3._0
 
         private void TrieAlphabetique(object sender, RoutedEventArgs e)
         {
-            
-            
+            pizzAlpha.ListCustomer.Add(a);
+            MessageBox.Show(pizzAlpha.ListCustomer[0].FirstName);
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
         }
 
         private void TrieVille(object sender, RoutedEventArgs e)
@@ -44,8 +49,12 @@ namespace WPF3._0
 
         private void AjoutClient(object sender, RoutedEventArgs e)
         {
-
             MessageBox.Show("Succes de l'ajout");
+        }
+
+        private void SuppressionClient(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

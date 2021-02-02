@@ -15,7 +15,7 @@
             <Line X1="400" Y1="0" X2="400" Y2="470" Visibility="Visible" Stroke="Black" StrokeThickness="4" Margin="0,0,0,20"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="Entree"  Text="Entrée-Sortie" Margin="200,0,200,0" />
-                <TextBlock x:Name="Trie"  Text="Trie" Margin="100,0,200,0"/>
+                <TextBlock x:Name="Tri"  Text="Tri" Margin="100,0,200,0"/>
             </StackPanel>
         </Grid>
         <StackPanel Margin="550,50,0,0">
@@ -29,6 +29,8 @@
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Adresse" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Ajout" Width="75" Margin="0,0,0,20" Click="AjoutClient"/>
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone Client" VerticalAlignment="Top"/>
+            <Button HorizontalAlignment="Left" Content="Suppression" Width="75" Margin="0,0,0,20" Click="SuppressionClient"/>
         </StackPanel>
         
         <Frame Grid.Row="1" Name="ClientMain"  />
