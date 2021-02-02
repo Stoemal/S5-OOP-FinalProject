@@ -57,6 +57,7 @@ namespace WPF3._0
             /// Implémentation de ICalculus permettant d'obtenir le prix 
             /// cumulé de toutes les commandes d'un client
             cumulativeOrder = 0;
+           
             listOrder.ForEach((Order n) => { cumulativeOrder = cumulativeOrder + n.Bill; });
         }
 

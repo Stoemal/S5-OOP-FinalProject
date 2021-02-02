@@ -376,7 +376,7 @@ namespace S5_OOP_FinalProject
         /// comme demandé pour le module Client
         /// </summary>
         /// <param name="lcustomer">liste de clients à afficher</param>
-        public delegate void DisplayCustomer(List<Customer> lcustomer);
+        public delegate void DisplayCustomer();
 
         /// <summary>
         /// Méthode appelée pour afficher les clients
@@ -384,7 +384,7 @@ namespace S5_OOP_FinalProject
         /// <param name="n">délégation DisplayCustomer prenant listCustomer en paramètre</param>
         public void DisplayCustomerShape(DisplayCustomer n)
         {
-            n(listCustomer);
+            n();
         }
 
         /// <summary>
@@ -392,16 +392,16 @@ namespace S5_OOP_FinalProject
         /// triant la liste des clients
         /// </summary>
         /// <param name="temp">paramètre correspondant à listCustomer</param>
-        public void DisplayCustomerAlphabet(List<Customer> temp)
+        public void DisplayCustomerAlphabet()
         {          
             //On trie la liste avec un sort et une délégation
-            temp.Sort(delegate (Customer a, Customer b)
+            listCustomer.Sort(delegate (Customer a, Customer b)
             {
                 return a.LastName.CompareTo(b.LastName);              
             });
 
             //On affiche la liste avec un ForEach et une délégation
-            //temp.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });            
+            listCustomer.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });            
         }
 
         /// <summary>
@@ -409,16 +409,16 @@ namespace S5_OOP_FinalProject
         /// sans trier la liste des clients
         /// </summary>
         /// <param name="temp">paramètre correspondant à listCustomer</param>
-        public void DisplayCustomerCity(List<Customer> temp)
+        public void DisplayCustomerCity()
         {
-            string[] datas = new string[temp.Count()];  //Le tableau où on mettra le nom des villes en plusieurs exemplaires si elles le sont
+            string[] datas = new string[listCustomer.Count()];  //Le tableau où on mettra le nom des villes en plusieurs exemplaires si elles le sont
             string[] pass = null;                       //Un tableau séparant chaque mots composant l'adresse
             List<string> cities = new List<string>();   //Un tableau des villes
 
             //On récupère d'abord tous les noms de ville dans datas
             for(int i = 0; i < datas.Length; i++)
             {
-                pass = temp[i].Address.Split(' ');
+                pass = listCustomer[i].Address.Split(' ');
                 datas[i] = pass[pass.Length - 1];             
             }
 
@@ -452,17 +452,20 @@ namespace S5_OOP_FinalProject
             */
         }
 
-        public void DisplayCustomerCumulativeOrder(List<Customer> temp)
+        public void DisplayCustomerCumulativeOrder()
         {
-            for (int i = 0; i < temp.Count(); i++)
+            for (int i = 0; i < listCustomer.Count(); i++)
             {
-                temp[i].Calculation();
-                //Console.WriteLine(temp[i].PartialToStringCumulativeOrder() + "\n");
+                listCustomer[i].Calculation();
+                
             }
-            temp.Sort(delegate (Customer a, Customer b)
-            {
-                return a.CumulativeOrder.CompareTo(b.CumulativeOrder);
+            listCustomer.Sort((Customer a, Customer b) =>
+            {               
+                return - (a.CumulativeOrder).CompareTo(b.CumulativeOrder);
             });
+
+            //listCustomer.ForEach((Customer n) => { Console.WriteLine(n.PartialToStringCumulativeOrder() + "\n"); });
+
         }
 
         #endregion Affichage Clients
