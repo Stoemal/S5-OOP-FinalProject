@@ -24,5 +24,30 @@ namespace WPF3._0
         {
             InitializeComponent();
         }
+
+        private void AfficheCommandesCommis(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AfficheCommandesLivreur(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RechercheCommandesDate(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MoyenneCommandes(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MoyenneClients(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
