@@ -729,7 +729,7 @@ namespace WPF3._0
                 "Teodule","Norbert","Gervais","Casimir",
                 "Raymond","Wilfried","Guy"
             };
-            // On parcourt notre list de commandes
+            /// On parcourt notre list de commandes
             foreach (Order commande in globalOrderList)
             {
                 /// Si la liste de prénom contient le prénom d'un des client qui a commandé aujourd'hui 
