@@ -24,5 +24,25 @@ namespace WPF3._0
         {
             InitializeComponent();
         }
+
+        private void AfficheClientHasard(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AfficheMeilleurClient(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackToTheFuture(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NomDuJour(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

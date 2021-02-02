@@ -29,7 +29,7 @@
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Adresse" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Ajout" Width="75" Margin="0,0,0,20" Click="AjoutClient"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone Client" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="TelephoneClient" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Suppression" Width="75" Margin="0,0,0,20" Click="SuppressionClient"/>
         </StackPanel>
         

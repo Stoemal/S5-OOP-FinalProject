@@ -9,7 +9,22 @@
       Title="ModuleAutre">
 
     <Grid Background="White">
-        <TextBlock HorizontalAlignment="Left" Margin="228,271,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
+        <Grid>
+            <Grid.ColumnDefinitions />
+            <StackPanel Orientation="Horizontal">
+
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Margin="40,40,0,0">
+            <Button HorizontalAlignment="Left" Content="Client aléatoire" Width="150" Margin="0,0,0,40" Click="AfficheClientHasard"/>
+            <Button HorizontalAlignment="Left" Content="Meilleur client" Width="150" Margin="0,0,0,40" Click="AfficheMeilleurClient"/>
+            <Button HorizontalAlignment="Left" Content="Nom du jour" Width="150" Margin="0,0,0,40" Click="NomDuJour"/>
+            <Button HorizontalAlignment="Left" Content="Nom de Zeus !" Width="150" Margin="0,0,0,40" Click="BackToTheFuture"/>
+
+        </StackPanel>
+
+        <Frame Grid.Row="1" Name="CommandeMain" />
     </Grid>
 </Page>

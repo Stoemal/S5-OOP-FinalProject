@@ -17,17 +17,17 @@
             </StackPanel>
         </Grid>
         <StackPanel Margin="550,50,0,0">
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="Date1" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Date2" VerticalAlignment="Top"/>
+            <TextBox x:Name="date1" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="Date1" VerticalAlignment="Top"/>
+            <TextBox x:Name="date2" HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Date2" VerticalAlignment="Top"/>
             <Button Content="Rechercher commandes" HorizontalAlignment="Left" Width="130" Margin="0,0,0,30" Click="RechercheCommandesDate"/>
             <Button Content="Moyenne Commandes" HorizontalAlignment="Left" Width="130" Margin="0,0,0,30" Click="MoyenneCommandes"/>
             <Button Content="Moyenne Clients" HorizontalAlignment="Left" Width="130" Margin="0,0,0,30" Click="MoyenneClients"/>
 
         </StackPanel>
         <StackPanel Margin="50,50,0,0">
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Numéro Commis" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NuméroCommis" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Nombre de commandes" Width="150" Margin="0,0,0,20" Click="AfficheCommandesCommis"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Numéro Livreur" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NuméroLivreur" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Nombre de commandes" Width="150" Margin="0,0,0,20" Click="AfficheCommandesLivreur"/>
             
         </StackPanel>
