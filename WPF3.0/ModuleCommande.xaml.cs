@@ -20,8 +20,10 @@ namespace WPF3._0
     /// </summary>
     public partial class ModuleCommande : Page
     {
-        public ModuleCommande()
+        Pizzeria pizzAlpha;
+        public ModuleCommande(Pizzeria pizzAlpha)
         {
+            this.pizzAlpha = pizzAlpha;
             InitializeComponent();
         }
 
@@ -30,10 +32,6 @@ namespace WPF3._0
             //CommandeMain.Content = new ModuleClient();
         }
 
-        private void TrieAlphabetique(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void TrieVille(object sender, RoutedEventArgs e)
         {
@@ -48,6 +46,20 @@ namespace WPF3._0
         private void AjoutCommande(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ChercheCommande(object sender, RoutedEventArgs e)
+        {
+            string text = "Aucune commande ne correspond à ce numéro";
+            string orderID = cmdNumber.Text;
+            foreach (Order commande in pizzAlpha.GlobalOrderList)
+            {
+                if ( Convert.ToString(commande.OrderNumber ) == orderID)
+                {
+                    text = commande + "\n\n" + commande.FoodToString();
+                }
+            }
+            MessageBox.Show(text);
         }
     }
 }

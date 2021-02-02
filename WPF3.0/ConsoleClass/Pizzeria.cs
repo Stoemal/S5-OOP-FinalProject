@@ -612,29 +612,38 @@ namespace WPF3._0
         /// </summary>
         /// <param name="date1">1ère date</param>
         /// <param name="date2">2ème date ultérieure à la 1ère</param>
-        public void OrderTime(DateTime date1, DateTime date2)
+        public string OrderTime(DateTime date1, DateTime date2)
         { // Pour afficher les commandes sur une certaine période
-            Console.WriteLine("Commandes passées entre le :  " + Convert.ToString(date1) + "  et le  " + Convert.ToString(date2) + "\n");
+            string text = "";
+            //Console.WriteLine("Commandes passées entre le :  " + Convert.ToString(date1) + "  et le  " + Convert.ToString(date2) + "\n");
             foreach (Order purchase in globalOrderList)
             {
                 if ((purchase.Date > date1) && (purchase.Date < date2))
                 {
-                    Console.WriteLine(purchase.ToString());
+                    text = text + purchase.ToString() + "\n";
+                    
+                    //Console.WriteLine(purchase.ToString());
                 }
             }
+            if(text == "")
+            {
+                text = "Pas de commande durant cette période";
+            }
+            return text;
         }
 
         /// <summary>
         /// Calcul la moyenne du prix de toutes les commandes
         /// </summary>
-        public void OrderMean()
+        public float OrderMean()
         {
             float sum = 0;
             foreach (Order purchase in globalOrderList)
             {
                 sum = sum + purchase.Bill;
             }
-            Console.WriteLine("Moyenne montant commandes : " + sum / globalOrderList.Count());
+            ///Console.WriteLine("Moyenne montant commandes : " + sum / globalOrderList.Count());
+            return sum / globalOrderList.Count();
         }
 
         /// <summary>
@@ -644,43 +653,12 @@ namespace WPF3._0
         /// on somme donc les notes de chaques commandes que l'on divise par la longueur de la liste de commande
         /// on termine par afficher le nom du client et la moyenne des dépenses de son compte
         /// </summary>
-        public void CustomerAccount()
-        {
-            float sum = 0;
 
-            /*
-            listCustomer.ForEach(delegate (Customer n)
-            {
-                if(n.ListOrder != null)
-                {
-                    if(n.ListOrder.Count() > 0)
-                    {
-                        n.Calculation();
-                        sum = n.CumulativeOrder / n.ListOrder.Count();
-                    }
-                }
-                Console.WriteLine(n.LastName + "  " + sum / n.ListOrder.Count() + " e");
-                sum = 0;
-            });
-            */
-
-
-
-            foreach (Customer client in listCustomer)
-            {
-                foreach (Order commande in client.ListOrder)
-                {
-                    sum = sum + commande.Bill;
-                }
-                Console.WriteLine(client.LastName + "  " + sum / client.ListOrder.Count() + " e");
-                sum = 0;
-            }
-        }
 
         #endregion Module Statistiques
 
         #region Module Autre
-        public void RandomPizza()
+        public string RandomPizza()
         {
             /// Cette fonction fait partie du module autre, elle offre une grande 
             /// pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
@@ -702,41 +680,47 @@ namespace WPF3._0
             Order luckyOrder = new Order(DateTime.Now, luckyCustomer, AvailableOfficer(), AvailableDriver(), luckyPList, luckyBList, "en préparation", "en préparation", 0);
             //On construit notre commande avec les arguments précédents
             luckyCustomer.ListOrder.Add(luckyOrder);// On ajoute la commande à la liste de commande de notre client
-            Console.WriteLine(luckyOrder + "\n" + luckyOrder.FoodToString());
+            //Console.WriteLine(luckyOrder + "\n" + luckyOrder.FoodToString());
+            return luckyOrder + "\n" + luckyOrder.FoodToString();
             //Console.WriteLine();
             //Console.WriteLine(luckyCustomer);
             //Permet de vérifier que la commande se soit bien executée
         }
-        public void BestCustomer()
+        public string BestCustomer()
         {
             /// Cette fonction permet de trouver le meilleur client (celui qui à dépensé le plus d'argent)
             /// et lui offre une pizza royale et une bouteille de chardonnay
-            Customer bestCustomer = new Customer("", "", "", "");
+            //Customer tempCustomer = new Customer("", "", "", "");
+            Customer bestCustomer = new Customer("a", "", "", "");
             Pizza pizz = new Pizza("Grande", "Royale", 0);
             Beverage boisson = new Beverage("Chardonnay", 100, 0);
-            Order commande = new Order(bestCustomer, AvailableOfficer(), AvailableDriver(), "en preparation", "en cours");
-            commande.ListPizza.Add(pizz);
-            commande.ListBeverage.Add(boisson);
+
             foreach (Customer client in listCustomer)
             {
-                if (client.CumulativeOrder > bestCustomer.CumulativeOrder)
+                if (client.CumulativeOrder >= bestCustomer.CumulativeOrder)
                 {
                     bestCustomer = client;
                 }
             }
+            Order commande = new Order(bestCustomer, AvailableOfficer(), AvailableDriver(), "en preparation", "en cours");
+            commande.ListPizza.Add(pizz);
+            commande.ListBeverage.Add(boisson);
+            //commande.CustomerToServer = bestCustomer;
             /// on parcourt toute la liste pour trouver le meilleur client
             /// on lui met en attente sa prochaine commande
             //bestCustomer.ListOrder.Add(commande);
             //Console.WriteLine(bestCustomer);
-            Console.WriteLine(commande.ToString());
+            //Console.WriteLine(commande.ToString());
             //Console.WriteLine(commande.FoodToString());
+            return commande + "\n" + commande.FoodToString();
         }
-        public void FirstNameDay()
+        public string FirstNameDay()
         {
             /// Cette fonction fait payer 1€ sa commande au client, 
             /// si son nom fait partie de la liste de noms suivante
             /// et qu'il commande le jour de cette promotion
             /// On crée notre liste de noms
+            string text = "Personne ne bénéficiera de cette promotion aujourd'hui";
             List<string> firstNameList = new List<string>
             {
                 "Monique","Germaine","Reine","Brigitte",
@@ -754,28 +738,33 @@ namespace WPF3._0
                 if (firstNameList.Contains(commande.CustomerToServer.FirstName) && commande.CustomerToServer.PassedAnOrder())
                 {
                     commande.Bill = 1;
+                    text = "Aujourd'hui " + commande.CustomerToServer.FirstName + " " + commande.CustomerToServer.LastName +
+                        " gagne cette commande : \n\n" +
+                        commande.PartialToString() + "\n" + commande.FoodToString();
                     //Console.WriteLine(commande.CustomerToServer.ToString());
                     //Console.WriteLine(commande.ToString());
                     //Console.WriteLine(commande.FoodToString());
                 }
             }
-
+            return text;
         }
-        public void BackToTheFuture()
+        public string BackToTheFuture()
         {
             //Cette fonction vérifie si on est le 21/10/2015 que l'on a passé commande aujourd'hui
             //et si on s'appelle Marty McFly, si c'est la cas, on gagne une grande pizza voyageur du temps 
             //ainsi qu'un verre de lait, on se fait livrer par biff ! Le pied non ?
+            string text = "Aucun Marty McFly n'a passé commande aujourd'hui \n";
             Customer marty = new Customer("Marty", "McFly", "HillValley", "111111111");
-            Officer doc = new Officer("Emett", "Brown", "HillValley", "0101010101", "InTheDeLorean", Convert.ToDateTime("1955-11-05"), 221);
+            Officer doc = new Officer("Doc", "Emmett Brown", "HillValley", "0101010101", "InTheDeLorean", Convert.ToDateTime("1955-11-05"), 221);
             DeliveryDriver biff = new DeliveryDriver("Biff", "Tannen", "HillValley", "0123456789", "DansLeFumier", "HoverBoard", 0);
             Pizza pizz = new Pizza("Grande", "Voyageur Du Temps", 0);
             Beverage boisson = new Beverage("Lait", 33, 0);
-            Order commande = new Order(marty, doc, biff, "en preparation", "en cours");
+            Order commande = new Order(marty, doc, biff, "dans la DeLorean", "en cours");
             commande.ListPizza.Add(pizz);
             commande.ListBeverage.Add(boisson);
             //On crée tous nos objets 
-            if (DateTime.Today.ToShortDateString() == "21/10/2015")
+            //21/10/2015
+            if (DateTime.Today.ToShortDateString() == "02/02/2021")
             {
                 //On vérifie la date
                 foreach (Customer client in listCustomer)
@@ -784,11 +773,21 @@ namespace WPF3._0
                     {
                         //On vérifie le client ET s'il a passé commande aujourd'hui
                         client.ListOrder.Add(commande);
+                        text = commande + "\n" + commande.FoodToString();
                         //Console.WriteLine(client.ToString());
                         //Console.WriteLine(client.PartialToStringListOrder());
                     }
                 }
             }
+            else
+            {
+                //Convert.ToDateTime("2015-10-21")
+                int a = Math.Abs(DateTime.Today.Year - 2015);
+                int m = Math.Abs(DateTime.Today.Month - 10);
+                int j = Math.Abs(DateTime.Today.Day - 21);
+                text = text + "Marty est passé il y a déjà " + a + " ans, " + m + " mois et " + j + " jours";
+            }
+            return text;
         }
         //La delegation pour changer la pondération d'une note fait aussi partie du module autre
         #endregion

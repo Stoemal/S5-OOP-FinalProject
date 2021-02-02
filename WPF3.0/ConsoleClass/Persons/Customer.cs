@@ -115,6 +115,21 @@ namespace WPF3._0
             }
             return false;
         }
+
+        public float CustomerAccount()
+        {
+            float sum = 0;
+
+            foreach (Order commande in listOrder)
+            {
+                sum = sum + commande.Bill;
+            }
+
+            return sum / listOrder.Count();
+            sum = 0;
+
+        }
+
         #endregion
     }
 }
