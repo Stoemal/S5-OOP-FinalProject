@@ -9,8 +9,11 @@ namespace S5_OOP_FinalProject
 {
     /// Class Pizzeria controlant les commandes des clients, le travail des employés 
     /// ainsi que le reste des caractéristiques reliées à la gestion de l'argent
-    class Pizzeria : IDisplay
+    public class Pizzeria : IDisplay 
     {
+
+
+
         #region ATTRIBUTS
         private List<Officer> listOfficer;
         private List<DeliveryDriver> listDeliveryDriver;

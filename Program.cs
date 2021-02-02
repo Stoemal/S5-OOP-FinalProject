@@ -92,7 +92,7 @@ namespace S5_OOP_FinalProject
 
 
             //pizzAlpha.Display();
-            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
             //pizzAlpha.ManipulateEntries(pizzAlpha.CreateCustomer, file);
             //pizzAlpha.ManipulateEntries(pizzAlpha.DeleteCustomer, file);
             //pizzAlpha.ManipulateEntries(pizzAlpha.ModifyCustomer, file);
@@ -116,8 +116,8 @@ namespace S5_OOP_FinalProject
             //pizzAlpha.BestCustomer(); marche
             //pizzAlpha.FirstNameDay(); marche
             //pizzAlpha.BackToTheFuture(); marche
-            pizzAlpha.GlobalOrderList[1].Ponderation(student);
-            Console.WriteLine(pizzAlpha.GlobalOrderList[1].Bill);
+            //pizzAlpha.GlobalOrderList[1].Ponderation(student);
+            //Console.WriteLine(pizzAlpha.GlobalOrderList[1].Bill);
 
 
 

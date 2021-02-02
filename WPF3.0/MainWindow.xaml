@@ -18,13 +18,13 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Click="Menu_Principal">Menu principal</Button>
-                <Button Grid.Column="1" Click="Module_Client">Module Client</Button>
-                <Button Grid.Column="2">Module Commande</Button>
-                <Button Grid.Column="3">Module Statistiques</Button>
-                <Button Grid.Column="4">Module Autre</Button>
+                <Button Grid.Column="0" Click="MenuPrincipal" Content="Menu principal"/>
+                <Button Grid.Column="1" Click="Module_Client" Content="Module CLIENT"/>
+                <Button Grid.Column="2" Content="Module COMMANDE" Click="ModuleCommande"/>
+                <Button Grid.Column="3" Content="Module STATISTIQUES" Click="ModuleStatistiques"/>
+                <Button Grid.Column="4" Content="Module AUTRE" Click="ModuleAutre"/>
             </Grid>
-            <Frame x:Name="MainFrame" Margin="0,75,0,0"/>
+            <Frame x:Name="MainFrame" Margin="0,75,0,0" NavigationUIVisibility="Hidden" />
             <Button Content="Quitter" HorizontalAlignment="Left" Margin="10,421,0,0" VerticalAlignment="Top" Width="75" Click="Quitter"/>
         </Grid>
     </Grid>

@@ -20,9 +20,46 @@ namespace WPF3._0
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+        
+
+        private void Module_Client(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ModuleClient();
+        }
+
+        private void ModuleCommande(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ModuleCommande();
+
+        }
+
+        private void ModuleStatistiques(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ModuleStatistiques();
+
+        }
+
+        private void ModuleAutre(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ModuleAutre();
+
+        }
+
+        private void MenuPrincipal(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new MenuPrincipal();
+        }
+
+        private void Quitter(object sender, RoutedEventArgs e)
+        {
+            //System.Environment.Exit(-1);
+            //Pour fermer violemment
+            this.Close();
         }
     }
 }

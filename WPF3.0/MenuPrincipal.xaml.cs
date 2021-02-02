@@ -16,10 +16,13 @@ using System.Windows.Shapes;
 namespace WPF3._0
 {
     /// <summary>
-    /// Logique d'interaction pour Success.xaml
+    /// Logique d'interaction pour MenuPrincipal.xaml
     /// </summary>
-    public partial class Success : Page
+    public partial class MenuPrincipal : Page
     {
-
+        public MenuPrincipal()
+        {
+            InitializeComponent();
+        }
     }
 }

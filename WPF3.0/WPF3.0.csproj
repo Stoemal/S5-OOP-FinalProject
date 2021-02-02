@@ -55,6 +55,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MenuPrincipal.xaml.cs">
+      <DependentUpon>MenuPrincipal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleAutre.xaml.cs">
+      <DependentUpon>ModuleAutre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleClient.xaml.cs">
+      <DependentUpon>ModuleClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleCommande.xaml.cs">
+      <DependentUpon>ModuleCommande.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleStatistiques.xaml.cs">
+      <DependentUpon>ModuleStatistiques.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Success.xaml.cs">
       <DependentUpon>Success.xaml</DependentUpon>
     </Compile>
@@ -70,6 +85,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MenuPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuleAutre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuleClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuleCommande.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModuleStatistiques.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Success.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
