@@ -76,7 +76,7 @@ namespace S5_OOP_FinalProject
 
 
 
-                        pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
             Console.WriteLine();
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCity);
             Console.WriteLine();

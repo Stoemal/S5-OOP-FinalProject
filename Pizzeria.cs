@@ -401,7 +401,7 @@ namespace S5_OOP_FinalProject
             });
 
             //On affiche la liste avec un ForEach et une délégation
-            temp.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });            
+            //temp.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });            
             temp = null;
         }
 

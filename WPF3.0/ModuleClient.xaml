@@ -18,7 +18,7 @@
                 <TextBlock x:Name="Tri"  Text="Tri" Margin="100,0,200,0"/>
             </StackPanel>
         </Grid>
-        <StackPanel Margin="550,50,0,0">
+        <StackPanel Margin="420,50,300,166.6">
             <Button Content="Alphabétique" HorizontalAlignment="Left" Width="75" Margin="0,0,0,80" Click="TrieAlphabetique"/>
             <Button Content="Ville" HorizontalAlignment="Left" Width="75" Margin="0,0,0,80" Click="TrieVille" />
             <Button Content="Montant" HorizontalAlignment="Left"  Width="75" Margin="0,0,0,80" Click="TrieMontant" />
@@ -32,7 +32,18 @@
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Telephone Client" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Suppression" Width="75" Margin="0,0,0,20" Click="SuppressionClient"/>
         </StackPanel>
-        
+
         <Frame Grid.Row="1" Name="ClientMain"  />
+        <ListView Name="listViewCustomer" HorizontalAlignment="Left" Height="390" Margin="505,50,0,0" VerticalAlignment="Top" Width="285">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nom"  DisplayMemberBinding="{Binding Nom}"/>
+                    <GridViewColumn Header="Prénom" DisplayMemberBinding="{Binding Prénom}"/>
+                    <GridViewColumn Header="Adresse" DisplayMemberBinding="{Binding Adresse}"/>
+                    <GridViewColumn Header="Téléphone" DisplayMemberBinding="{Binding Téléphone}"/>
+                    <GridViewColumn Header="Premiere_Commande" DisplayMemberBinding="{Binding Premiere_Commande}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

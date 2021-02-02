@@ -24,6 +24,9 @@ namespace WPF3._0
     public partial class MainWindow : Window
     {
         Pizzeria pizzAlpha = new Pizzeria();
+
+        public Pizzeria pizzAlpha { get; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,7 +35,7 @@ namespace WPF3._0
 
         private void Module_Client(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ModuleClient();
+            MainFrame.Content = new ModuleClient(pizzAlpha);
         }
 
         private void ModuleCommande(object sender, RoutedEventArgs e)

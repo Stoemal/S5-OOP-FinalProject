@@ -21,17 +21,25 @@ namespace WPF3._0
     /// </summary>
     public partial class ModuleClient : Page
     {
-        Pizzeria pizzAlpha = new Pizzeria();
+        Pizzeria pizzAlpha;
         Customer a = new Customer("dave", "dave", "dave", "dave");
-        
-        public ModuleClient()
+       
+
+        public ModuleClient(Pizzeria pizzAlpha)
         {
+            this.pizzAlpha = pizzAlpha;
             InitializeComponent();
         }
 
         private void TrieAlphabetique(object sender, RoutedEventArgs e)
         {
-            pizzAlpha.ListCustomer.Add(a);
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
+            InitializeComponent();
+            listViewCustomer.ItemsSource = pizzAlpha.ListCustomer;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewCustomer.ItemsSource);
+                    
+
             MessageBox.Show(pizzAlpha.ListCustomer[0].FirstName);
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
 
@@ -49,6 +57,7 @@ namespace WPF3._0
 
         private void AjoutClient(object sender, RoutedEventArgs e)
         {
+            pizzAlpha.ListCustomer.Add(a);
             MessageBox.Show("Succes de l'ajout");
         }
 
