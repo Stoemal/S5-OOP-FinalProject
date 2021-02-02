@@ -37,7 +37,7 @@ namespace WPF3._0
 
         private void RechercheCommandesDate(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void MoyenneCommandes(object sender, RoutedEventArgs e)
@@ -49,5 +49,7 @@ namespace WPF3._0
         {
 
         }
+
+
     }
 }
