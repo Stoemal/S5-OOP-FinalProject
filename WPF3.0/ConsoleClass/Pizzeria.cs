@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.ComponentModel;
 
 namespace WPF3._0
 {
     /// Class Pizzeria controlant les commandes des clients, le travail des employés 
     /// ainsi que le reste des caractéristiques reliées à la gestion de l'argent
-    public class Pizzeria : IDisplay
+    public class Pizzeria : IDisplay, INotifyPropertyChanged
     {
 
 
@@ -19,6 +20,8 @@ namespace WPF3._0
         private List<DeliveryDriver> listDeliveryDriver;
         private List<Customer> listCustomer;
         private List<Order> globalOrderList;
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region CONSTRUCTEURS
@@ -45,7 +48,7 @@ namespace WPF3._0
         public List<Customer> ListCustomer
         {
             get { return this.listCustomer; }
-            set { listCustomer = value; }
+            set { listCustomer = value; OnPropertyChanged("ListCustomer"); }
         }
         public List<Order> GlobalOrderList
         {
@@ -53,6 +56,15 @@ namespace WPF3._0
             set { this.globalOrderList = value; }
         }
         #endregion Accesseurs
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         #region FONCTIONS GENERALES
         public delegate void ReadFiles(string file);
@@ -63,9 +75,10 @@ namespace WPF3._0
             n(file);
         }
 
-        public delegate void Entries(string file);
 
-        public void ManipulateEntries(Entries n, string file) { n(file); }
+        public delegate void Entries(string[] datas);
+
+        public void ManipulateEntries(Entries n, string[] datas) { n(datas); }
 
         public Officer AvailableOfficer()
         {
@@ -102,38 +115,23 @@ namespace WPF3._0
         #region Module Client
 
 
-        public void CreateCustomer(string file)
+        public void CreateCustomer(string[] datas)
         {
-            Customer c;
-            string[] datas = new string[4];
-            Console.WriteLine("Nouveau Client : \n");
-            Console.WriteLine("Nom : ");
-            datas[0] = Console.ReadLine();
-            Console.WriteLine("Prénom : ");
-            datas[1] = Console.ReadLine();
-            Console.WriteLine("Adresse : ");
-            datas[2] = Console.ReadLine();
-            Console.WriteLine("Téléphone : ");
-            datas[3] = Console.ReadLine();
-
-            c = new Customer(datas[0], datas[1], datas[2], datas[3]);
+            Customer c = new Customer(datas[0], datas[1], datas[2], datas[3]);
             listCustomer.Add(c);
 
-            StreamWriter writeFile = new StreamWriter(file, true);
+            StreamWriter writeFile = new StreamWriter("Clients.csv", true);
             writeFile.WriteLine(datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3]);
             writeFile.Close();
         }
 
-        public void DeleteCustomer(string file)
+        public void DeleteCustomer(string[] datas)
         {
-            string tel;
-            bool check = false;
-            Console.WriteLine("Modifier un client : \nEntrer son numéro de téléphone :");
-            tel = Console.ReadLine();
+            bool check = false;   
 
             for (int i = 0; i < listCustomer.Count() && check == false; i++)
             {
-                if (listCustomer[i].PhoneNumber == tel)
+                if (listCustomer[i].PhoneNumber == datas[0])
                 {
                     listCustomer.Remove(listCustomer[i]);
                     check = true;
@@ -141,115 +139,42 @@ namespace WPF3._0
             }
             if (check == true)
             {
-                List<String> fichier = File.ReadAllLines(file).ToList();
+                List<String> fichier = File.ReadAllLines("Clients.csv").ToList();
                 for (int i = 0; i < fichier.Count(); i++)
                 {
-                    if ((fichier[i].Split(';'))[3] == tel)
+                    if ((fichier[i].Split(';'))[3] == datas[0])
                     {
                         fichier.RemoveAt(i);
                         break;
                     }
                 }
-                File.WriteAllLines(file, fichier.ToArray());
+                File.WriteAllLines("Clients.csv", fichier.ToArray());
             }
             else Console.WriteLine("Téléphone non trouvé\n");
         }
 
-        public void ModifyCustomer(string file)
+        public void ModifyCustomer(string[] datas)
         {
-            string tel;
-            bool check = false;
             int inc = -1;
-            Console.WriteLine("Modifier un client : \nEntrer son numéro de téléphone :");
-            tel = Console.ReadLine();
 
-            for (int i = 0; i < listCustomer.Count() && check == false; i++)
+            for (int i = 0; i < listCustomer.Count(); i++)
             {
-                if (listCustomer[i].PhoneNumber == tel)
+                if (listCustomer[i].PhoneNumber == datas[4]) inc = i;
+            }
+
+            listCustomer[inc] = new Customer(datas[0], datas[1], datas[2], datas[3]);
+
+            List<String> fichier = File.ReadAllLines("Clients.csv").ToList();
+            for (int i = 0; i < fichier.Count(); i++)
+            {
+                if ((fichier[i].Split(';'))[3] == datas[4])
                 {
-                    inc = i;
-                    check = true;
+                    fichier[i] = datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3];
+                    break;
                 }
             }
-            if (check == true && inc > -1)
-            {
-                string[] datas = new string[4];
-                bool t;
-                Console.WriteLine(listCustomer[inc]);
-                Console.WriteLine("\nEntrer 1 pour modifier le client et 0 sinon :\n");
 
-                #region Modifications du client en brut
-                Console.WriteLine("Nom ?");
-                t = Int32.TryParse(Console.ReadLine(), out int res);
-                while (t == false || res > 1 || res < 0)
-                {
-                    Console.WriteLine("Entrer 0 ou 1");
-                    t = Int32.TryParse(Console.ReadLine(), out res);
-                }
-                if (res == 1)
-                {
-                    Console.WriteLine("Nouveau nom : ");
-                    datas[0] = Console.ReadLine();
-                }
-                else datas[0] = listCustomer[inc].LastName;
-
-                Console.WriteLine("\nPrénom ?");
-                t = Int32.TryParse(Console.ReadLine(), out res);
-                while (t == false || res > 1 || res < 0)
-                {
-                    Console.WriteLine("Entrer 0 ou 1");
-                    t = Int32.TryParse(Console.ReadLine(), out res);
-                }
-                if (res == 1)
-                {
-                    Console.WriteLine("Nouveau prénom : ");
-                    datas[1] = Console.ReadLine();
-                }
-                else datas[1] = listCustomer[inc].FirstName;
-
-                Console.WriteLine("\nAdresse ?");
-                t = Int32.TryParse(Console.ReadLine(), out res);
-                while (t == false || res > 1 || res < 0)
-                {
-                    Console.WriteLine("Entrer 0 ou 1");
-                    t = Int32.TryParse(Console.ReadLine(), out res);
-                }
-                if (res == 1)
-                {
-                    Console.WriteLine("Nouvelle adresse : ");
-                    datas[2] = Console.ReadLine();
-                }
-                else datas[2] = listCustomer[inc].Address;
-
-                Console.WriteLine("\nNuméro de téléphone ?");
-                t = Int32.TryParse(Console.ReadLine(), out res);
-                while (t == false || res > 1 || res < 0)
-                {
-                    Console.WriteLine("Entrer 0 ou 1");
-                    t = Int32.TryParse(Console.ReadLine(), out res);
-                }
-                if (res == 1)
-                {
-                    Console.WriteLine("Nouveau téléphone : ");
-                    datas[1] = Console.ReadLine();
-                }
-                else datas[3] = listCustomer[inc].PhoneNumber;
-                #endregion Modifications du client en brut
-
-                listCustomer[inc] = new Customer(datas[0], datas[1], datas[2], datas[3]);
-
-                List<String> fichier = File.ReadAllLines(file).ToList();
-                for (int i = 0; i < fichier.Count(); i++)
-                {
-                    if ((fichier[i].Split(';'))[3] == tel)
-                    {
-                        fichier[i] = datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3];
-                        break;
-                    }
-                }
-                File.WriteAllLines(file, fichier.ToArray());
-            }
-            else Console.WriteLine("Téléphone non trouvé\n");
+            File.WriteAllLines("Clients.csv", fichier.ToArray());
         }
 
 
@@ -376,7 +301,7 @@ namespace WPF3._0
         /// comme demandé pour le module Client
         /// </summary>
         /// <param name="lcustomer">liste de clients à afficher</param>
-        public delegate void DisplayCustomer(List<Customer> lcustomer);
+        public delegate void DisplayCustomer();
 
         /// <summary>
         /// Méthode appelée pour afficher les clients
@@ -384,7 +309,7 @@ namespace WPF3._0
         /// <param name="n">délégation DisplayCustomer prenant listCustomer en paramètre</param>
         public void DisplayCustomerShape(DisplayCustomer n)
         {
-            n(listCustomer);
+            n();
         }
 
         /// <summary>
@@ -392,17 +317,16 @@ namespace WPF3._0
         /// triant la liste des clients
         /// </summary>
         /// <param name="temp">paramètre correspondant à listCustomer</param>
-        public void DisplayCustomerAlphabet(List<Customer> temp)
+        public void DisplayCustomerAlphabet()
         {
-            string text = "";
             //On trie la liste avec un sort et une délégation
-            temp.Sort(delegate (Customer a, Customer b)
+            listCustomer.Sort(delegate (Customer a, Customer b)
             {
                 return a.LastName.CompareTo(b.LastName);
             });
 
             //On affiche la liste avec un ForEach et une délégation
-            temp.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });
+            listCustomer.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });
             /*foreach (Customer n in temp)
             {
                 text = text + n.ToString() + "\n";
@@ -416,16 +340,16 @@ namespace WPF3._0
         /// sans trier la liste des clients
         /// </summary>
         /// <param name="temp">paramètre correspondant à listCustomer</param>
-        public void DisplayCustomerCity(List<Customer> temp)
+        public void DisplayCustomerCity()
         {
-            string[] datas = new string[temp.Count()];  //Le tableau où on mettra le nom des villes en plusieurs exemplaires si elles le sont
+            string[] datas = new string[listCustomer.Count()];  //Le tableau où on mettra le nom des villes en plusieurs exemplaires si elles le sont
             string[] pass = null;                       //Un tableau séparant chaque mots composant l'adresse
             List<string> cities = new List<string>();   //Un tableau des villes
 
             //On récupère d'abord tous les noms de ville dans datas
             for (int i = 0; i < datas.Length; i++)
             {
-                pass = temp[i].Address.Split(' ');
+                pass = listCustomer[i].Address.Split(' ');
                 datas[i] = pass[pass.Length - 1];
             }
 
@@ -442,27 +366,35 @@ namespace WPF3._0
                 }
             }
 
-            //On affiche tous les clients vivant dans une ville répertoriée dans 
-            //la liste de ville : cities par ordre alphabétique des villes
+
+            //On trie la liste de ville : cities par ordre alphabétique des villes
             cities.Sort(delegate (string a, string b) { return a.CompareTo(b); });
+
+            List<Customer> temp = listCustomer;
+            listCustomer = new List<Customer>();;
+
+            //On recrée listCustomer en fonction des villes
             cities.ForEach((string elt) =>
             {
-                Console.WriteLine(elt + " :\n");
                 for (int i = 0; i < temp.Count(); i++)
                 {
-                    if (datas[i] == elt) Console.WriteLine(temp[i] + "\n");
-                }
-                Console.WriteLine();
+                    if (datas[i] == elt) listCustomer.Add(temp[i]);
+                }               
             });
+
         }
 
-        public void DisplayCustomerCumulativeOrder(List<Customer> temp)
+        public void DisplayCustomerCumulativeOrder()
         {
-            for (int i = 0; i < temp.Count(); i++)
+            for (int i = 0; i < listCustomer.Count(); i++)
             {
-                temp[i].Calculation();
-                Console.WriteLine(temp[i].PartialToStringCumulativeOrder() + "\n");
+                listCustomer[i].Calculation();
+                //Console.WriteLine(temp[i].PartialToStringCumulativeOrder() + "\n");
             }
+            listCustomer.Sort((Customer a, Customer b) =>
+            {
+                return -(a.CumulativeOrder).CompareTo(b.CumulativeOrder);
+            });
         }
 
         #endregion Affichage Clients
