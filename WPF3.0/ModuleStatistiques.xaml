@@ -17,22 +17,32 @@
             </StackPanel>
         </Grid>
         <StackPanel Margin="550,50,0,0">
-            <TextBox x:Name="date1" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="Date1" VerticalAlignment="Top"/>
-            <TextBox x:Name="date2" HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="Date2" VerticalAlignment="Top"/>
-            <Button Content="Rechercher commandes" HorizontalAlignment="Left" Width="130" Margin="0,0,0,30" Click="RechercheCommandesDate"/>
-            <Button Content="Moyenne Commandes" HorizontalAlignment="Left" Width="130" Margin="0,0,0,30" Click="MoyenneCommandes"/>
-            <Button Content="Moyenne Clients" HorizontalAlignment="Left" Width="130" Margin="0,0,0,30" Click="MoyenneClients"/>
+
 
         </StackPanel>
         <StackPanel Margin="50,50,0,0">
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NuméroCommis" VerticalAlignment="Top"/>
+            <TextBox x:Name="numCommis" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="NuméroCommis" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Nombre de commandes" Width="150" Margin="0,0,0,20" Click="AfficheCommandesCommis"/>
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NuméroLivreur" VerticalAlignment="Top"/>
+            <TextBox x:Name="numLivreur" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="NuméroLivreur" VerticalAlignment="Top"/>
             <Button HorizontalAlignment="Left" Content="Nombre de commandes" Width="150" Margin="0,0,0,20" Click="AfficheCommandesLivreur"/>
-            
+            <TextBox x:Name="date1" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="Date1" VerticalAlignment="Top"/>
+            <TextBox x:Name="date2" HorizontalAlignment="Left" Margin="0,0,0,0" TextWrapping="Wrap" Text="Date2" VerticalAlignment="Top"/>
+            <Button Content="Rechercher commandes" HorizontalAlignment="Left" Width="130" Margin="0,0,0,20" Click="RechercheCommandesDate"/>
+            <Button Content="Moyenne Commandes" HorizontalAlignment="Left" Width="130" Margin="0,0,0,20" Click="MoyenneCommandes"/>
+            <Button Content="Moyenne Client" HorizontalAlignment="Left" Width="130" Margin="0,0,0,20" Click="MoyenneClients"/>
         </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="142,176,0,0" TextWrapping="Wrap" Text="Au format : jj/mm/aaaa" VerticalAlignment="Top"/>
+        <ListView Name="listViewCustomerMean" HorizontalAlignment="Left" Height="300" Margin="377,50,0,0" VerticalAlignment="Top" Width="200">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nom"  DisplayMemberBinding="{Binding LastName}" Width="100"/>
+                    <GridViewColumn Header="Prénom" DisplayMemberBinding="{Binding FirstName}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <Frame Grid.Row="1" Name="CommandeMain"  />
-        <TextBlock HorizontalAlignment="Left" Margin="660,60,0,0" TextWrapping="Wrap" Text="Au format :" VerticalAlignment="Top"/>
+        <Button Content="Rafraichir" HorizontalAlignment="Left" Margin="292,282,0,0" VerticalAlignment="Top" Width="74" Click="Refresh"/>
+        <TextBlock HorizontalAlignment="Left" Margin="197,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Background="#FFFF6161" TextAlignment="Center" ><Run Text="Rafraichissez avant "/><Run Text="puis"/><Run Text=" choisissez un client"/></TextBlock>
     </Grid>
 </Page>

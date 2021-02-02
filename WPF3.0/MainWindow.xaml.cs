@@ -52,19 +52,19 @@ namespace WPF3._0
 
         private void ModuleCommande(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ModuleCommande();
+            MainFrame.Content = new ModuleCommande(pizzAlpha);
 
         }
 
         private void ModuleStatistiques(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ModuleStatistiques();
+            MainFrame.Content = new ModuleStatistiques(pizzAlpha);
 
         }
 
         private void ModuleAutre(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new ModuleAutre();
+            MainFrame.Content = new ModuleAutre(pizzAlpha);
 
         }
 

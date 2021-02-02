@@ -19,14 +19,13 @@
             </StackPanel>
         </Grid>
         <StackPanel Margin="550,50,0,0">
-            <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NuméroDeCommande" VerticalAlignment="Top"/>
-
-            <Button Content="Rechercher" HorizontalAlignment="Left" Width="75" Margin="0,0,0,20" Click="TrieAlphabetique"/>
+            <TextBox x:Name="cmdNumber" HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NuméroDeCommande" VerticalAlignment="Top"/>
+            <Button Content="Rechercher" HorizontalAlignment="Left" Width="75" Margin="0,0,0,20" Click="ChercheCommande"/>
         </StackPanel>
         <StackPanel Margin="50,50,0,0">
             <Button HorizontalAlignment="Left" Content="Nouveau Client" Width="85" Margin="0,0,0,20" Click="NouveauClient"/>
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="TelephoneClient" VerticalAlignment="Top"/>
-            <ComboBox Text="Pizzas" Width="120" HorizontalAlignment="Left" Margin="0,0,0,20">
+            <ComboBox Text="Pizzas" Width="120" HorizontalAlignment="Left" Margin="0,0,0,0">
                 <ComboBoxItem Content="Margherita"/>
                 <ComboBoxItem Content="Calzone"/>
                 <ComboBoxItem Content="BBQ"/>
@@ -36,7 +35,7 @@
                 <ComboBoxItem Content="Orientale"/>
             </ComboBox>
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NombreDePizzas" VerticalAlignment="Top"/>
-            <ComboBox Width="120" HorizontalAlignment="Left" Margin="0,0,0,20">
+            <ComboBox Width="120" HorizontalAlignment="Left" Margin="0,0,0,0">
                 <ComboBoxItem Content="Coca-Cola"/>
                 <ComboBoxItem Content="Fanta"/>
                 <ComboBoxItem Content="Oasis"/>
@@ -45,6 +44,10 @@
                 <ComboBoxItem Content="Thé au jasmin"/>
             </ComboBox>
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NombreDeBoissons" VerticalAlignment="Top"/>
+            <ComboBox Width="120" HorizontalAlignment="Left" Margin="0,0,0,20">
+                <ComboBoxItem Content="Tarif normal"/>
+                <ComboBoxItem Content="Tarif étudiant"/>
+            </ComboBox>
             <Button HorizontalAlignment="Left" Content="Ajout Commande" Width="100" Margin="0,0,0,20" Click="AjoutCommande"/>
         </StackPanel>
 

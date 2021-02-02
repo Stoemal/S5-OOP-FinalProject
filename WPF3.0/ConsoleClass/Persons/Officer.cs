@@ -46,6 +46,7 @@ namespace WPF3._0
         {
             Console.WriteLine("Nombre de commandes prises en charge : " + this.orderCount);
         }
+        //public int OrderNumber ()
         #endregion
     }
 }

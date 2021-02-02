@@ -191,6 +191,7 @@ namespace WPF3._0
         public Customer CustomerToServer
         {
             get { return this.customerToServe; }
+            set { customerToServe = value; }
         }
         public Officer OfficerInCharge
         {
@@ -257,7 +258,7 @@ namespace WPF3._0
             /// Retourne une chaîne de caractères avec toutes les informations d'une commande
             /// en retirant le nom du client
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state +
-                ", état : " + achievement + ", addition : " + bill + " e" +
+                ", état : " + achievement + ", addition : " + bill + " €" +
                 "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName +
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName;
         }
@@ -273,7 +274,7 @@ namespace WPF3._0
         {
             /// Retourne une chaîne de caractères avec toutes les informations d'une commande
             return "Numéro de commande : " + orderNumber + ", date : " + Convert.ToString(date) + ", localisation : " + state +
-                ", état : " + achievement + ", addition : " + bill + " e" +
+                ", état : " + achievement + ", addition : " + bill + " €" +
                 "\nClient : " + this.customerToServe.FirstName + " " + this.customerToServe.LastName +
                 "\nCommis : " + this.officerInCharge.FirstName + " " + this.officerInCharge.LastName +
                 "\nLivreur : " + this.deliveryDriverInCharge.FirstName + " " + this.deliveryDriverInCharge.LastName + "\n";
@@ -291,7 +292,7 @@ namespace WPF3._0
                     text = "Liste pizza : \n";
                     foreach (Pizza pizz in listPizza)
                     {
-                        text = text + pizz.Type + " " + pizz.Size + " " + pizz.Price + " e\n";
+                        text = text + pizz.Type + " " + pizz.Size + " " + pizz.Price + " €\n";
                     }
                     text = text + "\n";
                 }
@@ -303,7 +304,7 @@ namespace WPF3._0
                     text = text + "Liste boissons : \n";
                     foreach (Beverage boisson in listBeverage)
                     {
-                        text = text + boisson.Type + " " + boisson.Volume + "cL " + boisson.Price + " e\n";
+                        text = text + boisson.Type + " " + boisson.Volume + "cL " + boisson.Price + " €\n";
                     }
                 }
             }
