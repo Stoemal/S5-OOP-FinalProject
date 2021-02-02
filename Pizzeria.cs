@@ -402,7 +402,6 @@ namespace S5_OOP_FinalProject
 
             //On affiche la liste avec un ForEach et une délégation
             //temp.ForEach((Customer n) => { Console.WriteLine(n + "\n"); });            
-            temp = null;
         }
 
         /// <summary>
@@ -439,6 +438,8 @@ namespace S5_OOP_FinalProject
             //On affiche tous les clients vivant dans une ville répertoriée dans 
             //la liste de ville : cities par ordre alphabétique des villes
             cities.Sort(delegate (string a, string b) { return a.CompareTo(b); });
+            
+            /*
             cities.ForEach((string elt) =>
             {
                 Console.WriteLine(elt + " :\n");
@@ -448,15 +449,20 @@ namespace S5_OOP_FinalProject
                 }
                 Console.WriteLine();
             });
+            */
         }
 
         public void DisplayCustomerCumulativeOrder(List<Customer> temp)
         {
-            for(int i = 0; i < temp.Count(); i++)
+            for (int i = 0; i < temp.Count(); i++)
             {
                 temp[i].Calculation();
-                Console.WriteLine(temp[i].PartialToStringCumulativeOrder() + "\n");
+                //Console.WriteLine(temp[i].PartialToStringCumulativeOrder() + "\n");
             }
+            temp.Sort(delegate (Customer a, Customer b)
+            {
+                return a.CumulativeOrder.CompareTo(b.CumulativeOrder);
+            });
         }
 
         #endregion Affichage Clients

@@ -12,13 +12,13 @@
 
         <Grid>
             <Grid.ColumnDefinitions />
-            <Line X1="400" Y1="0" X2="400" Y2="470" Visibility="Visible" Stroke="Black" StrokeThickness="4" Margin="0,0,0,20"/>
+            <Line X1="250" Y1="0" X2="250" Y2="470" Visibility="Visible" Stroke="Black" StrokeThickness="4" Margin="0,0,0,20"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="Entree"  Text="Entrée-Sortie" Margin="200,0,200,0" />
-                <TextBlock x:Name="Tri"  Text="Tri" Margin="100,0,200,0"/>
+                <TextBlock x:Name="Entree"  Text="Entrée-Sortie" Margin="90,0,200,0" />
+                <TextBlock x:Name="Tri"  Text="Tri" Margin="150,0,200,0"/>
             </StackPanel>
         </Grid>
-        <StackPanel Margin="420,50,300,166.6">
+        <StackPanel Margin="279,49,441,86.6">
             <Button Content="Alphabétique" HorizontalAlignment="Left" Width="75" Margin="0,0,0,80" Click="TrieAlphabetique"/>
             <Button Content="Ville" HorizontalAlignment="Left" Width="75" Margin="0,0,0,80" Click="TrieVille" />
             <Button Content="Montant" HorizontalAlignment="Left"  Width="75" Margin="0,0,0,80" Click="TrieMontant" />
@@ -34,14 +34,15 @@
         </StackPanel>
 
         <Frame Grid.Row="1" Name="ClientMain"  />
-        <ListView Name="listViewCustomer" HorizontalAlignment="Left" Height="390" Margin="505,50,0,0" VerticalAlignment="Top" Width="285">
+        <ListView Name="listViewCustomer" HorizontalAlignment="Left" Height="313" Margin="377,50,0,0" VerticalAlignment="Top" Width="396">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nom"  DisplayMemberBinding="{Binding Nom}"/>
-                    <GridViewColumn Header="Prénom" DisplayMemberBinding="{Binding Prénom}"/>
-                    <GridViewColumn Header="Adresse" DisplayMemberBinding="{Binding Adresse}"/>
-                    <GridViewColumn Header="Téléphone" DisplayMemberBinding="{Binding Téléphone}"/>
-                    <GridViewColumn Header="Premiere_Commande" DisplayMemberBinding="{Binding Premiere_Commande}"/>
+                    <GridViewColumn Header="Nom"  DisplayMemberBinding="{Binding LastName}"/>
+                    <GridViewColumn Header="Prénom" DisplayMemberBinding="{Binding FirstName}"/>
+                    <GridViewColumn Header="Adresse" DisplayMemberBinding="{Binding Address}"/>
+                    <GridViewColumn Header="Téléphone" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    <GridViewColumn Header="Premiere_Commande" DisplayMemberBinding="{Binding FirstOrder}"/>
+                    <GridViewColumn Header="Montant_cumulé" DisplayMemberBinding="{Binding CumulativeOrder}"/>
                 </GridView>
             </ListView.View>
         </ListView>

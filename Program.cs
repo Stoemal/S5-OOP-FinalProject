@@ -94,7 +94,7 @@ namespace S5_OOP_FinalProject
 
 
             //pizzAlpha.Display();
-            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
             //pizzAlpha.ManipulateEntries(pizzAlpha.CreateCustomer, file);
             //pizzAlpha.ManipulateEntries(pizzAlpha.DeleteCustomer, file);
             //pizzAlpha.ManipulateEntries(pizzAlpha.ModifyCustomer, file);

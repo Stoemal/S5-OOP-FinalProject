@@ -22,7 +22,6 @@ namespace WPF3._0
     public partial class ModuleClient : Page
     {
         Pizzeria pizzAlpha;
-        Customer a = new Customer("dave", "dave", "dave", "dave");
        
 
         public ModuleClient(Pizzeria pizzAlpha)
@@ -33,16 +32,16 @@ namespace WPF3._0
 
         private void TrieAlphabetique(object sender, RoutedEventArgs e)
         {
+
             pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+
+            
+            listViewCustomer.ItemsSource = pizzAlpha.ListCustomer;
+            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewCustomer.ItemsSource);                    
 
             InitializeComponent();
-            listViewCustomer.ItemsSource = pizzAlpha.ListCustomer;
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewCustomer.ItemsSource);
-                    
-
-            MessageBox.Show(pizzAlpha.ListCustomer[0].FirstName);
-            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
-
+            //pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerAlphabet);
+            
         }
 
         private void TrieVille(object sender, RoutedEventArgs e)
@@ -52,12 +51,14 @@ namespace WPF3._0
 
         private void TrieMontant(object sender, RoutedEventArgs e)
         {
-
+            pizzAlpha.DisplayCustomerShape(pizzAlpha.DisplayCustomerCumulativeOrder);
+            listViewCustomer.ItemsSource = pizzAlpha.ListCustomer;                
+            InitializeComponent();
+            
         }
 
         private void AjoutClient(object sender, RoutedEventArgs e)
         {
-            pizzAlpha.ListCustomer.Add(a);
             MessageBox.Show("Succes de l'ajout");
         }
 

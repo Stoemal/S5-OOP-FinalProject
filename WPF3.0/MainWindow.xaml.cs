@@ -25,10 +25,22 @@ namespace WPF3._0
     {
         Pizzeria pizzAlpha = new Pizzeria();
 
-        public Pizzeria pizzAlpha { get; }
+        
 
         public MainWindow()
         {
+            string file = "Clients.csv";
+            string file1 = "Commis.csv";
+            string file2 = "Livreur.csv";
+            string file3 = "Commandes.csv";
+            string file4 = "DetailsCommandes.csv";
+
+            pizzAlpha.AddFilesData(pizzAlpha.ReadCustomers, file);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadOfficer, file1);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadDeliveryDriver, file2);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadOrder, file3);
+            pizzAlpha.AddFilesData(pizzAlpha.ReadDetailsOrder, file4);
+
             InitializeComponent();
         }
         
@@ -67,5 +79,7 @@ namespace WPF3._0
             //Pour fermer violemment
             this.Close();
         }
+
+     
     }
 }
