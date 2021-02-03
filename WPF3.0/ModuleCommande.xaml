@@ -23,9 +23,6 @@
         </StackPanel>
 
 
-
-        <Frame Grid.Row="1" Name="CommandeMain" />
-
         <ScrollViewer HorizontalAlignment="Left" Height="311" Margin="37,50,0,0" VerticalAlignment="Top" Width="295">
             <StackPanel Height="746">
                 <Button HorizontalAlignment="Left" Content="Nouveau Client" Width="85" Margin="0,0,0,10" Click="NouveauClient"/>
@@ -71,7 +68,7 @@
 
         </ScrollViewer>
 
-
+        <Frame Name="CommandeMain" Margin="0,-44,0,0.4"/>
     </Grid>
 </Page>
 
