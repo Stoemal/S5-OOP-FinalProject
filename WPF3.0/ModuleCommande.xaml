@@ -44,9 +44,9 @@
                 <ComboBoxItem Content="Thé au jasmin"/>
             </ComboBox>
             <TextBox HorizontalAlignment="Left" Margin="0,0,0,20" TextWrapping="Wrap" Text="NombreDeBoissons" VerticalAlignment="Top"/>
-            <ComboBox Width="120" HorizontalAlignment="Left" Margin="0,0,0,20">
-                <ComboBoxItem Content="Tarif normal"/>
-                <ComboBoxItem Content="Tarif étudiant"/>
+            <ComboBox Name="tarif" Width="120" HorizontalAlignment="Left" Margin="0,0,0,20">
+                <ComboBoxItem Name="tarifNormal" Content="Tarif normal"/>
+                <ComboBoxItem Name="tarifEtudiant" Content="Tarif étudiant"/>
             </ComboBox>
             <Button HorizontalAlignment="Left" Content="Ajout Commande" Width="100" Margin="0,0,0,20" Click="AjoutCommande"/>
         </StackPanel>

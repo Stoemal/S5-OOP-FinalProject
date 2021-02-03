@@ -29,7 +29,7 @@ namespace WPF3._0
 
         private void NouveauClient(object sender, RoutedEventArgs e)
         {
-            //CommandeMain.Content = new ModuleClient();
+            CommandeMain.Content = new ModuleClient(pizzAlpha);
         }
 
 
@@ -45,7 +45,6 @@ namespace WPF3._0
 
         private void AjoutCommande(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void ChercheCommande(object sender, RoutedEventArgs e)
