@@ -110,15 +110,11 @@ namespace WPF3._0
                         datasBoisson[2] = "33";
                     }
                 }
-                
+
 
 
                 #endregion Boisson definition
-
-                //for (int i = 0; i < listCustomer.Count(); i++)
-                //{
-                //    listCustomer[i].Calculation();
-                //}
+            
 
                 Order commande = pizzAlpha.GlobalOrderList[pizzAlpha.GlobalOrderList.Count() - 1];
                 for (int i = pizzAlpha.GlobalOrderList.Count() - 1; i >= 0; i--)

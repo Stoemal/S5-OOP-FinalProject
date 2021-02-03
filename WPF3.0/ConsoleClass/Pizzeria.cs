@@ -470,7 +470,12 @@ namespace WPF3._0
 
             }
 
-            
+            for (int i = 0; i < listCustomer.Count(); i++)
+            {
+                listCustomer[i].Calculation();
+            }
+
+
             writeFile.Close();
         }
 
@@ -589,8 +594,11 @@ namespace WPF3._0
 
                 File.WriteAllLines("DetailsCommandes.csv", fichier.ToArray());
             }
+            for (int i = 0; i < listCustomer.Count(); i++)
+            {
+                listCustomer[i].Calculation();
+            }
 
-            
         }
 
 
@@ -736,6 +744,10 @@ namespace WPF3._0
                                     }
                                 }
                             }
+                        }
+                        for (int i = 0; i < listCustomer.Count(); i++)
+                        {
+                            listCustomer[i].Calculation();
                         }
                     }
                     for (int i = 0; i < listCustomer.Count(); i++)
