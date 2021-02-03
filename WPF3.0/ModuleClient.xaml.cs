@@ -23,7 +23,7 @@ namespace WPF3._0
     {
         Pizzeria pizzAlpha;
         bool check; //Pour vérifier si un lient est bien dans la liste
-        string tel; //Pour prendre le téléphone d'un client ui est bien dans la liste
+        string tel; //Pour prendre le téléphone d'un client ui est bien dans la liste      
        
 
         public ModuleClient(Pizzeria pizzAlpha)

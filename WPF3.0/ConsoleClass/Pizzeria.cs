@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
+using System.Windows;
 
 namespace WPF3._0
 {
@@ -12,9 +13,6 @@ namespace WPF3._0
     /// ainsi que le reste des caractéristiques reliées à la gestion de l'argent
     public class Pizzeria : IDisplay, INotifyPropertyChanged
     {
-
-
-
         #region ATTRIBUTS
         private List<Officer> listOfficer;
         private List<DeliveryDriver> listDeliveryDriver;
@@ -65,6 +63,8 @@ namespace WPF3._0
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+
+
 
         #region FONCTIONS GENERALES
         public delegate void ReadFiles(string file);
@@ -220,11 +220,11 @@ namespace WPF3._0
             }
             catch (FileNotFoundException okay)
             {  //On affiche un message d'erreur si le fichier n'a pas été trouvé
-                Console.WriteLine("Document non trouvé");
-                Console.WriteLine(okay.Message);
+                MessageBox.Show("Document non trouvé");
+                MessageBox.Show(okay.Message);
             }
-            catch (IOException e) { Console.WriteLine(e.Message); }   //On vérifie encore les erreurs
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            catch (IOException e) { MessageBox.Show(e.Message); ; }   //On vérifie encore les erreurs
+            catch (Exception e) { MessageBox.Show(e.Message); }
             finally  //On ferme le StremReader une fois que tout a été effectué
             { if (lecteur != null) lecteur.Close(); }
         }
@@ -254,11 +254,11 @@ namespace WPF3._0
             }
             catch (FileNotFoundException okay)
             {
-                Console.WriteLine("Document non trouvé");
-                Console.WriteLine(okay.Message);
+                MessageBox.Show("Document non trouvé");
+                MessageBox.Show(okay.Message);
             }
-            catch (IOException e) { Console.WriteLine(e.Message); }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            catch (IOException e) { MessageBox.Show(e.Message); }
+            catch (Exception e) { MessageBox.Show(e.Message); }
             finally
             { if (lecteur != null) lecteur.Close(); }
         }
@@ -284,11 +284,11 @@ namespace WPF3._0
             }
             catch (FileNotFoundException okay)
             {
-                Console.WriteLine("Document non trouvé");
-                Console.WriteLine(okay.Message);
+                MessageBox.Show("Document non trouvé");
+                MessageBox.Show(okay.Message);
             }
-            catch (IOException e) { Console.WriteLine(e.Message); }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            catch (IOException e) { MessageBox.Show(e.Message); }
+            catch (Exception e) { MessageBox.Show(e.Message); }
             finally
             { if (lecteur != null) lecteur.Close(); }
         }
@@ -389,7 +389,6 @@ namespace WPF3._0
             for (int i = 0; i < listCustomer.Count(); i++)
             {
                 listCustomer[i].Calculation();
-                //Console.WriteLine(temp[i].PartialToStringCumulativeOrder() + "\n");
             }
             listCustomer.Sort((Customer a, Customer b) =>
             {
@@ -409,31 +408,191 @@ namespace WPF3._0
         On l'explique une fois dans ReadCustomers
         Notons aussi qu'on ne lit que des fichiers csv pour chaque commande
         */
-        public void CreateOrder(string file)
+        public void CreateOrder(string[] datas) // datas contient : telephone 
         {
-            Customer c;
-            string[] datas = new string[4];
-            Console.WriteLine("Nouveau Client : \n");
-            Console.WriteLine("Nom : ");
-            datas[0] = Console.ReadLine();
-            Console.WriteLine("Prénom : ");
-            datas[1] = Console.ReadLine();
-            Console.WriteLine("Adresse : ");
-            datas[2] = Console.ReadLine();
-            Console.WriteLine("Téléphone : ");
-            datas[3] = Console.ReadLine();
+            Customer temp = listCustomer[0];
+            listCustomer.ForEach(delegate (Customer n)
+            {
+                if (datas[0] == n.PhoneNumber) temp = n;
+            });
 
-            c = new Customer(datas[0], datas[1], datas[2], datas[3]);
-            listCustomer.Add(c);
+            Officer commis = listOfficer[0];
+            listOfficer.ForEach(delegate (Officer n)
+            {
+                if (n.Position.ToUpper() == "SURPLACE") commis = n;
+            });
 
-            StreamWriter writeFile = new StreamWriter(file, true);
-            writeFile.WriteLine(datas[0] + ";" + datas[1] + ";" + datas[2] + ";" + datas[3]);
+            DeliveryDriver livreur = listDeliveryDriver[0];
+            listDeliveryDriver.ForEach(delegate (DeliveryDriver n)
+            {
+                if (n.Position.ToUpper() == "SURPLACE") livreur = n;
+            });
+
+            Order o = new Order(temp, commis, livreur, "ouvert", "encours");
+            globalOrderList.Add(o);
+
+            StreamWriter writeFile = new StreamWriter("Commandes.csv", true);
+            writeFile.WriteLine(o.OrderNumber + ";" + o.Date.ToShortDateString() + ";" + temp.PhoneNumber + ";" + 
+                commis.LastName + ";" + livreur.LastName + ";" + o.State + ";" + o.Achievement);
             writeFile.Close();
-
-
-            Order o;
-
         }
+
+        /// <summary>
+        /// Prend les détails d'une commande pour les ajouter dans la liste 
+        /// et le fichier csv
+        /// </summary>
+        /// <param name="datas">Si pizza datas contient : Pizza, prix, type, taille, quantite
+        /// Si boisson datas contient : type boisson, prix, volume, quantité</param>
+        public void CreateDetailsOrder(string[] datas, Order commande) 
+        {
+            StreamWriter writeFile = new StreamWriter("DetailsCommandes.csv", true);
+            
+            if (datas[0].ToUpper() == "PIZZA")
+            {
+                for (int i = 0; i < Convert.ToInt32(datas[4]); i++)
+                {
+                    commande.ListPizza.Add(new Pizza(datas[3], datas[2], float.Parse(datas[1])));
+                }
+
+                writeFile.WriteLine(commande.OrderNumber + ";" + "Pizza" + ";" + datas[1] + ";" +
+                datas[2] + ";" + datas[3] + ";" + "" + ";" + datas[4]);
+
+            }
+            else
+            {
+                for (int i = 0; i < Convert.ToInt32(datas[3]); i++)
+                {
+                    commande.ListBeverage.Add(new Beverage(datas[0], float.Parse(datas[2]), float.Parse(datas[1])));
+                }
+
+                writeFile.WriteLine(commande.OrderNumber + ";" + datas[0] + ";" + datas[1] + ";" +
+                    "" + ";" + "" + ";" + datas[2] + ";" + datas[3]);
+
+            }
+
+            
+            writeFile.Close();
+        }
+
+        /// <summary>
+        /// Modifier une commande
+        /// </summary>
+        /// <param name="datas">Datas contient : numéro de commande, num client, nom commis, nom livreur</param>
+        public void ModifyOrder(string[] datas)
+        {
+            int inc = 0;
+            for (int i = 0; i < globalOrderList.Count(); i++)
+            {
+                if (Convert.ToInt32(datas[0]) == globalOrderList[i].OrderNumber)
+                {
+                    inc = i;
+                    Customer c = null;
+                    Officer o = null;
+                    DeliveryDriver d = null;
+
+                    for (int j = 0; j < listCustomer.Count() && c == null; j++)
+                    {
+                        if (datas[1] == listCustomer[j].PhoneNumber) c = listCustomer[j];
+                    }
+
+                    for (int j = 0; j < listOfficer.Count() && o == null; j++)
+                    {
+                        if (datas[2].ToUpper() == listOfficer[j].LastName.ToUpper()) o = listOfficer[j];
+                    }
+
+                    for (int j = 0; j < listDeliveryDriver.Count() && d == null; j++)
+                    {
+                        if (datas[3].ToUpper() == listDeliveryDriver[j].LastName.ToUpper()) d = listDeliveryDriver[j];
+                    }
+
+                    globalOrderList[i].CustomerToServer = c;
+                    globalOrderList[i].OfficerInCharge = o;
+                    globalOrderList[i].DeliveryDriverInCharge = d;
+                    globalOrderList[i].State = "ouvert";
+                    globalOrderList[i].Achievement = "encours";
+                    globalOrderList[i].Date = DateTime.Now;
+                    break;
+                }
+            }
+
+            List<String> fichier = File.ReadAllLines("Commandes.csv").ToList();
+            for (int i = 0; i < fichier.Count(); i++)
+            {
+                if ((fichier[i].Split(';'))[0] == datas[0])
+                {
+                    fichier[i] = globalOrderList[inc].OrderNumber + ";" + globalOrderList[inc].CustomerToServer.PhoneNumber
+                        + ";" + globalOrderList[inc].OfficerInCharge.LastName + ";" + globalOrderList[inc].DeliveryDriverInCharge.LastName + ";" +
+                        globalOrderList[inc].State + ";" + globalOrderList[inc].Achievement;
+                    break;
+                }
+            }
+
+            File.WriteAllLines("Commandes.csv", fichier.ToArray());
+        }
+
+        /// <summary>
+        /// Modifie les détails d'une commande pour une liste de boissons ou une liste de pizzas
+        /// Rentrer une liste de boisson ou bien une liste de pizza et appeler deux fois la fonction 
+        /// pour deux listes différentes
+        /// </summary>
+        /// <param name="datas">données de la commande, si pizza : Pizza, taille, type, prix, quantite
+        /// si boisson : type boisson, volume, prix, quantite</param>
+        /// <param name="commande">commande à modifier</param>
+        public void ModifyDetailsOrder(string[] datas, Order commande)
+        {
+            if(datas[0].ToUpper() == "PIZZA")
+            {
+                Pizza temp = new Pizza(datas[1], datas[2], float.Parse(datas[3]));
+                commande.ListPizza = null;
+
+                int n = Convert.ToInt32(datas[4]);
+                for (int i = 0; i < n; i++)
+                {
+                    commande.ListPizza.Add(temp);
+                }
+
+                List<String> fichier = File.ReadAllLines("DetailsCommandes.csv").ToList();
+                for (int i = 0; i < fichier.Count(); i++)
+                {
+                    if ((fichier[i].Split(';'))[0] == datas[0])
+                    {
+                        fichier[i] = commande.OrderNumber + ";" + "Pizza"+ ";" + datas[3] + ";" 
+                            + datas[2] + ";" + datas[1]+ ";" + "" + ";" + datas[4];
+                        break;
+                    }
+                }
+
+                File.WriteAllLines("DetailsCommandes.csv", fichier.ToArray());
+
+            }
+            else
+            {
+                Beverage temp = new Beverage(datas[0], float.Parse(datas[1]), float.Parse(datas[2]));
+                commande.ListPizza = null;
+
+                int n = Convert.ToInt32(datas[4]);
+                for (int i = 0; i < n; i++)
+                {
+                    commande.ListBeverage.Add(temp);
+                }
+
+                List<String> fichier = File.ReadAllLines("DetailsCommandes.csv").ToList();
+                for (int i = 0; i < fichier.Count(); i++)
+                {
+                    if ((fichier[i].Split(';'))[0] == datas[0])
+                    {
+                        fichier[i] = commande.OrderNumber + ";" + datas[0] + ";" + datas[1] + ";"
+                            + "" + ";" + "" + ";" + datas[2] + ";" + datas[3];
+                        break;
+                    }
+                }
+
+                File.WriteAllLines("DetailsCommandes.csv", fichier.ToArray());
+            }
+
+            
+        }
+
 
         /// <summary>
         /// Lit les caractéristiques d'une commande dans un fichier Commande et 
@@ -491,9 +650,14 @@ namespace WPF3._0
                             }
                             #endregion
 
+                            //MessageBox.Show(new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]),
+                            //    Convert.ToInt32(datas[0]), 0, 0).ToShortDateString());
+
                             //On ajoute la commande dans la liste de commandes
                             Order add = new Order(new DateTime(Convert.ToInt32(temp[2]), Convert.ToInt32(temp[1]), Convert.ToInt32(temp[0]),
                                 Convert.ToInt32(datas[0]), 0, 0), c, o, d, datas[5], datas[6]);
+
+                            //MessageBox.Show(datas[6]);
 
                             globalOrderList.Add(add);
                             if (c.FirstOrder == new DateTime())
@@ -513,11 +677,11 @@ namespace WPF3._0
                     }
                     catch (FileNotFoundException okay)
                     {
-                        Console.WriteLine("Document non trouvé");
-                        Console.WriteLine(okay.Message);
+                        MessageBox.Show("Document non trouvé");
+                        MessageBox.Show(okay.Message);
                     }
-                    catch (IOException e) { Console.WriteLine(e.Message); }
-                    catch (Exception e) { Console.WriteLine(e.Message); }
+                    catch (IOException e) { MessageBox.Show(e.Message); ; }
+                    catch (Exception e) { MessageBox.Show(e.Message); }
                     finally
                     {
                         if (lecteur != null) lecteur.Close();
@@ -574,23 +738,28 @@ namespace WPF3._0
                             }
                         }
                     }
+                    for (int i = 0; i < listCustomer.Count(); i++)
+                    {
+                        listCustomer[i].Calculation();
+                    }
 
                     lu = null;
                     datas = null;
                 }
                 catch (FileNotFoundException okay)
                 {
-                    Console.WriteLine("Document non trouvé");
-                    Console.WriteLine(okay.Message);
+                    MessageBox.Show("Document non trouvé");
+                    MessageBox.Show(okay.Message);
+                    MessageBox.Show("Liste de Commande vide => Etude des détails impossible");
                 }
-                catch (IOException e) { Console.WriteLine(e.Message); }
-                catch (Exception e) { Console.WriteLine(e.Message); }
+                catch (IOException e) { MessageBox.Show(e.Message); }
+                catch (Exception e) { MessageBox.Show(e.Message); }
                 finally
                 {
                     if (lecteur != null) lecteur.Close();
                 }
             }
-            else Console.WriteLine("Liste de Commande vide => Etude des détails impossible");
+            else MessageBox.Show("Liste de Commande vide => Etude des détails impossible");
         }
 
         /// <summary>
@@ -646,22 +815,16 @@ namespace WPF3._0
             return sum / globalOrderList.Count();
         }
 
-        /// <summary>
-        /// Cette fonction affiche la moyenne des comptes clients
-        /// on parcourt la liste de clients 
-        /// puis pour chaque client on parcourt la liste de commandes et on y ajoute
-        /// on somme donc les notes de chaques commandes que l'on divise par la longueur de la liste de commande
-        /// on termine par afficher le nom du client et la moyenne des dépenses de son compte
-        /// </summary>
-
 
         #endregion Module Statistiques
 
         #region Module Autre
+         
+         
         public string RandomPizza()
         {
-            /// Cette fonction fait partie du module autre, elle offre une grande 
-            /// pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
+            // Cette fonction fait partie du module autre, elle offre une grande 
+            // pizza de la chance ainsi qu'un litre de bière au beurre à un client de façon aléatoire
             Random rnd = new Random();
             //On définit un variable aléatoire
             int index = rnd.Next(listCustomer.Count());
@@ -776,6 +939,14 @@ namespace WPF3._0
                         text = commande + "\n" + commande.FoodToString();
                         //Console.WriteLine(client.ToString());
                         //Console.WriteLine(client.PartialToStringListOrder());
+
+                        CreateCustomer(new string[] { client.FirstName, client.LastName, client.Address, client.PhoneNumber });
+                        CreateOrder(new string[] { client.PhoneNumber });
+                        CreateDetailsOrder(new string[] { "Pizza", Convert.ToString(pizz.Price), pizz.Type,
+                            pizz.Size, "1" }, commande);
+                        CreateDetailsOrder(new string[] { boisson.Type, Convert.ToString(boisson.Price), 
+                            Convert.ToString(boisson.Volume), pizz.Size, "1" }, commande);
+
                     }
                 }
             }
@@ -791,8 +962,5 @@ namespace WPF3._0
         }
         //La delegation pour changer la pondération d'une note fait aussi partie du module autre
         #endregion
-
-
-
     }
 }

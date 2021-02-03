@@ -187,6 +187,7 @@ namespace WPF3._0
         public DateTime Date
         {
             get { return this.date; }
+            set { this.date = value; }
         }
         public Customer CustomerToServer
         {
@@ -196,10 +197,12 @@ namespace WPF3._0
         public Officer OfficerInCharge
         {
             get { return this.officerInCharge; }
+            set { this.officerInCharge = value; }
         }
         public DeliveryDriver DeliveryDriverInCharge
         {
             get { return this.deliveryDriverInCharge; }
+            set { this.deliveryDriverInCharge = value; }
         }
 
         public List<Pizza> ListPizza
