@@ -13,8 +13,8 @@
             <Grid.ColumnDefinitions />
             <Line X1="250" Y1="0" X2="250" Y2="470" Visibility="Visible" Stroke="Black" StrokeThickness="4" Margin="0,0,0,20"/>
             <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="Entree"  Text="Entrée-Sortie" Margin="90,0,200,0" />
-                <TextBlock x:Name="Tri"  Text="Tri" Margin="150,0,200,0"/>
+                <TextBlock x:Name="Entree"  Text="Entrée-Sortie" Margin="70,0,200,0" FontSize="20" />
+                <TextBlock x:Name="Tri"  Text="Tri" Margin="140,0,200,0" FontSize="20"/>
             </StackPanel>
         </Grid>
         <StackPanel Margin="279,49,441,86.6">

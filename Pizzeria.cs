@@ -295,6 +295,7 @@ namespace S5_OOP_FinalProject
             }
             catch (FileNotFoundException okay)
             {  //On affiche un message d'erreur si le fichier n'a pas été trouvé
+                
                 Console.WriteLine("Document non trouvé");
                 Console.WriteLine(okay.Message);
             }

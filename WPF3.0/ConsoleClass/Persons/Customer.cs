@@ -17,6 +17,8 @@ namespace WPF3._0
      
 
         #region CONSTRUCTEURS
+
+
         public Customer(string firstName, string lastName, string address, string phoneNumber) : base(firstName, lastName, address, phoneNumber)
         {
             firstOrder = new DateTime();
@@ -116,6 +118,14 @@ namespace WPF3._0
             return false;
         }
 
+
+        /// <summary>
+        /// Cette fonction affiche la moyenne des comptes clients
+        /// on parcourt la liste de clients 
+        /// puis pour chaque client on parcourt la liste de commandes et on y ajoute
+        /// on somme donc les notes de chaques commandes que l'on divise par la longueur de la liste de commande
+        /// on termine par afficher le nom du client et la moyenne des dépenses de son compte
+        /// </summary>
         public float CustomerAccount()
         {
             float sum = 0;
